@@ -57,15 +57,18 @@ angular.module('starter.controllers', ['firebase', 'firebaseservices', 'ionic'])
 
         var normalloginsuccess = function (data, status) {
             console.log(data);
+            $scope.modal.hide();
         };
         console.log(FireBaseServices.normallogin(loginData.username, loginData.password));
         //        console.log($scope.logindata);
+        $scope.modal.hide();
 
     }
 
     //    normal registration service.js/normalregistration
     $scope.normalregister = function (logindata) {
-        FireBaseServices.normalregister(logindata.username, logindata.password);
+        console.log(FireBaseServices.normalregister(logindata.username, logindata.password));
+        $scope.modal2.hide();
     }
 
 })
