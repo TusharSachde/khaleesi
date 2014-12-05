@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['firebase', 'firebaseservices', 'ionic'])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
 
     //farebase authenticate service.js/authenticate
     console.log(FireBaseServices.authenticate());
@@ -61,14 +61,20 @@ angular.module('starter.controllers', ['firebase', 'firebaseservices', 'ionic'])
         };
         console.log(FireBaseServices.normallogin(loginData.username, loginData.password));
         //        console.log($scope.logindata);
+        
+        $location.url('/search');
         $scope.modal.hide();
 
     }
 
     //    normal registration service.js/normalregistration
+    var loginsuccess = function (data, status) {
+        console.log(data);
+    };
     $scope.normalregister = function (logindata) {
         console.log(FireBaseServices.normalregister(logindata.username, logindata.password));
         $scope.modal2.hide();
+        $location.url('/search');
     }
 
 })

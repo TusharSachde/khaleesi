@@ -20,8 +20,10 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                 if (error === null) {
 //                    return authData;
                     $.jStorage.set("user",authData);
+                    return 1;
                 } else {
-                    console.log("Error authenticating user:", error);
+//                    console.log("Error authenticating user:", error);
+                    return 0;
                 }
             });
 
