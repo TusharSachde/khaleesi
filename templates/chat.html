@@ -4,13 +4,14 @@
   </ion-nav-buttons>
   <ion-content class="has-header padding">
         <ol class="messages">
-          <li class="us"><p>Hi!</p></li>
-          <li class="them"><p>Hey!</p></li>
+<!--          <li class="them"><p>{{chat.chat.text}}</p></li>-->
+            
+<!--          <li class="us" ng-repeat="msg in messages"><p>{{message}}</p></li>-->
         </ol>
       </ion-content>
       <ion-footer-bar class="bar-stable">
-       <input type="text" class="chat-type" placeholder="Start typing...">
-        <button class="button button-clear button-positive pull-right" ng-click="send();">Send</button>
+       <input type="text" class="chat-type" ng-model="chat.message" placeholder="Start typing...">
+        <button class="button button-clear button-positive pull-right" ng-click="send(chat);">Send</button>
       </ion-footer-bar>
     
   </ion-content>
