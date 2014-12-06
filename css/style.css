@@ -8,7 +8,8 @@
 .messages li {
     display: block;
     clear: both;
-    max-width: 50%;
+/*    max-width: 50%;*/
+    width: -moz-fit-content;
     margin: 0 0 1rem 0;
     padding: 0;
 }

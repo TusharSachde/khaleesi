@@ -2,8 +2,9 @@ angular.module('starter.controllers', ['firebase', 'firebaseservices', 'ionic'])
 
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
 
+    $scope.userdata = [];
     //farebase authenticate service.js/authenticate
-    console.log(FireBaseServices.authenticate());
+    $scope.userdata = FireBaseServices.authenticate();
 
     // Form data for the login modal
     $scope.loginData = {};
@@ -52,6 +53,19 @@ angular.module('starter.controllers', ['firebase', 'firebaseservices', 'ionic'])
         }, 1000);
     };
 
+    var onloginsuccess = function (error, authData) {
+        if (error === null) {
+            window.location.reload(false);
+            $.jStorage.set("user", authData);
+            console.log(1);
+            //            $location.url('/search');
+
+        } else {
+            console.log("Error authenticating user:", error);
+            console.log(0);
+        }
+    }
+
     //    normal login service.js/normallogin
     $scope.normallogin = function (loginData) {
 
@@ -59,20 +73,25 @@ angular.module('starter.controllers', ['firebase', 'firebaseservices', 'ionic'])
             console.log(data);
             $scope.modal.hide();
         };
-        console.log(FireBaseServices.normallogin(loginData.username, loginData.password));
+        FireBaseServices.normallogin(loginData.username, loginData.password, onloginsuccess);
         //        console.log($scope.logindata);
-        
+
         $location.url('/search');
         $scope.modal.hide();
 
     }
 
     //    normal registration service.js/normalregistration
-    var loginsuccess = function (data, status) {
-        console.log(data);
+    var registersuccess = function (error) {
+        if (error === null) {
+            console.log("User created successfully");
+            $scope.modal.show();
+        } else {
+            console.log("Error creating user:", error);
+        }
     };
     $scope.normalregister = function (logindata) {
-        console.log(FireBaseServices.normalregister(logindata.username, logindata.password));
+        FireBaseServices.normalregister(logindata.username, logindata.password, registersuccess);
         $scope.modal2.hide();
         $location.url('/search');
     }
@@ -89,24 +108,24 @@ angular.module('starter.controllers', ['firebase', 'firebaseservices', 'ionic'])
 
     console.log($scope.chat);
     var ref = new Firebase("https://blinding-heat-5568.firebaseio.com/");
-     ref.on('child_changed', function(snapshot) {
+    ref.on('child_changed', function (snapshot) {
         var message = snapshot.val();
-         console.log(message);
-         if (message.name == $scope.userdata.uid) {
-                $('.messages').append('<li class="us"><p>'+message.email+ '  :  ' + message.text + '</p></li>');
-            }else{
-                $('.messages').append('<li class="them"><p>'+message.email+ '  :  ' + message.text + '</p></li>');   
-            }
-      });
-    
-//    $scope.chat.$loaded().then(function () {
-//            console.log("record ID:", $scope.chat.chat);
-//            if ($scope.chat.chat.name == $scope.userdata.uid) {
-//                $('.messages').append('<li class="us"><p>' + $scope.chat.chat.text + '</p></li>');
-//            }else{
-//                $('.messages').append('<li class="them"><p>' + $scope.chat.chat.text + '</p></li>');   
-//            }
-//        });
+        console.log(message);
+        if (message.name == $scope.userdata.uid) {
+            $('.messages').append('<li class="us"><p>' + message.email + '  :  ' + message.text + '</p></li>');
+        } else {
+            $('.messages').append('<li class="them"><p>' + message.email + '  :  ' + message.text + '</p></li>');
+        }
+    });
+
+    //    $scope.chat.$loaded().then(function () {
+    //            console.log("record ID:", $scope.chat.chat);
+    //            if ($scope.chat.chat.name == $scope.userdata.uid) {
+    //                $('.messages').append('<li class="us"><p>' + $scope.chat.chat.text + '</p></li>');
+    //            }else{
+    //                $('.messages').append('<li class="them"><p>' + $scope.chat.chat.text + '</p></li>');   
+    //            }
+    //        });
 
 
     //        var ref = new Firebase('https://blinding-heat-5568.firebaseio.com/');
@@ -115,16 +134,16 @@ angular.module('starter.controllers', ['firebase', 'firebaseservices', 'ionic'])
     //    console.log($scope.messages);
     $scope.send = function (chat) {
 
-        FireBaseServices.update($scope.userdata.uid,$scope.userdata.password.email, chat.message);
+        FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message);
         $scope.chat = FireBaseServices.chat();
-//        $scope.chat.$loaded().then(function () {
-//            console.log("record ID:", $scope.chat.chat);
-//            if ($scope.chat.chat.name == $scope.userdata.uid) {
-//                $('.messages').append('<li class="us"><p>' + $scope.chat.chat.text + '</p></li>');
-//            }else{
-//                $('.messages').append('<li class="them"><p>' + $scope.chat.chat.text + '</p></li>');   
-//            }
-//        });
+        //        $scope.chat.$loaded().then(function () {
+        //            console.log("record ID:", $scope.chat.chat);
+        //            if ($scope.chat.chat.name == $scope.userdata.uid) {
+        //                $('.messages').append('<li class="us"><p>' + $scope.chat.chat.text + '</p></li>');
+        //            }else{
+        //                $('.messages').append('<li class="them"><p>' + $scope.chat.chat.text + '</p></li>');   
+        //            }
+        //        });
 
         // Update the scroll area
         $ionicScrollDelegate.scrollBottom(true);
