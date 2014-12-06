@@ -13,8 +13,11 @@
     </header>
     <ion-content class="has-header">
       <ion-list>
-        <ion-item nav-clear menu-close ng-click="login()">
-          Login
+        <ion-item nav-clear menu-close ng-click="login()" ng-show="loginlogout=='Login'">
+          {{loginlogout}}
+        </ion-item>
+        <ion-item nav-clear menu-close ng-click="logout()" ng-show="loginlogout=='Logout'">
+          {{loginlogout}}
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/search">
           Search
