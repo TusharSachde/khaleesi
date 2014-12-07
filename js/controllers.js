@@ -67,6 +67,8 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     };
 
     var onloginsuccess = function (error, authData) {
+        FireBaseServices.authenticate();
+        FireBaseServices.firbasecallonchange();
         if (error === null) {
             window.location.reload(false);
             $.jStorage.set("user", authData);
@@ -142,12 +144,6 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     var ref = new Firebase("https://blinding-heat-5568.firebaseio.com/");
 
     $scope.allchats = FireBaseServices.getchats();
-
-
-
-
-
-
 
     // updating chat in service.js/update
     $scope.send = function (chat) {

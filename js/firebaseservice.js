@@ -5,16 +5,20 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
     var ref = new Firebase("https://blinding-heat-5568.firebaseio.com/");
     var chats = [];
     var onchangecallback = function () {};
-    ref.on('child_changed', function (snapshot) {
-        var message = snapshot.val();
-        chats.push(message);
-        onchangecallback(message);
-    });
+
     var authdetails = ref.getAuth();
+
     var val = 0;
 
 
     var returnval = {
+        firbasecallonchange: function () {
+            ref.child(authdetails.uid).on('value', function (snapshot) {
+                var message = snapshot.val();
+                chats.push(message);
+                onchangecallback(message);
+            });
+        },
         getchats: function () {
             return chats;
         },
@@ -61,10 +65,12 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
         },
         update: function (name, email, text) {
             var obj = {};
-            obj['chat'] = {
+            var timestamp = new Date();
+            obj[authdetails.uid] = {
                 name: name,
                 text: text,
-                email: email
+                email: email,
+                timestamp: timestamp.getTime()
             };
             ref.update(obj);
         },
@@ -87,6 +93,8 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
         }
     }
 
-
+    if (authdetails) {
+        returnval.firbasecallonchange();
+    }
     return returnval;
 });
