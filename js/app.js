@@ -63,10 +63,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
     .filter('chatclass', function (FireBaseServices) {
         return function (input) {
             useremail = FireBaseServices.getauthemail();
-            if (input == useremail) {
-                return "us";
-            } else {
+            if (input == "Sergy") {
                 return "them";
+            } else {
+                return "us";
             }
 
         };

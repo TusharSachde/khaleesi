@@ -30,6 +30,9 @@
 .messages li.them p {
     background: #158ffe;
     color: #fff;
+    max-width: 75%;
+    width: auto;
+    display: inline-block;
 }
 .messages img {
     display: block;

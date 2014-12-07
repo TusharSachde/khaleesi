@@ -128,10 +128,8 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
     function changeevent(message) {
         console.log(message);
-        if(message.email!=FireBaseServices.getauthemail())
-        {
-            $scope.$apply();
-        }
+        $scope.$apply();
+        
         
     };
 
@@ -149,6 +147,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     $scope.send = function (chat) {
         console.log(chat.message);
         FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message);
+        chat.message="";
         //        $scope.chat = FireBaseServices.chat();
 
         // Update the scroll area
