@@ -3,24 +3,38 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
 .factory('FireBaseServices', function ($http, $location, $firebase) {
 
     var ref = new Firebase("https://blinding-heat-5568.firebaseio.com/");
-//    var FBService = this;
-//    console.log(this);
-//    ref.on('child_changed', function (snapshot) {
-//        var message = snapshot.val();
-//        console.log(message);
-//        console.log(firebaseservices.authenticate());
-//    });
+    var chats = [];
+    var onchangecallback = function () {};
+    ref.on('child_changed', function (snapshot) {
+        var message = snapshot.val();
+        chats.push(message);
+        onchangecallback(message);
+    });
+    var authdetails = ref.getAuth();
+    var val = 0;
 
-    //    var val = 0;
-    return {
+
+    var returnval = {
+        getchats: function () {
+            return chats;
+        },
+        changecallback: function (newfunc) {
+            onchangecallback = newfunc;
+            return true;
+        },
         getuseremail: function () {
             return useremail;
         },
+
+        getauthemail: function () {
+            return authdetails.password.email;
+        },
+
         logout: function () {
-            
+
             ref.unauth();
             return 1;
-            
+
         },
         setuseremail: function (user) {
             useremail = user;
@@ -42,7 +56,8 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
 
         },
         authenticate: function () {
-            return ref.getAuth();
+            authdetails = ref.getAuth();
+            return authdetails;
         },
         update: function (name, email, text) {
             var obj = {};
@@ -71,4 +86,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             return $.jStorage.get("user");
         }
     }
+
+
+    return returnval;
 });
