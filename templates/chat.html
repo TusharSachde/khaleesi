@@ -12,8 +12,10 @@
         </ol>
     </ion-content>
     <ion-footer-bar class="bar-stable">
-        <input type="text" class="chat-type" ng-model="chat.message" placeholder="Start typing...">
-        <button class="button button-clear button-positive pull-right" ng-click="send(chat);">Send</button>
+       <form ng-submit="send(chat);">
+             <input type="text" class="chat-type" ng-model="chat.message" placeholder="Start typing...">
+            <button class="button button-clear button-positive pull-right" type="submit">Send</button>
+        </form>
     </ion-footer-bar>
 
     </ion-content>
