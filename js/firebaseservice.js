@@ -102,15 +102,15 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             };
             ref.update(obj);
 //            
-//            var json1 = {
-//                email: email,
-//                name: name,
-//                text: text,
-//                timestamp: timestamp.getTime()
-//            };
-//            json1=JSON.stringify(json1);
-//            
-//            $http.get(adminurl + "addchat?json="+json1+"&user="+id+"&type=1&url=&imageurl=&status=1",{});
+            var json1 = {
+                email: email,
+                name: name,
+                text: text,
+                timestamp: timestamp.getTime()
+            };
+            json1=JSON.stringify(json1);
+            
+            $http.get(adminurl + "addchat?json="+json1+"&user="+id+"&type=1&url=&imageurl=&status=1",{});
             
         },
         setuser: function (userdata) {
