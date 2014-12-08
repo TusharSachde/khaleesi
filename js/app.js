@@ -6,8 +6,8 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
 
-.run(function ($ionicPlatform) {
-    $ionicPlatform.ready(function () {
+.run(function($ionicPlatform) {
+    $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -20,7 +20,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
     });
 })
 
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
 
     .state('app', {
@@ -60,8 +60,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/chat');
 })
-    .filter('chatclass', function (FireBaseServices) {
-        return function (input) {
+    .filter('chatclass', function(FireBaseServices) {
+        return function(input) {
             useremail = FireBaseServices.getauthemail();
             if (input == "Sergy") {
                 return "them";
