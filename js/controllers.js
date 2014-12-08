@@ -136,7 +136,6 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
     FireBaseServices.changecallback(changeevent);
     // get chat from databse on page load
-    //    $scope.chat = FireBaseServices.chat();
 
     console.log($scope.chat);
     var ref = new Firebase("https://blinding-heat-5568.firebaseio.com/");
@@ -148,8 +147,6 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         console.log(chat.message);
         FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message);
         chat.message="";
-        //        $scope.chat = FireBaseServices.chat();
-
         // Update the scroll area
         $ionicScrollDelegate.scrollBottom(true);
     };

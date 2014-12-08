@@ -74,16 +74,6 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             };
             ref.update(obj);
         },
-        chat: function () {
-            var sync = $firebase(ref);
-            return sync.$asObject();
-            //            var val=0;
-            //            ref.once('value', function(nameSnapshot) {
-            //                 var val = nameSnapshot.val();
-            //
-            //            });
-            //            console.log(val);
-        },
         setuser: function (userdata) {
             var user = userdata;
             $.jStorage.set("user", userdata);
