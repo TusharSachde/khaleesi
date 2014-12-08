@@ -48,6 +48,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
             }
         }
     })
+    
         .state('app.chat', {
             url: "/chat",
             views: {
