@@ -1,3 +1,4 @@
+var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', ['firebase'])
 
 .factory('FireBaseServices', function ($http, $location, $firebase) {
@@ -37,11 +38,20 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
         logout: function () {
 
             ref.unauth();
+            $.jStorage.flush();
             return 1;
 
         },
-        setuseremail: function (user) {
-            useremail = user;
+        setuserid: function (user) {
+            console.log("me user");
+            console.log(user);
+            authdetails = ref.getAuth();
+            var userdata = {
+                'id' : user,
+                'provider' : authdetails.provider,
+                'uid' : authdetails.uid
+            };
+            $.jStorage.set("user", userdata);
         },
         normallogin: function (username, password, callback) {
             //    var auth = $firebaseAuth(ref);
@@ -51,8 +61,19 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             }, callback);
 
         },
+        login: function (username, password) {
+            return $http.get(adminurl + "login?email="+username+"&password="+password,{});
+            
+        },
+        adduser: function (name,username, password) {
+            return $http.get(adminurl + "register?name="+name+"&email="+username+"&password="+password+"&socialid="+0+"&logintype=3&json=",{});
+            
+        },
         normalregister: function (username, password, callback) {
-
+            
+            // User to database `user`
+//            $http.get(adminurl + 'addchat?user=' + bigbagplan.user + '&category=' + bigbagplan.category, {});
+            
             ref.createUser({
                 email: username,
                 password: password
@@ -63,7 +84,10 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             authdetails = ref.getAuth();
             return authdetails;
         },
-        update: function (name, email, text) {
+        authenticate1: function () {
+            return $http.get(adminurl + "authenticate",{});
+        },
+        update: function (name, email, text, id) {
             var obj = {};
             var timestamp = new Date();
             obj[authdetails.uid] = {
@@ -73,10 +97,20 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                 timestamp: timestamp.getTime()
             };
             ref.update(obj);
+            
+            var json1 = {
+                email: email,
+                name: name,
+                text: text,
+                timestamp: timestamp.getTime()
+            };
+            json1=JSON.stringify(json1);
+            
+            $http.get(adminurl + "addchat?json="+json1+"&user="+id+"&type=1&url=&imageurl=&status=1",{});
+            
         },
         setuser: function (userdata) {
-            var user = userdata;
-            $.jStorage.set("user", userdata);
+            
         },
         getuser: function () {
             return $.jStorage.get("user");

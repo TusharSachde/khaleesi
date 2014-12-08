@@ -1,11 +1,20 @@
 angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
-
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
 
     $scope.loginlogout = "Login";
     $scope.userdata = [];
+    $scope.logind = {};
+    
+    // authenticate for database login
+//    var authenticatesuccess = function (data, status) {
+//        console.log(data);
+//    };
+//    FireBaseServices.authenticate1().success(authenticatesuccess);
+    console.log(FireBaseServices.getuser());
+    
     //farebase authenticate service.js/authenticate
     $scope.userdata = FireBaseServices.authenticate();
+    
     if ($scope.userdata == null) {
         $scope.loginlogout = "Login";
     } else {
@@ -13,6 +22,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     }
     // Form data for the login modal
     $scope.loginData = {};
+    $scope.registerdata = {};
 
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -66,13 +76,20 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         }, 1000);
     };
 
+    var loginsuccess = function (data, status) {
+        console.log(data);
+        FireBaseServices.setuserid(data);
+//            window.location.reload(false);
+    };
+    
     var onloginsuccess = function (error, authData) {
         FireBaseServices.authenticate();
         FireBaseServices.firbasecallonchange();
         if (error === null) {
-            window.location.reload(false);
-            $.jStorage.set("user", authData);
+//            $.jStorage.set("user", authData);
             console.log(1);
+            FireBaseServices.login($scope.loginData.username,$scope.loginData.password).success(loginsuccess);
+            
             //            $location.url('/search');
 
         } else {
@@ -96,10 +113,19 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
     }
 
-    //    normal registration service.js/normalregistration
+    //    normal registration service.js/normalregistration\
+    var addusersuccess = function (data, status) {
+        console.log(data);
+    };
+    
     var registersuccess = function (error) {
+        
+        // User Register to Database
+        
         if (error === null) {
             console.log("User created successfully");
+            FireBaseServices.adduser($scope.registerdata.name,$scope.registerdata.username,$scope.registerdata.password).success(addusersuccess);
+//            FireBaseServices.a
             $scope.modal.show();
         } else {
             console.log("Error creating user:", error);
@@ -121,6 +147,10 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
 .controller('ChatCtrl', function ($scope, $stateParams, $ionicScrollDelegate, FireBaseServices, $firebase) {
 
+    // get logged in user stored in jstorage
+    $scope.user=FireBaseServices.getuser();
+    console.log($scope.user);
+    
     // get user data by getAuth() function
     $scope.userdata = FireBaseServices.authenticate();
     console.log($scope.userdata);
@@ -141,11 +171,12 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     var ref = new Firebase("https://blinding-heat-5568.firebaseio.com/");
 
     $scope.allchats = FireBaseServices.getchats();
+//    $scope.allchats.push({email: "jagruti@wohlig.com", name: "simplelogin:1", text: "hey whats up", timestamp: 1418016362961});
 
     // updating chat in service.js/update
     $scope.send = function (chat) {
         console.log(chat.message);
-        FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message);
+        FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message, $scope.user.id);
         chat.message="";
         // Update the scroll area
         $ionicScrollDelegate.scrollBottom(true);
