@@ -16,6 +16,10 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
         firbasecallonchange: function () {
             ref.child(authdetails.uid).on('value', function (snapshot) {
                 var message = snapshot.val();
+                console.log(message);
+//                json1=JSON.stringify(message);
+//            
+//                $http.get(adminurl + "addchat?json="+json1+"&user=0&type=1&url=&imageurl=&status=1",{});
                 chats.push(message);
                 onchangecallback(message);
             });
@@ -97,16 +101,16 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                 timestamp: timestamp.getTime()
             };
             ref.update(obj);
-            
-            var json1 = {
-                email: email,
-                name: name,
-                text: text,
-                timestamp: timestamp.getTime()
-            };
-            json1=JSON.stringify(json1);
-            
-            $http.get(adminurl + "addchat?json="+json1+"&user="+id+"&type=1&url=&imageurl=&status=1",{});
+//            
+//            var json1 = {
+//                email: email,
+//                name: name,
+//                text: text,
+//                timestamp: timestamp.getTime()
+//            };
+//            json1=JSON.stringify(json1);
+//            
+//            $http.get(adminurl + "addchat?json="+json1+"&user="+id+"&type=1&url=&imageurl=&status=1",{});
             
         },
         setuser: function (userdata) {
