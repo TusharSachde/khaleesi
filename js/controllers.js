@@ -1,9 +1,12 @@
+var ud="";
+
 angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
 
     $scope.loginlogout = "Login";
     $scope.userdata = [];
     $scope.logind = {};
+    
     
     // authenticate for database login
 //    var authenticatesuccess = function (data, status) {
@@ -78,8 +81,9 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
     var loginsuccess = function (data, status) {
         console.log(data);
+        ud=data;
         FireBaseServices.setuserid(data);
-//            window.location.reload(false);
+            window.location.reload(false);
     };
     
     var onloginsuccess = function (error, authData) {
@@ -147,9 +151,13 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
 .controller('ChatCtrl', function ($scope, $stateParams, $ionicScrollDelegate, FireBaseServices, $firebase) {
 
+    
+    $scope.allchats = [];
+    $scope.check = 0;
+    
     // get logged in user stored in jstorage
     $scope.user=FireBaseServices.getuser();
-    console.log($scope.user);
+//    console.log($scope.user);
     
     // get user data by getAuth() function
     $scope.userdata = FireBaseServices.authenticate();
@@ -168,14 +176,27 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
     console.log($scope.chat);
     var ref = new Firebase("https://blinding-heat-5568.firebaseio.com/");
-
-    $scope.allchats = FireBaseServices.getchats();
+    
+    var chatsuccess = function (data, status){
+        for(var i = 0 ; i < data.queryresult.length ; i++)
+        {
+            console.log(JSON.parse(data.queryresult[i].json));
+            $scope.allchats.push(JSON.parse(data.queryresult[i].json));
+            
+        }
+        
+    };
+    if($scope.userdata!=null){
+    FireBaseServices.getchatbyuser($scope.userdata.password.email).success(chatsuccess);
+    }
+        $scope.allchats = FireBaseServices.getchats();
 //    $scope.allchats.push({email: "jagruti@wohlig.com", name: "simplelogin:1", text: "hey whats up", timestamp: 1418016362961});
 
     // updating chat in service.js/update
     $scope.send = function (chat) {
         console.log(chat.message);
-        FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message, $scope.user.id);
+        $scope.check = 1;
+        FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message, ud);
         chat.message="";
         // Update the scroll area
         $ionicScrollDelegate.scrollBottom(true);
