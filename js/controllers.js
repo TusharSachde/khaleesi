@@ -160,7 +160,6 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         console.log(message);
         $scope.$apply();
         
-        
     };
 
 
