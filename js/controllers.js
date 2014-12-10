@@ -85,7 +85,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         console.log("myid");
         console.log(ud);
         FireBaseServices.setuserid(data);
-//            window.location.reload(false);
+            window.location.reload(false);
     };
     
     var onloginsuccess = function (error, authData) {
