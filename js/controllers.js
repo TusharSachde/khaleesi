@@ -163,6 +163,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     
     // get user data by getAuth() function
     $scope.userdata = FireBaseServices.authenticate();
+    console.log("user user");
     console.log($scope.userdata);
     $scope.chat = {};
 
@@ -190,10 +191,12 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         ud = data.queryresult[0].userid;
     };
     if($scope.userdata!=null){
-//        $scope.allchats = [];
-    FireBaseServices.getchatbyuser($scope.userdata.password.email).success(chatsuccess);
+        FireBaseServices.getchatbyuser($scope.userdata.password.email).success(chatsuccess);
     }
+    if($scope.check == 1)
+    {
         $scope.allchats = FireBaseServices.getchats();
+    }
 //    $scope.allchats.push({email: "jagruti@wohlig.com", name: "simplelogin:1", text: "hey whats up", timestamp: 1418016362961});
 
     // updating chat in service.js/update
