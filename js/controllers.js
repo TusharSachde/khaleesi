@@ -80,10 +80,12 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     };
 
     var loginsuccess = function (data, status) {
-        console.log(data);
+//        console.log(data);
         ud=data;
+        console.log("myid");
+        console.log(ud);
         FireBaseServices.setuserid(data);
-            window.location.reload(false);
+//            window.location.reload(false);
     };
     
     var onloginsuccess = function (error, authData) {
@@ -178,15 +180,17 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     var ref = new Firebase("https://blinding-heat-5568.firebaseio.com/");
     
     var chatsuccess = function (data, status){
+//        $scope.allchats = [];
         for(var i = 0 ; i < data.queryresult.length ; i++)
         {
             console.log(JSON.parse(data.queryresult[i].json));
             $scope.allchats.push(JSON.parse(data.queryresult[i].json));
             
         }
-        
+        ud = data.queryresult[0].userid;
     };
     if($scope.userdata!=null){
+//        $scope.allchats = [];
     FireBaseServices.getchatbyuser($scope.userdata.password.email).success(chatsuccess);
     }
         $scope.allchats = FireBaseServices.getchats();
@@ -196,6 +200,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     $scope.send = function (chat) {
         console.log(chat.message);
         $scope.check = 1;
+        console.log(ud);
         FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message, ud);
         chat.message="";
         // Update the scroll area
