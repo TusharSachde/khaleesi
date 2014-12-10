@@ -1,5 +1,5 @@
-//var adminurl = "http://localhost/sergybackend/index.php/json/";
-var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
+var adminurl = "http://localhost/sergybackend/index.php/json/";
+//var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', ['firebase'])
 
 .factory('FireBaseServices', function ($http, $location, $firebase) {
@@ -67,15 +67,36 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
 
         },
         getchatbyuser: function (email) {
-            return $http.get(adminurl + "getchatbyuser?email="+email,{});
+            return $http({
+                url: adminurl+'getchatbyuser',
+                method: "POST",
+               data: {'email':email}
+            });
             
         },
         login: function (username, password) {
-            return $http.get(adminurl + "login?email="+username+"&password="+password,{});
+//            return $http.get(adminurl + "login?email="+username+"&password="+password,{});
+            return $http({
+                url: adminurl+'login',
+                method: "POST",
+               data: {'email':username,
+                      'password':password}
+            });
             
         },
         adduser: function (name,username, password) {
-            return $http.get(adminurl + "register?name="+name+"&email="+username+"&password="+password+"&socialid="+0+"&logintype=3&json=",{});
+//            return $http.get(adminurl + "register?name="+name+"&email="+username+"&password="+password+"&socialid="+0+"&logintype=3&json=",{});
+            return $http({
+                url: adminurl+'register',
+                method: "POST",
+               data: {'name':name,
+                      'email':username,
+                      'password':password,
+                      'socialid':'',
+                      'logintype':3,
+                      'json':''
+                     }
+            });
             
         },
         normalregister: function (username, password, callback) {
