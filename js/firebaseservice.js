@@ -137,18 +137,18 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             json1=JSON.stringify(json1);
             
             
-            return $http({
-                url: adminurl+'addchat',
-                method: "POST",
-               data: {'json':json1,
-                      'user':id,
-                      'type':'1',
-                      'url':'',
-                      'imageurl':'',
-                      'status':'1'}
-            });
+//            return $http({
+//                url: adminurl+'addchat',
+//                method: "POST",
+//               data: {'json':json1,
+//                      'user':id,
+//                      'type':'1',
+//                      'url':'',
+//                      'imageurl':'',
+//                      'status':'1'}
+//            });
             
-//            $http.get(adminurl + "addchat?json="+json1+"&user="+id+"&type=1&url=&imageurl=&status=1",{});
+            $http.get(adminurl + "addchat?json="+json1+"&user="+id+"&type=1&url=&imageurl=&status=1",{});
             
         },
         setuser: function (userdata) {

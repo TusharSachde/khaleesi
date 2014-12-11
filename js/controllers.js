@@ -193,10 +193,10 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     if($scope.userdata!=null){
         FireBaseServices.getchatbyuser($scope.userdata.password.email).success(chatsuccess);
     }
-    if($scope.check == 1)
-    {
+//    if($scope.check == 1)
+//    {
         $scope.allchats = FireBaseServices.getchats();
-    }
+//    }
 //    $scope.allchats.push({email: "jagruti@wohlig.com", name: "simplelogin:1", text: "hey whats up", timestamp: 1418016362961});
 
     // updating chat in service.js/update
