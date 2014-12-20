@@ -21,15 +21,15 @@
 }
 .messages p {
     border-radius: .75rem;
-    background: #e6e5eb;
-    color: #383641;
+    background: #6DD900;
+    color: #fff;
     padding: .6875rem;
     margin: 0;
     font-size: .875rem;
 }
 .messages li.them p {
-    background: #158ffe;
-    color: #fff;
+    background: #eee;
+    color: #000;
     max-width: 75%;
     width: auto;
     display: inline-block;
