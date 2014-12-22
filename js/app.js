@@ -30,28 +30,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         controller: 'AppCtrl'
     })
 
-    .state('app.search', {
-        url: "/search",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/search.html"
-            }
-        }
-    })
-
-    .state('app.browse', {
-        url: "/browse",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/browse.html",
-                controller: 'BrowseCtrl'
-            }
-        }
-    })
         .state('app.chat', {
             url: "/chat",
             views: {
                 'menuContent': {
+                    templateUrl: "templates/chat.html",
+                    controller: 'ChatCtrl'
+                },
+                'menuContent2': {
+                    templateUrl: "templates/chat.html",
+                    controller: 'ChatCtrl'
+                },
+                'menuContent3': {
                     templateUrl: "templates/chat.html",
                     controller: 'ChatCtrl'
                 }
