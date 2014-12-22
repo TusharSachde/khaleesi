@@ -8,7 +8,7 @@
 .messages li {
     display: block;
     clear: both;
-/*    max-width: 50%;*/
+    /*    max-width: 50%;*/
     width: -moz-fit-content;
     margin: 0 0 1rem 0;
     padding: 0;
@@ -39,7 +39,47 @@
     max-width: 65%;
     border-radius: .75rem;
 }
-.chat-type {
-    background: transparent;
-    width: 85%;
+.bar.bar-white.bar-footer {
+    background-color: white;
+    border-color: #bfbfbf;
+}
+.bar.bar-stable {
+    border-color: #bfbfbf;
+    background-color: white;
+    background-image: -webkit-linear-gradient(90deg, #fff, #fff 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #fff, #fff 50%, transparent 50%);
+    color: #262626;
+}
+.chat-bar form {
+    width: 100%;
+    position: relative;
+}
+.chat-bar input {
+    box-sizing: border-box;
+    width: 100%;
+    background: #fff;
+    padding: 0 5px;
+}
+
+.offline {
+    color: #FF7373;
+}
+.sergy-title h5 {
+    margin: 10px 0 0;
+    text-transform: uppercase;
+}
+.sergy-title p {
+    margin: -15px 0 0;
+    font-size: 10px;
+    font-weight: normal;
+    color: #aaa;
+}
+
+.small {
+    font-size: 10px;
+    vertical-align: middle;
+}
+.chat-bar input[type="submit"] {
+    border: 0px;
+    font-weight: 500;
 }
