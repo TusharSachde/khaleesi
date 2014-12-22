@@ -50,6 +50,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/chat');
 })
+
+
+.filter('converttime', function (FireBaseServices) {
+    return function (input) {
+        input = parseInt(input);
+        var date = new Date(input);
+        return date.toUTCString();
+    };
+})
     .filter('chatclass', function(FireBaseServices) {
         return function(input) {
             useremail = FireBaseServices.getauthemail();

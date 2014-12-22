@@ -16,14 +16,9 @@
 
         <ol class="messages" ng-repeat="message in allchats">
             <li class="{{message.name|chatclass}}">
-                <p>{{message.name}} : {{message.text}}</p>
+                <p>
+                {{message.timestamp|converttime}}<br>{{message.name}} : {{message.text}}</p>
             </li>
-<<<<<<< HEAD
-=======
-            <li class="{{message.name|chatclass}}">
-                <p>{{message.name}} : {{message.text}}</p>
-            </li>
->>>>>>> origin/master
 
         </ol>
     </ion-content>

@@ -189,6 +189,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
             
         }
         ud = data.queryresult[0].userid;
+        $ionicScrollDelegate.scrollBottom(true);
     };
     if($scope.userdata!=null){
         FireBaseServices.getchatbyuser($scope.userdata.password.email).success(chatsuccess);
@@ -196,6 +197,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 //    if($scope.check == 1)
 //    {
         $scope.allchats = FireBaseServices.getchats();
+    $ionicScrollDelegate.scrollBottom(true);
 //    }
 //    $scope.allchats.push({email: "jagruti@wohlig.com", name: "simplelogin:1", text: "hey whats up", timestamp: 1418016362961});
 
