@@ -1,23 +1,43 @@
-<ion-view title="Chat">
+<ion-view>
+    <ion-nav-title class="sergy-title">
+        <h5><i class="ion-record small offline"></i> Sergy</h5>
+        <p>OFFLINE - 1h 22m ago</p>
+    </ion-nav-title>
+
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
+
+   <ion-nav-buttons side="right">
+        <a class="button icon-right ion-ios7-arrow-right button-clear button-dark">Orders</a>
+    </ion-nav-buttons>
+   
     <ion-content class="has-header padding">
 
         <ol class="messages" ng-repeat="message in allchats">
             <li class="{{message.name|chatclass}}">
                 <p>{{message.name}} : {{message.text}}</p>
             </li>
-               <li class="{{message.name|chatclass}}">
+            <li class="{{message.name|chatclass}}">
                 <p>{{message.name}} : {{message.text}}</p>
             </li>
 
         </ol>
     </ion-content>
-    <ion-footer-bar class="bar-stable">
-       <form ng-submit="send(chat);">
-             <input type="text" class="chat-type" ng-model="chat.message" placeholder="Start typing...">
-            <button class="button button-clear button-positive pull-right" type="submit">Send</button>
+    <ion-footer-bar class="bar-stable bar-white chat-bar">
+        <form ng-submit="send(chat);">
+           
+            <table style="width:100%;">
+                <tr>
+                    <td style="width:100%;">
+                        <input type="text" ng-model="chat.message" placeholder="Your message" style="width:100%;">
+                    </td>
+                    <td>
+                        <input type="submit" value="SEND">
+                    </td>
+                </tr>
+            </table>
+
         </form>
     </ion-footer-bar>
 
