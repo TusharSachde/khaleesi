@@ -6,21 +6,23 @@
         </div>
     </ion-header-bar>
     <ion-content>
-        <div class="list">
-            <label class="item item-input">
-                <span class="input-label">Username</span>
-                <input type="text" id="loginemail" ng-model="loginData.username">
-            </label>
-            <label class="item item-input">
-                <span class="input-label">Password</span>
-                <input type="password" id="loginpassword" ng-model="loginData.password">
-            </label>
-        </div>
-
-        <div class="padding">
-            <button class="button button-block button-positive" ng-click="normallogin(loginData);" type="submit">Log in</button>
-
-            <button class="button button-block button-positive" ng-click="register()" type="submit">Sign Up</button>
-        </div>
+       <form ng-submit="normallogin(loginData);">
+             <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Username</span>
+                    <input type="text" id="loginemail" ng-model="loginData.username">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Password</span>
+                    <input type="password" id="loginpassword" ng-model="loginData.password">
+                </label>
+            </div>
+            
+            <div class="padding">
+                <button class="button button-block button-dark" type="submit">Log in</button>
+            
+                <button class="button button-block button-dark" ng-click="register()">Sign Up</button>
+            </div>
+        </form>
     </ion-content>
 </div>

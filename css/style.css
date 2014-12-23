@@ -26,6 +26,7 @@
     padding: .6875rem;
     margin: 0;
     font-size: .875rem;
+    position: relative;
 }
 .messages li.them p {
     background: #eee;
@@ -60,13 +61,19 @@
     background: #fff;
     padding: 0 5px;
 }
-
 .offline {
     color: #FF7373;
+}
+.online {
+    color: #53DD6D;
 }
 .sergy-title h5 {
     margin: 10px 0 0;
     text-transform: uppercase;
+}
+.bar .title {
+    text-transform: uppercase;
+    font-size: 14px;
 }
 .sergy-title p {
     margin: -15px 0 0;
@@ -74,7 +81,6 @@
     font-weight: normal;
     color: #aaa;
 }
-
 .small {
     font-size: 10px;
     vertical-align: middle;
@@ -82,4 +88,127 @@
 .chat-bar input[type="submit"] {
     border: 0px;
     font-weight: 500;
+}
+.title.icon {
+    font-size: 33px;
+}
+.bar.bar-dark {
+    border-color: #191919;
+    background-color: #191919;
+    background-image: -webkit-linear-gradient(90deg, #191919, #191919 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #191919, #191919 50%, transparent 50%);
+    color: #fff;
+}
+.icon1 {
+    background: url("../img/menu-icon.png") no-repeat top left;
+    margin: 0 5px 0 -5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.icon1.white {
+    background-image: url("../img/menu-icon-w.png");
+}
+.bar .icon1 {
+    margin-top: 5px;
+}
+.i-order {
+    background-position: 0px 0px;
+    width: 32px;
+    height: 23px;
+    background-size: 100%;
+}
+.i-return {
+    background-position: -1px -24px;
+    width: 32px;
+    height: 25px;
+    background-size: 100%;
+}
+.i-shipping {
+    background-position: 0px -48px;
+    width: 32px;
+    height: 22px;
+    background-size: 100%;
+}
+.i-billing {
+    background-position: 0px -70px;
+    width: 32px;
+    height: 19px;
+    background-size: 100%;
+}
+.i-setting {
+    background-position: 0px -89px;
+    width: 32px;
+    height: 24px;
+    background-size: 100%;
+}
+.menus-content .item {
+    border: 0px;
+    text-transform: uppercase;
+    color: white;
+    background: #191919;
+}
+.menus-content .item-content {
+    background: #191919;
+}
+.menus-content .item-content.activated {
+    background: #bfbfbf;
+    color: white;
+}
+.menus-content .after-menu .item-content.activated {
+    background: #191919;
+    color: white;
+}
+.menus-content {
+    background: #191919;
+}
+.menus-content .after-menu .item {
+    border: 0px;
+    text-transform: uppercase;
+    color: #444;
+}
+.menus-content .after-menu .item-complex .item-content,
+.menus-content .item-radio .item-content {
+    font-weight: bold;
+    font-size: 13px;
+    padding: 0;
+}
+.menus-content .after-menu .item {
+    font-weight: bold;
+    font-size: 12px;
+    padding: 10px 0 10px 50px;
+}
+.footer {
+    display: block;
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+    border: 1px solid #444;
+    padding: 14px 5px 4px;
+    color: #444;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-top: 45px;
+}
+.f2x {
+    font-size: 20px;
+    vertical-align: middle;
+}
+.small-right {
+    font-size: 10px;
+    color: #444;
+}
+.messages p:after {
+    border-left: 10px solid #6DD900;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 20px;
+}
+.messages li.them p:after {
+    border-right: 10px solid #EEEEEE;
+    border-left: 10px solid transparent;
+    right: initial;
+    left: -20px;
 }
