@@ -1,0 +1,31 @@
+
+        <ol class="messages" ng-repeat="message in allchats">
+            {{allchats | json}}
+            <li class="{{message.name|chatclass}}" ng-if="message.type!=3">
+                <p>
+                {{message.timestamp|converttime}}<br>{{message.name}} : {{message.text}}</p>
+            </li>
+
+            <li class="{{message.name|chatclass}}" ng-if="message.type==3">
+                {{message.timestamp|converttime}}<br>{{message.name}} : 
+                
+                <form form-controller="home">
+                    <p ng-repeat='form in message.text|chatt'>
+                        {{message.text | json}}
+                        <input type="text" placeholder='{{form.placeholder}}' class="form-control" ng-if="form.type=='text'">
+                        <input type="password" placeholder='{{form.placeholder}}' class="form-control" ng-if="form.type=='password'">
+                        <select ng-if="form.type=='selection'" class="form-control" >
+                            <option>{{form.placeholder}}</option>
+                            <option ng-repeat="frm in form.value">{{frm.title}}</option>
+                        </select>
+                    </p>
+                    <p>
+                        <button type="submit" class="btn btn-default" ng-click="formsubmit(form)">Submit</button>
+                        <button type="cancel" class="btn btn-default">Cancel</button>
+
+                    </p>
+                </form>
+            </li>
+
+        </ol
+            

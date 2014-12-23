@@ -51,7 +51,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
     $urlRouterProvider.otherwise('/app/chat');
 })
 
-
+    
 .filter('converttime', function (FireBaseServices) {
     return function (input) {
         input = parseInt(input);
@@ -69,4 +69,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
             }
 
         };
-    });
+    })
+
+.filter('chatt', function () {
+    return function (input) {
+        console.log(input);
+        var j = JSON.parse(input);
+        return j.form;
+    };
+})
+
+.directive("chat", function () {
+    return {
+        restrict: "E",
+        replace: "true",
+        templateUrl: "http://localhost/sergy/templates/chat1.html"
+    }
+});
