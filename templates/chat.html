@@ -13,14 +13,7 @@
     </ion-nav-buttons>
    
     <ion-content class="has-header padding">
-
-        <ol class="messages" ng-repeat="message in allchats">
-            <li class="{{message.name|chatclass}}">
-                <p>
-                {{message.timestamp|converttime}}<br>{{message.name}} : {{message.text}}</p>
-            </li>
-
-        </ol>
+        <chat></chat>
     </ion-content>
     <ion-footer-bar class="bar-stable bar-white chat-bar">
         <form ng-submit="send(chat);">
