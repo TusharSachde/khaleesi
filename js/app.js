@@ -82,6 +82,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
     return {
         restrict: "E",
         replace: "true",
-        templateUrl: "http://localhost/sergy/templates/chat1.html"
+        templateUrl: "templates/chat1.html"
     }
 });
