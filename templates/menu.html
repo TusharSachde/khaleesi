@@ -51,14 +51,9 @@
                 <ion-item nav-clear menu-close href="#/app/share">
                     Share
                 </ion-item>
-                <ion-item nav-clear menu-close ng-show="loginlogout=='Login'">
-                    <a class="item-content" ng-click="login()">
-                        {{loginlogout}}
-                </a>
-                </ion-item>
-                <ion-item nav-clear ng-show="loginlogout=='Logout'">
-                    <a class="item-content" ng-click="logout()">
-                     {{loginlogout}}
+                <ion-item nav-clear>
+                    <a href="#/logout" class="item-content">
+                     Logout
                 </a>
                 </ion-item>
             </ion-list>

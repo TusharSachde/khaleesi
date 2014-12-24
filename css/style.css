@@ -23,9 +23,9 @@
     border-radius: .75rem;
     background: #6DD900;
     color: #fff;
-    padding: .6875rem;
+    padding: 7px 19px;
     margin: 0;
-    font-size: .875rem;
+    font-size: 14px;
     position: relative;
     text-align: right;
 }
@@ -269,9 +269,15 @@ a.tab-item {
     height: 53px;
     border-color: #bfbfbf;
 }
-.tab-item.activated, .tab-item.active, .tab-item.tab-item-active {
+.tab-item.activated,
+.tab-item.active,
+.tab-item.tab-item-active {
     background: #111;
 }
 .tab-item {
     padding-top: 4px;
+}
+span.datetime {
+    font-size: 11px;
+    opacity: 0.6;
 }

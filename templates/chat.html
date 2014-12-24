@@ -20,7 +20,7 @@
         <ol class="messages" ng-repeat="message in allchats">
            <li class="{{message.name|chatclass}}" ng-if="message.type!=3">
                 <p>
-                {{message.timestamp|converttime}}<br>{{message.name}} : {{message.text}}</p>
+                {{message.text}}<br><span class="datetime">{{message.timestamp|date:"h:mma"}}</span></p>
             </li>
             <li class="{{message.name|chatclass}}" ng-if="message.type==3">
                 <p>
