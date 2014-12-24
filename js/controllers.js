@@ -114,7 +114,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         FireBaseServices.normallogin(loginData.username, loginData.password, onloginsuccess);
         //        console.log($scope.logindata);
 
-        $location.url('/search');
+        $location.url('/chat');
         $scope.modal.hide();
 
     }
