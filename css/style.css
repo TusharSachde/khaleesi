@@ -107,6 +107,15 @@
     display: inline-block;
     vertical-align: middle;
 }
+.icon2 {
+    background: url("../img/tabs.png") no-repeat top left;
+    margin: 0 5px 0 -5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.tab-item-active .icon2 {
+    background-image: url("../img/tabs-w.png");
+}
 .icon1.white {
     background-image: url("../img/menu-icon-w.png");
 }
@@ -142,6 +151,36 @@
     width: 32px;
     height: 24px;
     background-size: 100%;
+}
+.i-travel {
+    background-position: 0px 0px;
+    width: 32px;
+    height: 22px;
+    background-size: 400px;
+}
+.i-hotel {
+    background-position: -87px 0px;
+    width: 32px;
+    height: 22px;
+    background-size: 400px;
+}
+.i-good {
+    background-position: -172px 0px;
+    width: 40px;
+    height: 22px;
+    background-size: 400px;
+}
+.i-show {
+    background-position: -271px 0px;
+    width: 34px;
+    height: 22px;
+    background-size: 400px;
+}
+.i-bill {
+    background-position: -371px 0px;
+    width: 33px;
+    height: 22px;
+    background-size: 400px;
 }
 .menus-content .item {
     border: 0px;
@@ -213,4 +252,26 @@
     border-left: 10px solid transparent;
     right: initial;
     left: -20px;
+}
+a.tab-item {
+    opacity: 1;
+}
+.big-txt .tab-title {
+    font-size: 14px;
+    color: #ababab;
+    text-transform: uppercase;
+}
+.big-txt .tab-item-active .tab-title {
+    color: white;
+}
+.tabs {
+    background: white;
+    height: 53px;
+    border-color: #bfbfbf;
+}
+.tab-item.activated, .tab-item.active, .tab-item.tab-item-active {
+    background: #111;
+}
+.tab-item {
+    padding-top: 4px;
 }

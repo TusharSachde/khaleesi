@@ -211,4 +211,12 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         // Update the scroll area
         $ionicScrollDelegate.scrollBottom(true);
     };
-});
+})
+
+.controller('TravelCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
+    
+})
+.controller('TravelCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
+    
+})
+;
