@@ -27,6 +27,7 @@
     margin: 0;
     font-size: .875rem;
     position: relative;
+    text-align: right;
 }
 .messages li.them p {
     background: #eee;
@@ -34,6 +35,7 @@
     max-width: 75%;
     width: auto;
     display: inline-block;
+    text-align: left;
 }
 .messages img {
     display: block;
