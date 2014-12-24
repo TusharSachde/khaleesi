@@ -6,8 +6,8 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
 
-.run(function($ionicPlatform) {
-    $ionicPlatform.ready(function() {
+.run(function ($ionicPlatform) {
+    $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -20,15 +20,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
     });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
-
+.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+    $ionicConfigProvider.views.maxCache(0);
     //APP
     $stateProvider
         .state('app', {
             url: "/app",
             abstract: true,
-            templateUrl: "templates/menu.html",
-            controller: 'AppCtrl'
+            templateUrl: "templates/menu.html"
         })
         .state('app.chat', {
             url: "/chat",
@@ -39,21 +38,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
                 }
             }
         })
+        .state('login', { //logins
+            url: "/login",
+            templateUrl: "templates/login.html",
+            controller: 'LoginCtrl'
 
-    //login
-    .state('login', {
-        url: "/login",
-        templateUrl: "templates/login.html",
-        controller: 'LoginCtrl'
+        })
+        .state('logout', { //Logout
+            url: "/logout",
+            templateUrl: "templates/login.html",
+            controller: 'LogoutCrtl'
 
-    })
-
-    //TABS
-    .state('tab', {
-        url: '/tab',
-        abstract: true,
-        templateUrl: "templates/tabs.html"
-    })
+        })
+        .state('tab', { //tabs
+            url: '/tab',
+            abstract: true,
+            templateUrl: "templates/tabs.html"
+        })
         .state('tab.travel', {
             url: '/travel',
             views: {
@@ -85,7 +86,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
             url: '/show',
             views: {
                 'tab-hotel': {
-                    templateUrl: "templates/tab-show.html",
+                    templateUrl: "templates/tab-travel.html",
                     controller: 'ShowCtrl'
                 }
             }
@@ -94,7 +95,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
             url: '/bill',
             views: {
                 'tab-hotel': {
-                    templateUrl: "templates/tab-show.html",
+                    templateUrl: "templates/tab-travel.html",
                     controller: 'BillCtrl'
                 }
             }
@@ -104,15 +105,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
 })
 
 
-.filter('converttime', function(FireBaseServices) {
-    return function(input) {
+.filter('converttime', function (FireBaseServices) {
+    return function (input) {
         input = parseInt(input);
         var date = new Date(input);
         return date.toUTCString();
     };
 })
-    .filter('chatclass', function(FireBaseServices) {
-        return function(input) {
+    .filter('chatclass', function (FireBaseServices) {
+        return function (input) {
             useremail = FireBaseServices.getauthemail();
             if (input == "Sergy") {
                 return "them";
@@ -123,14 +124,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         };
     })
 
-.filter('chatt', function() {
-    return function(input) {
+.filter('chatt', function () {
+    return function (input) {
         var j = JSON.parse(input);
         return j.form;
     };
 })
 
-.directive("chat", function() {
+.directive("chat", function () {
     return {
         restrict: "E",
         replace: "true",

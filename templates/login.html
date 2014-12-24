@@ -1,10 +1,11 @@
-<div class="modal">
+<ion-view>
     <ion-header-bar>
         <h1 class="title">Login</h1>
     </ion-header-bar>
     <ion-content>
-       <form ng-submit="normallogin(loginData);">
-             <div class="list">
+
+        <form ng-submit="normallogin(loginData);">
+            <div class="list">
                 <label class="item item-input">
                     <span class="input-label">Username</span>
                     <input type="text" id="loginemail" ng-model="loginData.username">
@@ -14,12 +15,17 @@
                     <input type="password" id="loginpassword" ng-model="loginData.password">
                 </label>
             </div>
-            
+
+
+
             <div class="padding">
                 <button class="button button-block button-dark" type="submit">Log in</button>
-            
-                <button class="button button-block button-dark" ng-click="register()">Sign Up</button>
+
+                <!--                <button class="button button-block button-dark" ng-click="register()">Sign Up</button>-->
+            </div>
+            <div class="bar bar-assertive" ng-show="error">
+                <h1 class="title">{{error}}</h1>
             </div>
         </form>
     </ion-content>
-</div>
+</ion-view>
