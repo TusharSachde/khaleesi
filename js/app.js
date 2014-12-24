@@ -21,29 +21,73 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
+
+    //APP
     $stateProvider
-
-    .state('app', {
-        url: "/app",
-        abstract: true,
-        templateUrl: "templates/menu.html",
-        controller: 'AppCtrl'
-    })
-
+        .state('app', {
+            url: "/app",
+            abstract: true,
+            templateUrl: "templates/menu.html",
+            controller: 'AppCtrl'
+        })
         .state('app.chat', {
             url: "/chat",
             views: {
                 'menuContent': {
                     templateUrl: "templates/chat.html",
                     controller: 'ChatCtrl'
-                },
-                'menuContent2': {
-                    templateUrl: "templates/chat.html",
-                    controller: 'ChatCtrl'
-                },
-                'menuContent3': {
-                    templateUrl: "templates/chat.html",
-                    controller: 'ChatCtrl'
+                }
+            }
+        })
+
+    //TABS
+    .state('tab', {
+        url: '/tab',
+        abstract: true,
+        templateUrl: "templates/tabs.html"
+    })
+        .state('tab.travel', {
+            url: '/travel',
+            views: {
+                'tab-travel': {
+                    templateUrl: "templates/tab-travel.html",
+                    controller: 'TravelCtrl'
+                }
+            }
+        })
+        .state('tab.hotel', {
+            url: '/hotel',
+            views: {
+                'tab-hotel': {
+                    templateUrl: "templates/tab-hotel.html",
+                    controller: 'HotelCtrl'
+                }
+            }
+        })
+    .state('tab.good', {
+            url: '/good',
+            views: {
+                'tab-travel': {
+                    templateUrl: "templates/tab-travel.html",
+                    controller: 'GoodCtrl'
+                }
+            }
+        })
+        .state('tab.show', {
+            url: '/show',
+            views: {
+                'tab-hotel': {
+                    templateUrl: "templates/tab-show.html",
+                    controller: 'ShowCtrl'
+                }
+            }
+        })
+        .state('tab.bill', {
+            url: '/bill',
+            views: {
+                'tab-hotel': {
+                    templateUrl: "templates/tab-show.html",
+                    controller: 'BillCtrl'
                 }
             }
         });
@@ -51,9 +95,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
     $urlRouterProvider.otherwise('/app/chat');
 })
 
-    
-.filter('converttime', function (FireBaseServices) {
-    return function (input) {
+
+.filter('converttime', function(FireBaseServices) {
+    return function(input) {
         input = parseInt(input);
         var date = new Date(input);
         return date.toUTCString();
@@ -71,14 +115,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         };
     })
 
-.filter('chatt', function () {
-    return function (input) {
+.filter('chatt', function() {
+    return function(input) {
         var j = JSON.parse(input);
         return j.form;
     };
 })
 
-.directive("chat", function () {
+.directive("chat", function() {
     return {
         restrict: "E",
         replace: "true",
