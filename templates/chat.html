@@ -16,16 +16,28 @@
     </ion-nav-buttons>
 
     <ion-content class="has-header padding">
+<!--        <chat></chat>-->
         <ol class="messages" ng-repeat="message in allchats">
-            <li class="{{message.name|chatclass}}">
+           <li class="{{message.name|chatclass}}" ng-if="message.type!=3">
                 <p>
-                    {{message.name}} : {{message.text}}
+                {{message.timestamp|converttime}}<br>{{message.name}} : {{message.text}}</p>
+            </li>
+            <li class="{{message.name|chatclass}}" ng-if="message.type==3">
+                <p>
+                    <span ng-repeat="form in message.text|chatt">
+                    {{message.name}} : 
+                    <input type="text" placeholder='{{form.placeholder}}' class="form-control" ng-if="form.type=='text'">
+                        <input type="password" placeholder='{{form.placeholder}}' class="form-control" ng-if="form.type=='password'">
+                        <select ng-if="form.type=='selection'" class="form-control" >
+                            <option>{{form.placeholder}}</option>
+                            <option ng-repeat="frm in form.value">{{frm.title}}</option>
+                        </select>
                     <br><span class="small-right">{{message.timestamp|converttime}}</span>
+                    </span>
                 </p>
             </li>
 
         </ol>
-        <chat></chat>
     </ion-content>
     <ion-footer-bar class="bar-stable bar-white chat-bar">
         <form ng-submit="send(chat);">
