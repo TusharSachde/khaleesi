@@ -216,6 +216,10 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 .controller('TravelCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
     
 })
+
+.controller('LoginCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
+    
+})
 .controller('TravelCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
     
 })

@@ -40,6 +40,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
             }
         })
 
+    //login
+    .state('login', {
+        url: "/login",
+        templateUrl: "templates/login.html",
+        controller: 'LoginCtrl'
+
+    })
+
     //TABS
     .state('tab', {
         url: '/tab',
@@ -64,7 +72,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
                 }
             }
         })
-    .state('tab.good', {
+        .state('tab.good', {
             url: '/good',
             views: {
                 'tab-travel': {
