@@ -1,5 +1,5 @@
-//var adminurl = "http://localhost/sergybackend/index.php/json/";
-var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
+var adminurl = "http://localhost/sergybackend/index.php/json/";
+//var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', ['firebase'])
 
 .factory('FireBaseServices', function ($http, $location, $firebase) {
@@ -128,7 +128,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             });
             
         },
-        normalregister: function (username, password, callback) {
+        normalregister: function (username, password, callback,oncancel) {
             
             // User to database `user`
 //            $http.get(adminurl + 'addchat?user=' + bigbagplan.user + '&category=' + bigbagplan.category, {});
@@ -136,7 +136,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             ref.createUser({
                 email: username,
                 password: password
-            }, callback);
+            }, callback,oncancel);
 
         },
         authenticate: function () {
