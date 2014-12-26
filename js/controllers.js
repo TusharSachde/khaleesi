@@ -207,6 +207,8 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
         var loginsuccess = function (data, status) {
             //        console.log(data);
+            console.log("on databse login success");
+            console.log(data);
             ud = data;
             console.log("myid");
             console.log(ud);
@@ -216,6 +218,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
         };
         var onloginsuccess = function (error, authData) {
+            console.log("on firebase login success");
             if (error) {
                 console.log("Error");
                 $scope.error = "Invalid Username and Password.";

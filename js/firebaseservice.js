@@ -5,25 +5,25 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
 .factory('FireBaseServices', function ($http, $location, $firebase) {
 
     
-     var db = openDatabase('Sergy', '1.0', 'Books Database', 2 * 1024 * 1024);
-
-
-
-
-    db.transaction(function (tx) {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS chatmessages (id INTEGER PRIMARY KEY, chat,user,timestamp,type,url,imageurl,status,json)');
-        
-         
-
-        
-        //        tx.executeSql('INSERT INTO BETS (id, book,favorite,backlay,stake,odds) VALUES (1,1,2,2,0.3,100)');
-
-        //            tx.executeSql('SELECT last_insert_rowid()',callback);
-        //            getlast();
-        //            tx.executeSql('SELECT last_insert_rowid()', [], function (tx, results) {
-        //                console.log(results.rows.item(0));
-        //                });
-    });
+//     var db = openDatabase('Sergy', '1.0', 'Books Database', 2 * 1024 * 1024);
+//
+//
+//
+//
+//    db.transaction(function (tx) {
+//        tx.executeSql('CREATE TABLE IF NOT EXISTS chatmessages (id INTEGER PRIMARY KEY, chat,user,timestamp,type,url,imageurl,status,json)');
+//        
+//         
+//
+//        
+//        //        tx.executeSql('INSERT INTO BETS (id, book,favorite,backlay,stake,odds) VALUES (1,1,2,2,0.3,100)');
+//
+//        //            tx.executeSql('SELECT last_insert_rowid()',callback);
+//        //            getlast();
+//        //            tx.executeSql('SELECT last_insert_rowid()', [], function (tx, results) {
+//        //                console.log(results.rows.item(0));
+//        //                });
+//    });
     
     var ref = new Firebase("https://blinding-heat-5568.firebaseio.com/");
     var chats = [];
