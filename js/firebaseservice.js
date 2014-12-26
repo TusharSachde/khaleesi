@@ -1,5 +1,5 @@
-//var adminurl = "http://localhost/sergybackend/index.php/json/";
-var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
+var adminurl = "http://localhost/sergybackend/index.php/json/";
+//var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', ['firebase'])
 
 .factory('FireBaseServices', function ($http, $location, $firebase) {
@@ -113,6 +113,18 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                 method: "POST",
                data: {'email':username,
                       'password':password}
+            });
+            
+        },
+        adduserform: function (formid, user, json) {
+//            return $http.get(adminurl + "login?email="+username+"&password="+password,{});
+            return $http({
+                url: adminurl+'adduserform',
+                method: "POST",
+               data: {'formid':formid,
+                      'user':user,
+                      'json':json
+                    }
             });
             
         },

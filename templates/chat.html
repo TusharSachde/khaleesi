@@ -16,24 +16,36 @@
     </ion-nav-buttons>
 
     <ion-content class="has-header padding">
-<!--        <chat></chat>-->
+        <!--        <chat></chat>-->
         <ol class="messages" ng-repeat="message in allchats">
-           <li class="{{message.name|chatclass}}" ng-if="message.type!=3">
+            <li class="{{message.name|chatclass}}" ng-if="message.type!=3">
                 <p>
-                {{message.text}}<br><span class="datetime">{{message.timestamp|date:"h:mma"}}</span></p>
+                    {{message.text}}
+                    <br><span class="datetime">{{message.timestamp|date:"h:mma"}}</span>
+                </p>
             </li>
             <li class="{{message.name|chatclass}}" ng-if="message.type==3">
-                <p>
-                    <span ng-repeat="form in message.text|chatt">
-                    {{message.name}} : 
-                    <input type="text" placeholder='{{form.placeholder}}' class="form-control" ng-if="form.type=='text'">
-                        <input type="password" placeholder='{{form.placeholder}}' class="form-control" ng-if="form.type=='password'">
-                        <select ng-if="form.type=='selection'" class="form-control" >
+                <p ng-init="convertform(message.text);">
+                
+<!--                    {{formjson|json}}-->
+                    <span ng-show="!check">Form Submited Successfully</span>
+                  <span ng-show="check">
+                   <span>{{message.fname}}</span>
+                   <span class="assertive">{{msg}}</span>
+                    <span ng-repeat="form in formjson">
+<!--                    {{message.name}} : -->
+                        
+                    <input type="text" placeholder='{{form.placeholder}}' ng-model="form.val" class="form-control" ng-if="form.type=='text'">
+                        <input type="password" placeholder='{{form.placeholder}}' ng-model="form.val"  class="form-control" ng-if="form.type=='password'">
+                        <select ng-if="form.type=='selection'" ng-model="form.val" class="form-control" >
                             <option>{{form.placeholder}}</option>
                             <option ng-repeat="frm in form.value">{{frm.title}}</option>
                         </select>
-                    <br><span class="small-right">{{message.timestamp|converttime}}</span>
+                    <br>
                     </span>
+                    <button class="btn btn-default" ng-click="submitt(formjson,message.id)">Submit</button>
+                    </span>
+                    <span class="small-right">{{message.timestamp|converttime}}</span>
                 </p>
             </li>
 

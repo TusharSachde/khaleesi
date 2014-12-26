@@ -127,7 +127,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
 .filter('chatt', function () {
     return function (input) {
         var j = JSON.parse(input);
-        return j.form;
+        console.log(j.form);return j.form;
     };
 })
 
