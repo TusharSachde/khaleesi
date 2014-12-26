@@ -237,10 +237,14 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
             console.log(data);
             $scope.modal.hide();
         };
+        var oncancel = function (error) {
+            console.log("Error.......................................................");
+            console.log(error);
+        };
 
         //    normal login service.js/normallogin
         $scope.normallogin = function (loginData) {
-            FireBaseServices.normallogin(loginData.username, loginData.password, onloginsuccess);
+            FireBaseServices.normallogin(loginData.username, loginData.password, onloginsuccess,oncancel);
 
         }
 
