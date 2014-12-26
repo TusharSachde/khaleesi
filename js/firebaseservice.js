@@ -87,12 +87,15 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             };
             $.jStorage.set("user", userdata);
         },
-        normallogin: function (username, password, callback) {
+        normallogin: function (username, password, callback, oncancel) {
             //    var auth = $firebaseAuth(ref);
             ref.authWithPassword({
                 email: username,
                 password: password
-            }, callback);
+            }, callback,oncancel);
+            
+            
+            
 
         },
         getchatbyuser: function (email) {
@@ -128,7 +131,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             });
             
         },
-        normalregister: function (username, password, callback,oncancel) {
+        normalregister: function (username, password, callback) {
             
             // User to database `user`
 //            $http.get(adminurl + 'addchat?user=' + bigbagplan.user + '&category=' + bigbagplan.category, {});
@@ -136,7 +139,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             ref.createUser({
                 email: username,
                 password: password
-            }, callback,oncancel);
+            }, callback);
 
         },
         authenticate: function () {
