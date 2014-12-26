@@ -126,10 +126,49 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     } else {
         $state.go('login');
     }
-    $scope.allchats = [];
-    $scope.check = 0;
+    
+    
     // get logged in user stored in jstorage
     $scope.user = FireBaseServices.getuser();
+    
+    $scope.convertform = function(val) 
+    {
+        $scope.formjson=JSON.parse(val).form;
+    };
+    $scope.allchats = [];
+    $scope.msg = '';
+    
+    $scope.data = [];
+    var formsavesuccess = function (data, status) {
+        console.log(data);
+        $scope.check = false;
+        $scope.data.message = "Form Submited Successfully";
+        $scope.send($scope.data);
+    };
+    
+    
+    
+    // form div validation
+    $scope.check = 1;
+    $scope.submitt = function (val,formid)
+    {
+        for(var i = 0 ; i < val.length ; i++)
+        {
+            if(!val[i].val)
+            {
+                $scope.msg = val[i].name+' can not be blank';
+                console.log($scope.msg);
+            }else{
+                $scope.msg = '';
+            }
+        }
+        console.log($scope.user.id);
+        console.log(JSON.stringify(val));
+        if($scope.msg == '')
+        {
+        FireBaseServices.adduserform(formid,$scope.user.id,JSON.stringify(val)).success(formsavesuccess);
+        }
+    }
     //    console.log($scope.user);
 
     // get user data by getAuth() function
@@ -152,7 +191,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     var chatsuccess = function (data, status) {
         //        $scope.allchats = [];
         for (var i = 0; i < data.queryresult.length; i++) {
-            console.log(JSON.parse(data.queryresult[i].json));
+//            console.log(JSON.parse(data.queryresult[i].json));
             $scope.allchats.push(JSON.parse(data.queryresult[i].json));
 
         }
@@ -217,6 +256,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
             //$state.go('app.chat');
 
         };
+    
         var onloginsuccess = function (error, authData) {
             console.log("on firebase login success");
             if (error) {
