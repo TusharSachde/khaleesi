@@ -281,3 +281,27 @@ span.datetime {
     font-size: 11px;
     opacity: 0.6;
 }
+.item-select select.inform {
+    padding: 0px;
+    height: 24px;
+    position: relative;
+}
+input.form-control.inform {
+    padding: 15px;
+}
+span.form-title {
+    padding: 0px 0px 6px;
+    display: block;
+    margin: 13px 0px;
+    text-transform: CAPITALIZE;
+    font-size: 110%;
+    font-weight: 300;
+    color: #5F5F5F;
+    border-bottom: 1px solid #B5B5B5;
+}
+span.assertive.inform {
+    margin-bottom: 10px;
+    display: block;
+    margin-top: -5px;
+    text-transform: none;
+}
