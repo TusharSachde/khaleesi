@@ -26,24 +26,29 @@
             </li>
             <li class="{{message.name|chatclass}}" ng-if="message.type==3">
                 <p ng-init="convertform(message.text);">
-                
-<!--                    {{formjson|json}}-->
+
+                    <!--                    {{formjson|json}}-->
                     <span ng-show="!check">Form Submited Successfully</span>
-                  <span ng-show="check">
-                   <span>{{message.fname}}</span>
-                   <span class="assertive">{{msg}}</span>
-                    <span ng-repeat="form in formjson">
+                    <span ng-show="check">
+                   <span class="form-title">{{message.fname}}</span>
+                    <span class="assertive inform button-assertive">{{msg}}</span>
+                    <span ng-repeat="form in formjson.form">
 <!--                    {{message.name}} : -->
                         
-                    <input type="text" placeholder='{{form.placeholder}}' ng-model="form.val" class="form-control" ng-if="form.type=='text'">
-                        <input type="password" placeholder='{{form.placeholder}}' ng-model="form.val"  class="form-control" ng-if="form.type=='password'">
-                        <select ng-if="form.type=='selection'" ng-model="form.val" class="form-control" >
+                    <input type="text" placeholder='{{form.placeholder}}' ng-model="form.val" class="form-control inform" ng-if="form.type=='text'">
+                        <input type="password" placeholder='{{form.placeholder}}' ng-model="form.val"  class="form-control inform" ng-if="form.type=='password'">
+                        <label class="item item-input item-select" ng-if="form.type=='selection'">
+    
+    <select  ng-model="form.val" class="form-control inform" >
                             <option>{{form.placeholder}}</option>
                             <option ng-repeat="frm in form.value">{{frm.title}}</option>
                         </select>
+  </label>
+
+                        
                     <br>
-                    </span>
-                    <button class="btn btn-default" ng-click="submitt(formjson,message.id)">Submit</button>
+                    </span>{{formjson.status}}
+                    <button class="button button-block button-positive button-small button-outline" ng-click="submitt(formjson.form,formjson.formid,message.id)" ng-if="formjson.status==0">Submit</button>
                     </span>
                     <span class="small-right">{{message.timestamp|converttime}}</span>
                 </p>

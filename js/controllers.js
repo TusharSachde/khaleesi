@@ -133,9 +133,11 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     
     $scope.convertform = function(val) 
     {
-        $scope.formjson=JSON.parse(val).form;
+        $scope.maintext = JSON.parse(val);
+        $scope.formjson = JSON.parse(val);
     };
     $scope.allchats = [];
+    $scope.allchats.json = [];
     $scope.msg = '';
     
     $scope.data = [];
@@ -150,8 +152,10 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     
     // form div validation
     $scope.check = 1;
-    $scope.submitt = function (val,formid)
+    $scope.submitt = function (val,formid,id,message)
     {
+        console.log("all chatmessage");
+        console.log(message);
         for(var i = 0 ; i < val.length ; i++)
         {
             if(!val[i].val)
@@ -162,11 +166,14 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
                 $scope.msg = '';
             }
         }
-        console.log($scope.user.id);
+        console.log("form json");
+        console.log($scope.formjson);
+        $scope.formjson.status = "1";
         console.log(JSON.stringify(val));
+        console.log(JSON.stringify($scope.formjson));
         if($scope.msg == '')
         {
-        FireBaseServices.adduserform(formid,$scope.user.id,JSON.stringify(val)).success(formsavesuccess);
+//        FireBaseServices.adduserform(formid,$scope.user.id,JSON.stringify(val),JSON.stringify($scope.formjson),id).success(formsavesuccess);
         }
     }
     //    console.log($scope.user);
@@ -191,10 +198,14 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     var chatsuccess = function (data, status) {
         //        $scope.allchats = [];
         for (var i = 0; i < data.queryresult.length; i++) {
-//            console.log(JSON.parse(data.queryresult[i].json));
+            console.log("kdlfahdk");
+            console.log(data.queryresult[i]);
             $scope.allchats.push(JSON.parse(data.queryresult[i].json));
+            $scope.allchats[i].statuss=data.queryresult[i].status;
+//            console.log($scope.allchats);
 
         }
+        console.log($scope.allchats);
         ud = data.queryresult[0].userid;
         $ionicScrollDelegate.scrollBottom(true);
     };
