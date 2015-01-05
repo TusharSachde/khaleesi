@@ -103,6 +103,12 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                 url: adminurl+'getchatbyuser',
                 method: "POST",
                data: {'email':email}
+            }).success(function (data, status){
+                for (var i = 0; i < data.queryresult.length; i++) {
+                    chats.push(JSON.parse(data.queryresult[i].json));
+                    chats[i].statuss=data.queryresult[i].status;
+
+                }
             });
             
         },
@@ -116,16 +122,25 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             });
             
         },
-        adduserform: function (formid, user, json, chatjson, id) {
+        adduserform: function (formid, user, json) {
 //            return $http.get(adminurl + "login?email="+username+"&password="+password,{});
             return $http({
                 url: adminurl+'adduserform',
                 method: "POST",
                data: {'formid':formid,
                       'user':user,
-                      'json':json,
-                      'chatjson':chatjson,
-                      'id':id
+                      'json':json
+                    }
+            });
+            
+        },
+        adduserproduct: function (productid, user, json) {;
+            return $http({
+                url: adminurl+'adduserproduct',
+                method: "POST",
+               data: {'productid':productid,
+                      'user':user,
+                      'json':json
                     }
             });
             

@@ -23,7 +23,6 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         //
         //        // on logout 
         $scope.logout = function () {
-            console.log("logout pressed");
             if (FireBaseServices.logout() == 1) {
                 $scope.loginlogout = "Login";
             }
@@ -127,14 +126,21 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         $state.go('login');
     }
     
+    ud = $.jStorage.get("user").id;
+    ud = $.jStorage.get("user").id;
     
     // get logged in user stored in jstorage
     $scope.user = FireBaseServices.getuser();
     
     $scope.convertform = function(val) 
     {
-        $scope.maintext = JSON.parse(val);
-        $scope.formjson = JSON.parse(val);
+        var fff=JSON.parse(val);
+        fff.json = JSON.parse(fff.json);
+        return fff;
+    };
+    $scope.convertproduct = function(val) 
+    {
+        return JSON.parse(val);
     };
     $scope.allchats = [];
     $scope.allchats.json = [];
@@ -142,46 +148,47 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     
     $scope.data = [];
     var formsavesuccess = function (data, status) {
-        console.log(data);
         $scope.check = false;
         $scope.data.message = "Form Submited Successfully";
         $scope.send($scope.data);
     };
     
     
+    // product place order
+//    $scope.form.productmsg = "";
+    var productsuccess = function (data, status) {
+        if(data==1)
+        {
+//            $scope.form.productmsg = "Product Saved...We'll come back to you soon...";
+        }
+    };
+    $scope.placeorder = function (product) {
+        FireBaseServices.adduserproduct(product.id,$scope.user.id,JSON.stringify(product)).success(productsuccess);
+    }
     
     // form div validation
     $scope.check = 1;
-    $scope.submitt = function (val,formid,id,message)
+    $scope.submitt = function (val,message)
     {
-        console.log("all chatmessage");
-        console.log(message);
+        $scope.formid=val.id;
         for(var i = 0 ; i < val.length ; i++)
         {
             if(!val[i].val)
             {
                 $scope.msg = val[i].name+' can not be blank';
-                console.log($scope.msg);
             }else{
                 $scope.msg = '';
             }
         }
-        console.log("form json");
-        console.log($scope.formjson);
-        $scope.formjson.status = "1";
-        console.log(JSON.stringify(val));
-        console.log(JSON.stringify($scope.formjson));
         if($scope.msg == '')
         {
-//        FireBaseServices.adduserform(formid,$scope.user.id,JSON.stringify(val),JSON.stringify($scope.formjson),id).success(formsavesuccess);
+        FireBaseServices.adduserform($scope.formid,$scope.user.id,JSON.stringify(val)).success(formsavesuccess);
         }
     }
     //    console.log($scope.user);
 
     // get user data by getAuth() function
     $scope.userdata = FireBaseServices.authenticate();
-    console.log("user user");
-    console.log($scope.userdata);
     $scope.chat = {};
 
     function changeevent(message) {
@@ -192,25 +199,24 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     FireBaseServices.changecallback(changeevent);
     // get chat from databse on page load
 
-    console.log($scope.chat);
     var ref = new Firebase("https://blinding-heat-5568.firebaseio.com/");
 
     var chatsuccess = function (data, status) {
         //        $scope.allchats = [];
-        for (var i = 0; i < data.queryresult.length; i++) {
-            console.log("kdlfahdk");
-            console.log(data.queryresult[i]);
-            $scope.allchats.push(JSON.parse(data.queryresult[i].json));
-            $scope.allchats[i].statuss=data.queryresult[i].status;
-//            console.log($scope.allchats);
-
-        }
-        console.log($scope.allchats);
-        ud = data.queryresult[0].userid;
+//        for (var i = 0; i < data.queryresult.length; i++) {
+//            console.log("kdlfahdk");
+//            console.log(data.queryresult[i]);
+//            $scope.allchats.push(JSON.parse(data.queryresult[i].json));
+//            $scope.allchats[i].statuss=data.queryresult[i].status;
+////            console.log($scope.allchats);
+//
+//        }
+        $scope.allchats = FireBaseServices.getchats();
+//        ud = data.queryresult[0].userid;
         $ionicScrollDelegate.scrollBottom(true);
     };
     if ($scope.userdata != null) {
-        FireBaseServices.getchatbyuser($scope.userdata.password.email).success(chatsuccess);
+        FireBaseServices.getchatbyuser($scope.userdata.password.email,chatsuccess);
     }
     //    if($scope.check == 1)
     //    {
@@ -221,9 +227,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
     // updating chat in service.js/update
     $scope.send = function (chat) {
-        console.log(chat.message);
         $scope.check = 1;
-        console.log(ud);
         FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message, ud);
         chat.message = "";
         // Update the scroll area
@@ -241,7 +245,6 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         }
         $scope.loginData = [];
         var logoutsuccess = function (data, status) {
-            console.log(data);
             $location.url("login");
         };
         FireBaseServices.logout(logoutsuccess);
@@ -257,11 +260,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
         var loginsuccess = function (data, status) {
             //        console.log(data);
-            console.log("on databse login success");
-            console.log(data);
             ud = data;
-            console.log("myid");
-            console.log(ud);
             FireBaseServices.setuserid(data);
             $location.url('app/chat');
             //$state.go('app.chat');
