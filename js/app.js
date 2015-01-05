@@ -124,6 +124,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         };
     })
 
+.filter('imagepath', function () {
+    return function (input) {
+        if (input == "") {
+            return "http://mafiawarloots.com/sergybackend/assets/img/default.jpg";
+//                return "http://localhost/sergybackend/assets/img/default.jpg";
+        } else {
+            return "http://mafiawarloots.com/sergybackend/uploads/" + input;
+//            return "http://localhost/sergybackend/uploads/" + input;
+        }
+    };
+})
+
 .filter('chatt', function () {
     return function (input) {
         var j = JSON.parse(input);

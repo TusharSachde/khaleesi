@@ -18,21 +18,21 @@
     <ion-content class="has-header padding">
         <!--        <chat></chat>-->
         <ol class="messages" ng-repeat="message in allchats">
-            <li class="{{message.name|chatclass}}" ng-if="message.type!=3">
+            <li class="{{message.name|chatclass}}" ng-if="message.type!=3 && message.type!=4">
                 <p>
                     {{message.text}}
                     <br><span class="datetime">{{message.timestamp|date:"h:mma"}}</span>
                 </p>
             </li>
+            
+<!--            li for form-->
             <li class="{{message.name|chatclass}}" ng-if="message.type==3">
-                <p ng-init="convertform(message.text);">
+                <p ng-init="formm = convertform(message.text);">
 
                     <!--                    {{formjson|json}}-->
-                    <span ng-show="!check">Form Submited Successfully</span>
-                    <span ng-show="check">
-                   <span class="form-title">{{message.fname}}</span>
+                   <span class="form-title">{{formm.name}}</span>
                     <span class="assertive inform button-assertive">{{msg}}</span>
-                    <span ng-repeat="form in formjson.form">
+                    <span ng-repeat="form in formm.json">
 <!--                    {{message.name}} : -->
                         
                     <input type="text" placeholder='{{form.placeholder}}' ng-model="form.val" class="form-control inform" ng-if="form.type=='text'">
@@ -48,8 +48,24 @@
                         
                     <br>
                     </span>
-                    <button class="button button-block button-positive button-small button-outline" ng-click="submitt(formjson.form,formjson.formid,message.id)" ng-if="formjson.status==0">Submit</button>
-                    </span>
+                    <button class="button button-block button-positive button-small button-outline" ng-click="submitt(formm,message)">Submit</button>
+                    <span class="small-right">{{message.timestamp|converttime}}</span>
+                </p>
+            </li>
+            
+<!--            li for product-->
+            <li class="{{message.name|chatclass}}" ng-if="message.type==4">
+                <p ng-init="form=convertproduct(message.text);">
+
+                   <span class="form-title">{{form.name}}</span>
+                   <span>
+                       <img src="{{form.image|imagepath}}" width="100">
+                   </span>
+                    <span class="form-info">Price</span>
+                    <span>{{form.price}}</span>
+                    <span class="form-info">Details</span>
+                    <span>{{form.details}}</span>
+                    <button class="button button-block button-positive button-small button-outline" ng-click="placeorder(form)">Place Order</button>
                     <span class="small-right">{{message.timestamp|converttime}}</span>
                 </p>
             </li>
