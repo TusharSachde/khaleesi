@@ -159,6 +159,8 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     var productsuccess = function (data, status) {
         if(data==1)
         {
+            $scope.data.message = "Order Send";
+            $scope.send($scope.data);
 //            $scope.form.productmsg = "Product Saved...We'll come back to you soon...";
         }
     };
