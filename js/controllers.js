@@ -227,9 +227,16 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     //    $scope.allchats.push({email: "jagruti@wohlig.com", name: "simplelogin:1", text: "hey whats up", timestamp: 1418016362961});
 
     // updating chat in service.js/update
+    
+    function callback(data) {
+        
+        $scope.allchats = FireBaseServices.getchats();    
+        
+    }
+    
     $scope.send = function (chat) {
         console.log(chat);
-        FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message, ud);
+        FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message, ud, callback);
         chat.message = "";
         // Update the scroll area
         $ionicScrollDelegate.scrollBottom(true);
@@ -282,7 +289,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
             if (authData) {
                 console.log("Done");
 
-                //                FireBaseServices.firbasecallonchange();
+//                                FireBaseServices.firbasecallonchange();
                 FireBaseServices.login($scope.loginData.username, $scope.loginData.password).success(loginsuccess);
 
             }

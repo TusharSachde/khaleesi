@@ -180,16 +180,32 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
         authenticate1: function () {
             return $http.get(adminurl + "authenticate",{});
         },
-        update: function (name, email, text, id) {
+        update: function (name, email, text, id, callback) {
             var obj = {};
             var timestamp = new Date();
-            obj[authdetails.uid] = {
-                name: name,
+            
+            
+            ref.child(authdetails.uid).on("value", function(data){
+                    chats.push(data.val());
+                callback();
+            });
+            
+            
+            ref.child(authdetails.uid).set({
+                 name: name,
                 text: text,
                 email: email,
                 timestamp: timestamp.getTime()
-            };
-            ref.update(obj);
+            });
+            
+            
+//            obj[authdetails.uid] = {
+//                name: name,
+//                text: text,
+//                email: email,
+//                timestamp: timestamp.getTime()
+//            };
+//            ref.update(obj);
 //            
             var json1 = {
                 email: email,
