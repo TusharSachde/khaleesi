@@ -99,7 +99,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             
 
         },
-        getchatbyuser: function (email) {
+        getchatbyuser: function (email,newchat) {
             return $http({
                 url: adminurl+'getchatbyuser',
                 method: "POST",
@@ -110,6 +110,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                     chats[i].statuss=data.queryresult[i].status;
 
                 }
+//            newchat();
             });
             
         },

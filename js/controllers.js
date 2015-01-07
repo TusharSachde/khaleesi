@@ -127,7 +127,6 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     }
     
     ud = $.jStorage.get("user").id;
-    ud = $.jStorage.get("user").id;
     
     // get logged in user stored in jstorage
     $scope.user = FireBaseServices.getuser();
@@ -169,7 +168,6 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     }
     
     // form div validation
-    $scope.check = 1;
     $scope.submitt = function (val,message)
     {
         $scope.formid=val.id;
@@ -204,6 +202,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     var ref = new Firebase("https://blinding-heat-5568.firebaseio.com/");
 
     var chatsuccess = function (data, status) {
+        console.log(data);
         //        $scope.allchats = [];
 //        for (var i = 0; i < data.queryresult.length; i++) {
 //            console.log("kdlfahdk");
@@ -229,7 +228,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
     // updating chat in service.js/update
     $scope.send = function (chat) {
-        $scope.check = 1;
+        console.log(chat);
         FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message, ud);
         chat.message = "";
         // Update the scroll area
@@ -247,6 +246,9 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         }
         $scope.loginData = [];
         var logoutsuccess = function (data, status) {
+            $scope.allchats = FireBaseServices.getchats();
+            console.log("chat after logout");
+            console.log($scope.allchats);
             $location.url("login");
         };
         FireBaseServices.logout(logoutsuccess);
@@ -264,6 +266,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
             //        console.log(data);
             ud = data;
             FireBaseServices.setuserid(data);
+            ud = $.jStorage.get("user").id;
             $location.url('app/chat');
             //$state.go('app.chat');
 
@@ -297,7 +300,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         //    normal login service.js/normallogin
         $scope.normallogin = function (loginData) {
             FireBaseServices.normallogin(loginData.username, loginData.password, onloginsuccess,oncancel);
-            FireBaseServices.login(loginData.username, loginData.password).success(loginsuccess);
+//            FireBaseServices.login(loginData.username, loginData.password).success(loginsuccess);
 
         }
 
