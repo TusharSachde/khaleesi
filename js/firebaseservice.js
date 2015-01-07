@@ -63,6 +63,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
         logout: function (callback) {
             ref.unauth();
             $.jStorage.flush();
+            chats = [];
             callback();
         },
         checklogin: function() {
