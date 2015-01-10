@@ -64,6 +64,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
                 }
             }
         })
+        .state('tab.placeorder', {
+            url: '/placeorder/:id',
+            views: {
+                'tab-travel': {
+                    templateUrl: "templates/tab-placeorder.html",
+                    controller: 'PlaceOrderCtrl'
+                }
+            }
+        })
         .state('tab.hotel', {
             url: '/hotel',
             views: {
