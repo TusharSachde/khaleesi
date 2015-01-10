@@ -1,5 +1,5 @@
-//var adminurl = "http://localhost/sergybackend/index.php/json/";
-var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
+var adminurl = "http://localhost/sergybackend/index.php/json/";
+//var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', ['firebase'])
 
 .factory('FireBaseServices', function ($http, $location, $firebase) {
@@ -28,6 +28,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
     var ref = new Firebase("https://blinding-heat-5568.firebaseio.com/");
     var chats = [];
     var onchangecallback = function () {};
+    var newfun = function () {};
 
     var authdetails = ref.getAuth();
 
@@ -43,6 +44,8 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
 //            
 //                $http.get(adminurl + "addchat?json="+json1+"&user=0&type=1&url=&imageurl=&status=1",{});
                 chats.push(message);
+                console.log("chat in firebasecallonchange");
+                console.log(chats);
                 onchangecallback(message);
             });
         },
@@ -107,7 +110,9 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             }).success(function (data, status){
                 for (var i = 0; i < data.queryresult.length; i++) {
                     chats.push(JSON.parse(data.queryresult[i].json));
-                    chats[i].statuss=data.queryresult[i].status;
+//                    chats[i].statuss=data.queryresult[i].status;
+                    console.log("chats in get chat by user");
+                    console.log(chats);
 
                 }
 //            newchat();
@@ -133,6 +138,33 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                       'user':user,
                       'json':json
                     }
+            });
+            
+        },
+        placeorder: function (form) {
+            return $http({
+                url: adminurl+'createfrontendorder',
+                method: "POST",
+               data: {'name':form.name,
+                      'user':form.user,
+                      'address1':form.address1,
+                      'address2':form.address2,
+                      'city':form.city,
+                      'state':form.state,
+                      'pincode':form.pincode,
+                      'email':form.email,
+                      'contactno':form.contactno,
+                      'country':form.country,
+                      'shippingaddress1':form.shipaddress1,
+                      'shippingaddress2':form.shipaddress2,
+                      'shipcity':form.shipcity,
+                      'shipstate':form.shipstate,
+                      'shippingcode':form.shippingcode,
+                      'shipcountry':form.shipcountry,
+                      'trackingcode':form.trackingcode,
+                      'shippingcharge':form.shippingcharge,
+                      'shippingmethod':form.shippingmethod,
+                      'productid':form.productid}
             });
             
         },
@@ -177,36 +209,40 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             authdetails = ref.getAuth();
             return authdetails;
         },
+        getordersbyuserid: function (id) {
+            return $http.get(adminurl + "getordersbyuserid?id="+id, {});
+        },
+        getproductbycategoryid: function (id) {
+            return $http.get(adminurl + "getproductbyid?id="+id, {});
+        },
         authenticate1: function () {
             return $http.get(adminurl + "authenticate",{});
         },
-        update: function (name, email, text, id, callback) {
+        update: function (name, email, text, id, newfun) {
             var obj = {};
             var timestamp = new Date();
             
             
-            ref.child(authdetails.uid).on("value", function(data){
-                    chats.push(data.val());
-                callback();
-            });
-            
-            
-            ref.child(authdetails.uid).set({
-                 name: name,
-                text: text,
-                email: email,
-                timestamp: timestamp.getTime()
-            });
-            
-            
-//            obj[authdetails.uid] = {
-//                name: name,
+//            ref.child(authdetails.uid).set({
+//                 name: name,
 //                text: text,
 //                email: email,
 //                timestamp: timestamp.getTime()
-//            };
-//            ref.update(obj);
+//            });
+            
+            
+            obj[authdetails.uid] = {
+                name: name,
+                text: text,
+                email: email,
+                timestamp: timestamp.getTime()
+            };
+            ref.update(obj);
+            
+            newfun();
+            
 //            
+            
             var json1 = {
                 email: email,
                 name: name,
