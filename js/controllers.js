@@ -162,8 +162,8 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     };
     $scope.placeorder = function (product) {
         console.log("place order");
-        $location.url('tab/placeorder/'+product.id);
-//        FireBaseServices.adduserproduct(product.id, $scope.user.id, JSON.stringify(product)).success(productsuccess);
+        $location.url('tab/placeorder/' + product.id);
+        //        FireBaseServices.adduserproduct(product.id, $scope.user.id, JSON.stringify(product)).success(productsuccess);
     }
 
     // form div validation
@@ -194,11 +194,14 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     FireBaseServices.changecallback(changeevent);
     // get chat from databse on page load
 
-    
 
+    var onnewchat = function () {
+        console.log("new Chat received");
+        $ionicScrollDelegate.scrollBottom(true);
+    };
     var chatsuccess = function (data, status) {
         console.log(data);
-        FireBaseServices.firbasecallonchange();
+        FireBaseServices.firbasecallonchange(onnewchat);
         //        $scope.allchats = [];
         //        for (var i = 0; i < data.queryresult.length; i++) {
         //            console.log("kdlfahdk");
@@ -208,10 +211,10 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         ////            console.log($scope.allchats);
         //
         //        }
-        
+
         FireBaseServices.changecallback(changeevent);
         $scope.allchats = FireBaseServices.getchats();
-        
+
         //        ud = data.queryresult[0].userid;
         $ionicScrollDelegate.scrollBottom(true);
     };
@@ -229,11 +232,11 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
     function newfun(data) {
 
-//        $scope.allchats = FireBaseServices.getchats();
+        //        $scope.allchats = FireBaseServices.getchats();
         console.log($scope.allchats);
 
     }
-    
+
     $scope.send = function (chat) {
         console.log(chat);
         FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message, ud, newfun);
@@ -243,21 +246,21 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     };
 })
     .controller('TravelCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
-    
-//        DECLARATION
+
+        //        DECLARATION
         $scope.orders = [];
-        
-//        GET USER FROM jStorage
+
+        //        GET USER FROM jStorage
         ud = $.jStorage.get("user").id;
-    
-//        GET ALL ORDERS BY USER ID
+
+        //        GET ALL ORDERS BY USER ID
         var ordersuccess = function (data, status) {
             console.log(data.queryresult);
             $scope.orders = data.queryresult;
         };
         FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
-    
-//        PAYMENT GETWAY
+
+        //        PAYMENT GETWAY
         $scope.StipePaymentGen = function (amount, form) {
             console.log("strippaymentGen form");
 
@@ -271,33 +274,31 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
     })
     .controller('PlaceOrderCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $stateParams, $state) {
-    
+
         ud = $.jStorage.get("user").id;
-    
-//        getproduct by product id
+
+        //        getproduct by product id
         var productssuccess = function (data, status) {
             console.log(data);
             $scope.product = data.product;
         };
         FireBaseServices.getproductbycategoryid($stateParams.id).success(productssuccess);
-    
-//        place order
+
+        //        place order
         var placeordersuccess = function (data, status) {
             console.log(data);
-            if(data=="1")
-            {
+            if (data == "1") {
                 $state.go('app.chat');
             }
         };
-    
-        $scope.placeorder = function (form)
-        {
+
+        $scope.placeorder = function (form) {
             console.log(form);
             form.user = ud;
             form.productid = $scope.product.id;
             FireBaseServices.placeorder(form).success(placeordersuccess);
         }
-    
+
     })
     .controller('LogoutCrtl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $state) {
         if (FireBaseServices.checklogin()) {
@@ -362,8 +363,8 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         //    normal login service.js/normallogin
         $scope.normallogin = function (loginData) {
             FireBaseServices.normallogin(loginData.username, loginData.password, onloginsuccess, oncancel);
-                        FireBaseServices.login(loginData.username, loginData.password).success(loginsuccess);
-           
+            FireBaseServices.login(loginData.username, loginData.password).success(loginsuccess);
+
 
         }
 
