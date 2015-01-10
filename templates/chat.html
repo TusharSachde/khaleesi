@@ -17,6 +17,7 @@
 
     <ion-content class="has-header padding">
         <!--        <chat></chat>-->
+        
         <ol class="messages" ng-repeat="message in allchats">
             <li class="{{message.name|chatclass}}" ng-if="message.type!=3 && message.type!=4">
                 <p>

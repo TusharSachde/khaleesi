@@ -1,5 +1,5 @@
-var adminurl = "http://localhost/sergybackend/index.php/json/";
-//var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
+//var adminurl = "http://localhost/sergybackend/index.php/json/";
+var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', ['firebase'])
 
 .factory('FireBaseServices', function ($http, $location, $firebase) {
@@ -24,7 +24,6 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
 //        //                console.log(results.rows.item(0));
 //        //                });
 //    });
-    
     var ref = new Firebase("https://blinding-heat-5568.firebaseio.com/");
     var chats = [];
     var onchangecallback = function () {};
@@ -37,7 +36,9 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
 
     var returnval = {
         firbasecallonchange: function () {
+            ref.child(authdetails.uid).off('value');
             ref.child(authdetails.uid).on('value', function (snapshot) {
+                console.log("firbasecallonchange firbasecallonchange firbasecallonchange firbasecallonchange firbasecallonchange");
                 var message = snapshot.val();
                 console.log(message);
 //                json1=JSON.stringify(message);
@@ -64,6 +65,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             return authdetails.password.email;
         },
         logout: function (callback) {
+            ref.child(authdetails.uid).off('value');
             ref.unauth();
             $.jStorage.flush();
             chats = [];
@@ -103,19 +105,22 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
 
         },
         getchatbyuser: function (email,newchat) {
-            return $http({
+            chats=[];
+            console.log("GET CHAT BY USER CALLED _____________________________________________________________________");
+            $http({
                 url: adminurl+'getchatbyuser',
                 method: "POST",
                data: {'email':email}
             }).success(function (data, status){
+                chats=[];
                 for (var i = 0; i < data.queryresult.length; i++) {
                     chats.push(JSON.parse(data.queryresult[i].json));
 //                    chats[i].statuss=data.queryresult[i].status;
-                    console.log("chats in get chat by user");
-                    console.log(chats);
+                    //console.log("chats in get chat by user");
+                    //console.log(chats);
 
                 }
-//            newchat();
+            newchat();
             });
             
         },
@@ -275,7 +280,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
     }
 
     if (authdetails) {
-        returnval.firbasecallonchange();
+       // returnval.firbasecallonchange();
     }
     return returnval;
 });
