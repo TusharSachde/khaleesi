@@ -194,10 +194,11 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     FireBaseServices.changecallback(changeevent);
     // get chat from databse on page load
 
-    var ref = new Firebase("https://blinding-heat-5568.firebaseio.com/");
+    
 
     var chatsuccess = function (data, status) {
         console.log(data);
+        FireBaseServices.firbasecallonchange();
         //        $scope.allchats = [];
         //        for (var i = 0; i < data.queryresult.length; i++) {
         //            console.log("kdlfahdk");
@@ -246,20 +247,6 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 //        DECLARATION
         $scope.orders = [];
         
-//        PAYMENT GETWAY DECLARATION
-         var handler = StripeCheckout.configure({
-            key: 'pk_live_I1udSOaNJK4si3FCMwvHsY4g',
-            //key: 'pk_test_4etgLi16WbODEDr4YBFdcbP0',
-            image: 'img/logo.jpg',
-            currency: 'GBP',
-            token: function (token) {
-                MyServices.chargestripe(token.id, $scope.form.email, ($scope.subtotal + $scope.form.shippingcost - $scope.discountamount), ($scope.form.firstname + " " + $scope.form.lastname)).success(paymentcomplete);
-                //window.location.href="http://www.lylaloves.co.uk/#/thankyou";
-                // Use the token to create the charge with a server-side script.
-                // You can access the token ID with `token.id`
-            }
-        });
-
 //        GET USER FROM jStorage
         ud = $.jStorage.get("user").id;
     
@@ -321,6 +308,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         $scope.loginData = [];
         var logoutsuccess = function (data, status) {
             $scope.allchats = FireBaseServices.getchats();
+            console.log(allchats);
             console.log("chat after logout");
             console.log($scope.allchats);
             $location.url("login");
