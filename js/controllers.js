@@ -361,7 +361,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
         //    normal login service.js/normallogin
         $scope.normallogin = function (loginData) {
-//            FireBaseServices.normallogin(loginData.username, loginData.password, onloginsuccess, oncancel);
+            FireBaseServices.normallogin(loginData.username, loginData.password, onloginsuccess, oncancel);
                         FireBaseServices.login(loginData.username, loginData.password).success(loginsuccess);
            
 
