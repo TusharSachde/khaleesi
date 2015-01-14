@@ -120,6 +120,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 })
 
 .controller('ChatCtrl', function ($scope, $stateParams, $ionicScrollDelegate, FireBaseServices, $state, $location) {
+    $('#txtSendTo').focus();
     if (FireBaseServices.checklogin()) {
         $state.go('app.chat');
     } else {
@@ -214,6 +215,10 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
         FireBaseServices.changecallback(changeevent);
         $scope.allchats = FireBaseServices.getchats();
+        $('#txtSendTo').focus();
+        console.log("getchatbyuser.......................////////////");
+        console.log($scope.allchats);
+        
 
         //        ud = data.queryresult[0].userid;
         $ionicScrollDelegate.scrollBottom(true);
@@ -224,6 +229,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     //    if($scope.check == 1)
     //    {
     $scope.allchats = FireBaseServices.getchats();
+    $('#txtSendTo').focus();
     $ionicScrollDelegate.scrollBottom(true);
     //    }
     //    $scope.allchats.push({email: "jagruti@wohlig.com", name: "simplelogin:1", text: "hey whats up", timestamp: 1418016362961});
@@ -234,6 +240,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
         //        $scope.allchats = FireBaseServices.getchats();
         console.log($scope.allchats);
+        $('#txtSendTo').focus();
 
     }
 
@@ -241,6 +248,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         console.log(chat);
         FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message, ud, newfun);
         chat.message = "";
+        $('#txtSendTo').focus();
         // Update the scroll area
         $ionicScrollDelegate.scrollBottom(true);
     };
@@ -261,16 +269,16 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
 
         //        PAYMENT GETWAY
-        $scope.StipePaymentGen = function (amount, form) {
-            console.log("strippaymentGen form");
-
-            handler.open({
-                name: 'Lyla Loves',
-                description: 'Total Amount: £ ' + amount,
-                amount: amount * 100,
-
-            });
-        };
+//        $scope.StipePaymentGen = function (amount, form) {
+//            console.log("strippaymentGen form");
+//
+//            handler.open({
+//                name: 'Lyla Loves',
+//                description: 'Total Amount: £ ' + amount,
+//                amount: amount * 100,
+//
+//            });
+//        };
 
     })
     .controller('PlaceOrderCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $stateParams, $state) {
@@ -289,6 +297,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
             console.log(data);
             if (data == "1") {
                 $state.go('app.chat');
+                $location.url('app/chat');
             }
         };
 
