@@ -40,13 +40,22 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             ref.child(authdetails.uid).on('value', function (snapshot) {
                 console.log("firbasecallonchange firbasecallonchange firbasecallonchange firbasecallonchange firbasecallonchange");
                 var message = snapshot.val();
-
-                chats.push(message);
+                if(chats!='')
+                {
+                if(chats[chats.length-1].text!=message.text)
+                {
+                    chats.push(message);
+                }
+                }else{
+                    chats.push(message);
+                }
                 callback();
                 onchangecallback(message);
             });
         },
         getchats: function () {
+            console.log("chat in firebase");
+            console.log(chats.length);
             return chats;
         },
         changecallback: function (newfunc) {

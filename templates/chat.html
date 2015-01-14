@@ -74,12 +74,12 @@
         </ol>
     </ion-content>
     <ion-footer-bar class="bar-stable bar-white chat-bar">
-        <form ng-submit="send(chat);">
+        <form ng-submit="send(chat)">
 
             <table style="width:100%;">
                 <tr>
                     <td style="width:100%;">
-                        <input type="text" ng-model="chat.message" placeholder="Your message" style="width:100%;">
+                        <input type="text" ng-model="chat.message" id="txtSendTo" placeholder="Your message" style="width:100%;" autofocus>
                     </td>
                     <td>
                         <input type="submit" value="SEND">
