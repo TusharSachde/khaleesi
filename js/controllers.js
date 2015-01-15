@@ -1,4 +1,5 @@
 var ud = "";
+var online = false;
 
 angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
@@ -199,10 +200,25 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     var onnewchat = function () {
         console.log("new Chat received");
         $ionicScrollDelegate.scrollBottom(true);
+        $('#txtSendTo').focus();
     };
+    $scope.online = "";
+    $scope.line = "offline";
+    var onsergychange = function (data) {
+        console.log("my my my sergy data");
+        console.log(data);
+        if(data.text=="on")
+        {
+            console.log("im on");
+            $scope.online = true;
+            $scope.line = "online";
+            $scope.$apply();
+            
+        }
+    }
     var chatsuccess = function (data, status) {
         console.log(data);
-        FireBaseServices.firbasecallonchange(onnewchat);
+        FireBaseServices.firbasecallonchange(onnewchat, onsergychange);
         //        $scope.allchats = [];
         //        for (var i = 0; i < data.queryresult.length; i++) {
         //            console.log("kdlfahdk");
@@ -218,7 +234,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         $('#txtSendTo').focus();
         console.log("getchatbyuser.......................////////////");
         console.log($scope.allchats);
-        
+
 
         //        ud = data.queryresult[0].userid;
         $ionicScrollDelegate.scrollBottom(true);
@@ -248,9 +264,10 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         console.log(chat);
         FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message, ud, newfun);
         chat.message = "";
-        $('#txtSendTo').focus();
+
         // Update the scroll area
         $ionicScrollDelegate.scrollBottom(true);
+        $('#txtSendTo').focus();
     };
 })
     .controller('TravelCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
@@ -269,16 +286,16 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
 
         //        PAYMENT GETWAY
-//        $scope.StipePaymentGen = function (amount, form) {
-//            console.log("strippaymentGen form");
-//
-//            handler.open({
-//                name: 'Lyla Loves',
-//                description: 'Total Amount: £ ' + amount,
-//                amount: amount * 100,
-//
-//            });
-//        };
+        //        $scope.StipePaymentGen = function (amount, form) {
+        //            console.log("strippaymentGen form");
+        //
+        //            handler.open({
+        //                name: 'Lyla Loves',
+        //                description: 'Total Amount: £ ' + amount,
+        //                amount: amount * 100,
+        //
+        //            });
+        //        };
 
     })
     .controller('PlaceOrderCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $stateParams, $state) {

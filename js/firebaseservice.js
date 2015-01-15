@@ -1,5 +1,5 @@
-//var adminurl = "http://localhost/sergybackend/index.php/json/";
-var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
+var adminurl = "http://localhost/sergybackend/index.php/json/";
+//var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', ['firebase'])
 
 .factory('FireBaseServices', function ($http, $location, $firebase) {
@@ -35,7 +35,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
 
 
     var returnval = {
-        firbasecallonchange: function (callback) {
+        firbasecallonchange: function (callback, callback1) {
             ref.child(authdetails.uid).off('value');
             ref.child(authdetails.uid).on('value', function (snapshot) {
                 console.log("firbasecallonchange firbasecallonchange firbasecallonchange firbasecallonchange firbasecallonchange");
@@ -51,6 +51,12 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                 }
                 callback();
                 onchangecallback(message);
+            });
+            ref.child("sergy").on('value', function (snapshot) {
+                console.log("on sergy change");
+                
+                callback1(snapshot.val());
+                
             });
         },
         getchats: function () {
