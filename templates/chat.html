@@ -4,8 +4,8 @@
 <!--        <i class="ion-record small offline" ng-if="!online"></i>-->
          Sergy</h5>
         <p>
-            <span>OFFLINE - 1h 22m ago</span>
-            <span ng-show="online">ONLINE</span>
+            <span ng-if="lastseen.text=='off'">OFFLINE - {{lastseen.timestamp|date:"h:mma"}}</span>
+            <span ng-if="lastseen.text=='on'">ONLINE</span>
         </p>
     </ion-nav-title>
 

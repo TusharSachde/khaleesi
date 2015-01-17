@@ -204,16 +204,24 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     };
     $scope.online = "";
     $scope.line = "offline";
+    $scope.useremail=FireBaseServices.getauthemail();
     var onsergychange = function (data) {
-        console.log("my my my sergy data");
-        console.log(data);
+        $scope.lastseen = data;
         if(data.text=="on")
         {
-            console.log("im on");
-            $scope.online = true;
-            $scope.line = "online";
-            $scope.$apply();
+            if(data.email==$scope.useremail)
+            {
+                console.log("waiting waiting");
+                $scope.line = "online";
+                $scope.$apply();
+            }else{
+                $scope.line = "waiting";
+                $scope.$apply();
+            }
             
+        }else{
+            $scope.line = "offline";
+            $scope.$apply();
         }
     }
     var chatsuccess = function (data, status) {
