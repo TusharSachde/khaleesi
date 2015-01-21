@@ -189,7 +189,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     $scope.chat = {};
 
     function changeevent(message) {
-        console.log(message);
+//        console.log(message);
         $scope.$apply();
 
     };

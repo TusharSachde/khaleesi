@@ -28,7 +28,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
     var chats = [];
     var onchangecallback = function () {};
     var newfun = function () {};
-
+    var message = [];
     var authdetails = ref.getAuth();
 
     var val = 0;
@@ -39,7 +39,8 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             ref.child(authdetails.uid).off('value');
             ref.child(authdetails.uid).on('value', function (snapshot) {
                 console.log("firbasecallonchange firbasecallonchange firbasecallonchange firbasecallonchange firbasecallonchange");
-                var message = snapshot.val();
+                message = snapshot.val();
+                console.log(message);
                 if(chats!='')
                 {
                 if(chats[chats.length-1].text!=message.text)
@@ -237,8 +238,8 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
         update: function (name, email, text, id, newfun) {
             var obj = {};
             var timestamp = new Date();
-            
-            
+            console.log("%%%%%%%%%%%%%%%%new chat%%%%%%%%%%%%%%%%%%5");
+            console.log(message);
 //            ref.child(authdetails.uid).set({
 //                 name: name,
 //                text: text,
@@ -250,6 +251,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             obj[authdetails.uid] = {
                 name: name,
                 text: text,
+                textcheck: message.textcheck + 1,
                 email: email,
                 timestamp: timestamp.getTime()
             };
