@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
+<!--Use this in IOS-->
+<!--<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.91streets.91streets" version="2.0.0" versionCode="4">-->
+
+<!--Use this in Android-->
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.sergy.gozoop" version="1.0.0" versionCode="1">
+
+    <name>Sergy</name>
+
+    <description>
+        Online Shopping Aid
+    </description>
+
+    <author href="http://www.wohlig.com" email="info@wohlig.com">
+        Wohlig Technologies
+    </author>
+
+    <gap:platform name="ios" />
+    <gap:platform name="android" />
+
+    <preference name="phonegap-version" value="3.5.0" />
+    <preference name="permissions" value="none" />
+    <preference name="fullscreen" value="false" />
+    <preference name="orientation" value="portrait" />
+    <preference name="android-installLocation" value="internalOnly" />
+    <preference name="ErrorUrl" value="" />
+    <preference name="BackgroundColor" value="0x000000" />
+    <preference name="KeepRunning" value="true" />
+    <preference name="splash-screen-duration" value="3000" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="ios-statusbarstyle" value="black-translucent" />
+    <preference name="android-minSdkVersion" value="7" />
+    <preference name="target-device" value="universal" />
+    <preference name="LoadUrlTimeoutValue" value="200000" />
+    <preference name="deployment-target" value="6.1" />
+
+
+    <icon src="img/logo.png" />
+
+    <gap:splash src="img/screen.png" />
+
+
+
+
+    <access origin="*" />
+    <!-- allow all pages, use for development -->
+    <access origin="*.pushwoosh.com" />
+    <!-- allow pushwoosh service -->
+
+    <gap:plugin name="org.apache.cordova.file" />
+    <gap:plugin name="org.apache.cordova.file-transfer" />
+    <gap:plugin name="org.apache.cordova.device" />
+    <gap:plugin name="com.pushwoosh.plugins.pushwoosh" version="3.0.2" />
+    <gap:plugin name="nl.x-services.plugins.socialsharing" />
+    <gap:plugin name="org.apache.cordova.geolocation" />
+    <gap:plugin name="org.apache.cordova.inappbrowser" />
+    <gap:plugin name="org.apache.cordova.dialogs" />
+    <gap:plugin name="org.apache.cordova.statusbar" /> 
+
+    <gap:plugin name="com.adobe.plugins.gaplugin" version="2.3.1" />
+
+    <feature name="http://api.phonegap.com/1.0/file" />
+    <feature name="http://api.phonegap.com/1.0/geolocation" />
+    <feature name="http://api.phonegap.com/1.0/notification" />
+    <!-- for iOS -->
+    <feature name="SocialSharing">
+        <param name="ios-package" value="SocialSharing" />
+    </feature>
+    <!-- for Android (you will find one in res/xml) -->
+    <feature name="SocialSharing">
+        <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
+    </feature>
+    <!-- for Windows Phone -->
+    <feature name="SocialSharing">
+        <param name="wp-package" value="SocialSharing" />
+    </feature>
+
+
+
+</widget>
