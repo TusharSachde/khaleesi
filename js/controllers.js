@@ -264,19 +264,43 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
         //        $scope.allchats = FireBaseServices.getchats();
         console.log($scope.allchats);
-        $('#txtSendTo').focus();
+//        $('#txtSendTo').focus();
 
     }
 
+    $scope.allvalidation1 = [];
+    $scope.showsend = false;
+    
+    $scope.checksend = function (){
+        console.log("chekc check");
+        if($scope.chat.message)
+        {
+            $scope.showsend = true;
+        }else{
+            $scope.showsend = false;
+        }
+    }
+    
     $scope.send = function (chat) {
-        console.log(chat);
-        FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message, ud, newfun);
-        chat.message = "";
+        
+        
+                if(chat.message)
+                {
+                FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message, ud, newfun);
+                chat.message = "";
 
-        // Update the scroll area
-        $ionicScrollDelegate.scrollBottom(true);
-        $('#txtSendTo').focus();
+                // Update the scroll area
+                $ionicScrollDelegate.scrollBottom(true);
+//                $('#txtSendTo').focus();
+                }else{
+                    
+                    console.log("not not not check");
+                }
     };
+    
+
+    
+    
 })
     .controller('TravelCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
 

@@ -43,7 +43,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                 console.log(message);
                 if(chats!='')
                 {
-                if(chats[chats.length-1].text!=message.text)
+                if(chats[0].text!=message.text)
                 {
                     chats.push(message);
                 }
