@@ -16,6 +16,7 @@
 .messages li.us {
     float: right;
 }
+.ng-invalid.ng-dirty { border: 1px solid red; }
 .messages li.us img {
     float: right;
 }

@@ -159,3 +159,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         templateUrl: "templates/chat1.html"
     }
 });
+var formvalidation = function(allvalidation) {
+            var isvalid2 = true;
+            for (var i = 0; i < allvalidation.length; i++) {
+                console.log("checking");
+                console.log(allvalidation[i].field);
+                if (allvalidation[i].field == "" || !allvalidation[i].field) {
+                    allvalidation[i].validation = "ng-dirty";
+                    isvalid2 = false;
+                }
+            }
+            return isvalid2;
+        };

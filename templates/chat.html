@@ -20,7 +20,7 @@
     <ion-content class="has-header padding">
         <!--        <chat></chat>-->
         
-        <ol class="messages" ng-repeat="message in allchats">
+        <ol class="messages" ng-repeat="message in allchats|orderBy:'timestamp':false">
             <li class="{{message.name|chatclass}}" ng-if="message.type!=3 && message.type!=4">
                 <p>
                     {{message.text}}
@@ -81,10 +81,11 @@
             <table style="width:100%;">
                 <tr>
                     <td style="width:100%;">
-                        <input type="text" ng-model="chat.message" id="txtSendTo" placeholder="Your message" style="width:100%;" autofocus>
+<!--                        <input type="text" ng-model="chat.message" id="txtSendTo" placeholder="Your message" ng-class="allvalidation[0].validation" style="width:100%;" autofocus required>-->
+                        <input type="text" ng-model="chat.message" id="txtSendTo" placeholder="Your message" style="width:100%;" ng-change="checksend()" ng-focus="checksend()">
                     </td>
                     <td>
-                        <input type="submit" value="SEND">
+                        <input type="submit" ng-if="showsend" value="SEND">
                     </td>
                 </tr>
             </table>
