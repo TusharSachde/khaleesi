@@ -82,7 +82,7 @@
                 <tr>
                     <td style="width:100%;">
 <!--                        <input type="text" ng-model="chat.message" id="txtSendTo" placeholder="Your message" ng-class="allvalidation[0].validation" style="width:100%;" autofocus required>-->
-                        <input type="text" ng-model="chat.message" id="txtSendTo" placeholder="Your message" style="width:100%;" ng-change="checksend()" ng-focus="checksend()">
+                        <input type="text" ng-model="chat.message" id="txtSendTo" placeholder="Your message" style="width:100%;" ng-change="checksend()" ng-focus="checksend()" autofocus>
                     </td>
                     <td>
                         <input type="submit" ng-if="showsend" value="SEND">
