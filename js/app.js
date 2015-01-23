@@ -6,8 +6,9 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
 
-.run(function ($ionicPlatform) {
-    $ionicPlatform.ready(function () {
+.run(function($ionicPlatform) {
+    $ionicPlatform.ready(function() {
+        StatusBar.hide();
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -15,12 +16,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         }
         if (window.StatusBar) {
             // org.apache.cordova.statusbar required
-            StatusBar.styleDefault();
+            StatusBar.hide();
+            StatusBar.styleDefault();   
         }
     });
 })
 
-.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     $ionicConfigProvider.views.maxCache(0);
     //APP
     $stateProvider
@@ -114,15 +116,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
 })
 
 
-.filter('converttime', function (FireBaseServices) {
-    return function (input) {
+.filter('converttime', function(FireBaseServices) {
+    return function(input) {
         input = parseInt(input);
         var date = new Date(input);
         return date.toUTCString();
     };
 })
-    .filter('chatclass', function (FireBaseServices) {
-        return function (input) {
+    .filter('chatclass', function(FireBaseServices) {
+        return function(input) {
             useremail = FireBaseServices.getauthemail();
             if (input == "Sergy") {
                 return "them";
@@ -133,26 +135,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         };
     })
 
-.filter('imagepath', function () {
-    return function (input) {
+.filter('imagepath', function() {
+    return function(input) {
         if (input == "") {
             return "http://mafiawarloots.com/sergybackend/assets/img/default.jpg";
-//                return "http://localhost/sergybackend/assets/img/default.jpg";
+            //                return "http://localhost/sergybackend/assets/img/default.jpg";
         } else {
             return "http://mafiawarloots.com/sergybackend/uploads/" + input;
-//            return "http://localhost/sergybackend/uploads/" + input;
+            //            return "http://localhost/sergybackend/uploads/" + input;
         }
     };
 })
 
-.filter('chatt', function () {
-    return function (input) {
+.filter('chatt', function() {
+    return function(input) {
         var j = JSON.parse(input);
-        console.log(j.form);return j.form;
+        console.log(j.form);
+        return j.form;
     };
 })
 
-.directive("chat", function () {
+.directive("chat", function() {
     return {
         restrict: "E",
         replace: "true",
@@ -160,14 +163,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
     }
 });
 var formvalidation = function(allvalidation) {
-            var isvalid2 = true;
-            for (var i = 0; i < allvalidation.length; i++) {
-                console.log("checking");
-                console.log(allvalidation[i].field);
-                if (allvalidation[i].field == "" || !allvalidation[i].field) {
-                    allvalidation[i].validation = "ng-dirty";
-                    isvalid2 = false;
-                }
-            }
-            return isvalid2;
-        };
+    var isvalid2 = true;
+    for (var i = 0; i < allvalidation.length; i++) {
+        console.log("checking");
+        console.log(allvalidation[i].field);
+        if (allvalidation[i].field == "" || !allvalidation[i].field) {
+            allvalidation[i].validation = "ng-dirty";
+            isvalid2 = false;
+        }
+    }
+    return isvalid2;
+};
