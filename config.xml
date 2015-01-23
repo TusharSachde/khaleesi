@@ -47,7 +47,7 @@
 
     <access origin="*" />
     <!-- allow all pages, use for development -->
-    <access origin="*.pushwoosh.com" />
+<!--    <access origin="*.pushwoosh.com" />-->
     <!-- allow pushwoosh service -->
 
 <!--
@@ -65,7 +65,7 @@
 -->
 
    <gap:plugin name="com.adobe.plugins.gaplugin" version="2.3.1" />
-<gap:plugin name="com.pushwoosh.plugins.pushwoosh" version="3.0.2" />
+<!--<gap:plugin name="com.pushwoosh.plugins.pushwoosh" version="3.0.2" />-->
 <gap:plugin name="nl.x-services.plugins.socialsharing" version="4.3.8" />
 <gap:plugin name="org.apache.cordova.device" version="0.2.12" />
 <gap:plugin name="org.apache.cordova.dialogs" version="0.2.10" />
