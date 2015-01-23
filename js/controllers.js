@@ -264,7 +264,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
         //        $scope.allchats = FireBaseServices.getchats();
         console.log($scope.allchats);
-//        $('#txtSendTo').focus();
+        $('#txtSendTo').focus();
 
     }
 
@@ -291,7 +291,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
                 // Update the scroll area
                 $ionicScrollDelegate.scrollBottom(true);
-//                $('#txtSendTo').focus();
+                $('#txtSendTo').focus();
                 }else{
                     
                     console.log("not not not check");
