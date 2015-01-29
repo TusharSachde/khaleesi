@@ -19,69 +19,115 @@
 
     <ion-content class="has-header padding">
         <!--        <chat></chat>-->
-        
+
         <ol class="messages" ng-repeat="message in allchats|orderBy:'timestamp':false">
-            <li class="{{message.name|chatclass}}" ng-if="message.type!=3 && message.type!=4">
+            <li class="{{message.name|chatclass}}" ng-if="message.type!=3 && message.type!=4 && message.type!=5">
                 <p>
                     {{message.text}}
                     <br><span class="datetime">{{message.timestamp|date:"h:mma"}}</span>
                 </p>
             </li>
-            
-<!--            li for form-->
+
+            <!--            li for form-->
             <li class="{{message.name|chatclass}}" ng-if="message.type==3">
+
                 <p ng-init="formm = convertform(message.text);">
 
                     <!--                    {{formjson|json}}-->
-                   <span class="form-title">{{formm.name}}</span>
+                    <span class="form-title">{{formm.name}}</span>
+
                     <span class="assertive inform button-assertive">{{msg}}</span>
+
                     <span ng-repeat="form in formm.json">
-<!--                    {{message.name}} : -->
                         
                     <input type="text" placeholder='{{form.placeholder}}' ng-model="form.val" class="form-control inform" ng-if="form.type=='text'">
-                        <input type="password" placeholder='{{form.placeholder}}' ng-model="form.val"  class="form-control inform" ng-if="form.type=='password'">
-                        <label class="item item-input item-select" ng-if="form.type=='selection'">
+                       
+                    <input type="password" placeholder='{{form.placeholder}}' ng-model="form.val"  class="form-control inform" ng-if="form.type=='password'">
+                       
+                    <label class="item item-input item-select" ng-if="form.type=='selection'">
     
-    <select  ng-model="form.val" class="form-control inform" >
-                            <option>{{form.placeholder}}</option>
-                            <option ng-repeat="frm in form.value">{{frm.title}}</option>
+                        <select  ng-model="form.val" class="form-control inform" >
+                               
+                                <option>{{form.placeholder}}</option>
+                                
+                                <option ng-repeat="frm in form.value">{{frm.title}}</option>
+                                
                         </select>
-  </label>
+                        
+                    </label>
 
                         
                     <br>
+                    
                     </span>
+
                     <button class="button button-block button-positive button-small button-outline" ng-click="submitt(formm,message)">Submit</button>
+
+                    <span class="small-right">{{message.timestamp|converttime}}</span>
+
+                </p>
+
+            </li>
+
+            <!--            li for product-->
+            <li class="{{message.name|chatclass}}" ng-if="message.type==4">
+               
+                <p ng-init="form=convertproduct(message.text);">
+
+                    <span class="form-title">{{form.name}}</span>
+                    
+                    <span>
+                       <img src="{{form.image|imagepath}}" width="100">
+                    </span>
+                    
+                    <span class="form-info">Price</span>
+                    
+                    <span>{{form.price}}</span>
+                    
+                    <span class="form-info">Details</span>
+                    
+                    <span>{{form.details}}</span>
+                    
+                    <button class="button button-block button-positive button-small button-outline" ng-click="placeorder(form)">Place Order</button>
+                    
                     <span class="small-right">{{message.timestamp|converttime}}</span>
                 </p>
             </li>
             
-<!--            li for product-->
-            <li class="{{message.name|chatclass}}" ng-if="message.type==4">
+            <!--            li for Form Return-->
+            <li class="{{message.name|chatclass}}" ng-if="message.type==5">
+               
                 <p ng-init="form=convertproduct(message.text);">
-
-                   <span class="form-title">{{form.name}}</span>
-                   <span>
-                       <img src="{{form.image|imagepath}}" width="100">
-                   </span>
-                    <span class="form-info">Price</span>
-                    <span>{{form.price}}</span>
-                    <span class="form-info">Details</span>
-                    <span>{{form.details}}</span>
-                    <button class="button button-block button-positive button-small button-outline" ng-click="placeorder(form)">Place Order</button>
+                
+                    <span class="form-title">Your Data Of {{form.name}}</span>
+                    
+                    <span ng-repeat="formdata in form.json">
+                       
+                        <span class="form-info">{{formdata.name}}</span>
+                    
+                        <span ng-if="formdata.val">{{formdata.val}}</span>
+                        
+                        <span ng-if="!formdata.val">NA</span>
+                        
+                    </span>
+                    
+                    <br>
+                    
                     <span class="small-right">{{message.timestamp|converttime}}</span>
+                    
                 </p>
+                
             </li>
 
         </ol>
     </ion-content>
     <ion-footer-bar class="bar-stable bar-white chat-bar">
-        <form ng-submit="send(chat)">
+        <form ng-submit="send(chat, 1)">
 
             <table style="width:100%;">
                 <tr>
                     <td style="width:100%;">
-<!--                        <input type="text" ng-model="chat.message" id="txtSendTo" placeholder="Your message" ng-class="allvalidation[0].validation" style="width:100%;" autofocus required>-->
+                        <!--                        <input type="text" ng-model="chat.message" id="txtSendTo" placeholder="Your message" ng-class="allvalidation[0].validation" style="width:100%;" autofocus required>-->
                         <input type="text" ng-model="chat.message" id="txtSendTo" placeholder="Your message" style="width:100%;" ng-change="checksend()" ng-focus="checksend()" autofocus>
                     </td>
                     <td>
