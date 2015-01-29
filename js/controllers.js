@@ -121,6 +121,8 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 })
 
 .controller('ChatCtrl', function ($scope, $stateParams, $ionicScrollDelegate, FireBaseServices, $state, $location) {
+    
+    $scope.formreturn = [];
     $('#txtSendTo').focus();
     if (FireBaseServices.checklogin()) {
         $state.go('app.chat');
@@ -148,8 +150,10 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
     $scope.data = [];
     var formsavesuccess = function (data, status) {
         $scope.check = false;
-        $scope.data.message = "Form Submited Successfully";
-        $scope.send($scope.data);
+        $scope.data.message = $scope.formreturn;
+
+        $scope.send($scope.data, 5);
+        console.log($scope.formreturn);
     };
 
 
@@ -170,6 +174,9 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
 
     // form div validation
     $scope.submitt = function (val, message) {
+        console.log("my form");
+        $scope.formreturn = val;
+        console.log(val);
         $scope.formid = val.id;
         for (var i = 0; i < val.length; i++) {
             if (!val[i].val) {
@@ -281,12 +288,14 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
         }
     }
     
-    $scope.send = function (chat) {
-        
+    $scope.send = function (chat, type) {
+            
+                console.log("type of messsage");
+                console.log(type);
         
                 if(chat.message)
                 {
-                FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message, ud, newfun);
+                FireBaseServices.update($scope.userdata.uid, $scope.userdata.password.email, chat.message, ud, type, newfun);
                 chat.message = "";
 
                 // Update the scroll area
