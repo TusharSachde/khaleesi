@@ -8,6 +8,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        cordova.plugins.Keyboard.disableScroll(true);
+        cordova.plugins.Keyboard.shrinkView(true);  
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -17,7 +20,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         }
         if (window.StatusBar) {
             // org.apache.cordova.statusbar required
-            StatusBar.styleDefault();   
+            StatusBar.styleDefault();
         }
     });
 })

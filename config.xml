@@ -27,6 +27,7 @@
     <preference name="android-installLocation" value="internalOnly" />
     <preference name="ErrorUrl" value="" />
     <preference name="BackgroundColor" value="0x000000" />
+    <preference name="ios-statusbarstyle" value="black-translucent" />
     <preference name="KeepRunning" value="true" />
     <preference name="splash-screen-duration" value="3000" />
     <preference name="SplashScreen" value="screen" />
@@ -45,6 +46,10 @@
 
     <gap:plugin name="com.ionic.keyboard" />
     <gap:plugin name="org.apache.cordova.statusbar" version="0.1.4" />
+
+    <feature name="Keyboard">
+        <param name="ios-package" value="IonicKeyboard" onload="true" />
+    </feature>
 
 
 </widget>
