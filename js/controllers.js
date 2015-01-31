@@ -1,7 +1,7 @@
 var ud = "";
 var online = false;
 
-angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices'])
+angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 'ngSanitize'])
     .controller('AppCtrl', function($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
 
         $scope.demo = "demo";

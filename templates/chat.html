@@ -23,7 +23,7 @@
         <ol class="messages" ng-repeat="message in allchats|orderBy:'timestamp':false">
             <li class="{{message.name|chatclass}}" ng-if="message.type!=3 && message.type!=4 && message.type!=5">
                 <p>
-                    {{message.text}}
+                    <span ng-bind-html="message.text | linky:'_blank'"></span>
                     <br><span class="datetime">{{message.timestamp|date:"h:mma"}}</span>
                 </p>
             </li>
