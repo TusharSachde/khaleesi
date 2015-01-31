@@ -32,11 +32,15 @@
     <preference name="splash-screen-duration" value="3000" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
-    <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="target-device" value="universal" />
     <preference name="LoadUrlTimeoutValue" value="200000" />
     <preference name="deployment-target" value="6.1" />
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="BackupWebStorage" value="none" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
 
     <icon src="img/icon.png" />
 
@@ -46,7 +50,9 @@
 
     <gap:plugin name="com.ionic.keyboard" />
     <gap:plugin name="org.apache.cordova.statusbar" version="0.1.4" />
-
+    <feature name="StatusBar">
+        <param name="ios-package" value="CDVStatusBar" onload="true" />
+    </feature>
     <feature name="Keyboard">
         <param name="ios-package" value="IonicKeyboard" onload="true" />
     </feature>
