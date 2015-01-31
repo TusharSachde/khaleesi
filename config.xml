@@ -31,7 +31,7 @@
     <preference name="splash-screen-duration" value="3000" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
-    <preference name="ios-statusbarstyle" value="black-translucent" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="target-device" value="universal" />
     <preference name="LoadUrlTimeoutValue" value="200000" />
@@ -43,6 +43,7 @@
 
     <access origin="*" />
 
+    <gap:plugin name="com.ionic.keyboard" />
     <gap:plugin name="org.apache.cordova.statusbar" version="0.1.4" />
 
 
