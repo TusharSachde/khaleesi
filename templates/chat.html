@@ -17,7 +17,7 @@
         <i class="icon1 i-order"></i>
     </ion-nav-buttons>
 
-    <ion-content class="has-header padding" style="overflow-y: auto;">
+    <div class="padding scroll-content ionic-scroll  has-header has-footer" style="overflow-y: auto;">
         <!--        <chat></chat>-->
 
         <ol class="messages" ng-repeat="message in allchats|orderBy:'timestamp':false">
@@ -120,7 +120,7 @@
             </li>
 
         </ol>
-    </ion-content>
+    </div>
     <ion-footer-bar class="bar-stable bar-white chat-bar">
         <form ng-submit="send(chat, 1)">
 
