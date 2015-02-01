@@ -28,89 +28,6 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
                 $scope.loginlogout = "Login";
             }
         }
-        //
-        //        // Open the login modal
-        //        $scope.login = function () {
-        //            $scope.modal.show();
-        //        };
-        //
-        //        // Open the register modal
-        //        $scope.register = function () {
-        //            $scope.modal.hide();
-        //            $scope.modal2.show();
-        //        };
-        //
-        //        // Perform the login action when the user submits the login form
-        //        $scope.doLogin = function () {
-        //            console.log('Doing login', $scope.loginData);
-        //
-        //            // Simulate a login delay. Remove this and replace with your login
-        //            // code if using a login system
-        //            $timeout(function () {
-        //                $scope.closeLogin();
-        //            }, 1000);
-        //        };
-        //
-        //        var loginsuccess = function (data, status) {
-        //            //        console.log(data);
-        //            ud = data;
-        //            console.log("myid");
-        //            console.log(ud);
-        //            FireBaseServices.setuserid(data);
-        //            window.location.reload(false);
-        //        };
-        //
-        //        var onloginsuccess = function (error, authData) {
-        //            FireBaseServices.authenticate();
-        //            FireBaseServices.firbasecallonchange();
-        //            if (error === null) {
-        //                //            $.jStorage.set("user", authData);
-        //                console.log(1);
-        //                FireBaseServices.login($scope.loginData.username, $scope.loginData.password).success(loginsuccess);
-        //
-        //                //            $location.url('/search');
-        //
-        //            } else {
-        //                console.log("Error authenticating user:", error);
-        //                console.log(0);
-        //            }
-        //        }
-        //        var normalloginsuccess = function (data, status) {
-        //            console.log(data);
-        //            $scope.modal.hide();
-        //        };
-        //
-        //        //    normal login service.js/normallogin
-        //        $scope.normallogin = function (loginData) {
-        //            FireBaseServices.normallogin(loginData.username, loginData.password, onloginsuccess);
-        //            $location.url('/chat');
-        //            $scope.modal.hide();
-        //
-        //        }
-        //
-        //        //    normal registration service.js/normalregistration\
-        //        var addusersuccess = function (data, status) {
-        //            console.log(data);
-        //        };
-        //
-        //        var registersuccess = function (error) {
-        //
-        //            // User Register to Database
-        //
-        //            if (error === null) {
-        //                console.log("User created successfully");
-        //                FireBaseServices.adduser($scope.registerdata.name, $scope.registerdata.username, $scope.registerdata.password).success(addusersuccess);
-        //                //            FireBaseServices.a
-        //                $scope.modal.show();
-        //            } else {
-        //                console.log("Error creating user:", error);
-        //            }
-        //        };
-        //        $scope.normalregister = function (logindata) {
-        //            FireBaseServices.normalregister(logindata.username, logindata.password, registersuccess);
-        //            $scope.modal2.hide();
-        //            $location.url('/search');
-        //        }
 
     })
 
@@ -123,7 +40,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 .controller('ChatCtrl', function($scope, $stateParams, $ionicScrollDelegate, FireBaseServices, $state, $location) {
 
     $scope.formreturn = [];
-    $('#txtSendTo').focus();
+//    $('#txtSendTo').focus();
     if (FireBaseServices.checklogin()) {
         $state.go('app.chat');
     } else {
@@ -206,8 +123,9 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
     var onnewchat = function() {
         console.log("new Chat received");
-        $ionicScrollDelegate.scrollBottom(true);
-        $('#txtSendTo').focus();
+//        $ionicScrollDelegate.scrollBottom(true);
+        $(".has-header").scrollTop(10000000000);
+//        $('#txtSendTo').focus();
     };
     $scope.online = "";
     $scope.line = "offline";
@@ -244,13 +162,14 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
         FireBaseServices.changecallback(changeevent);
         $scope.allchats = FireBaseServices.getchats();
-        $('#txtSendTo').focus();
+//        $('#txtSendTo').focus();
         console.log("getchatbyuser.......................////////////");
         console.log($scope.allchats);
 
 
         //        ud = data.queryresult[0].userid;
-        $ionicScrollDelegate.scrollBottom(true);
+//        $ionicScrollDelegate.scrollBottom(true);
+        $(".has-header").scrollTop(10000000000);
     };
     if ($scope.userdata != null) {
         FireBaseServices.getchatbyuser($scope.userdata.password.email, chatsuccess);
@@ -258,8 +177,9 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     //    if($scope.check == 1)
     //    {
     $scope.allchats = FireBaseServices.getchats();
-    $('#txtSendTo').focus();
-    $ionicScrollDelegate.scrollBottom(true);
+//    $('#txtSendTo').focus();
+//    $ionicScrollDelegate.scrollBottom(true);
+    $(".has-header").scrollTop(10000000000);
     //    }
     //    $scope.allchats.push({email: "jagruti@wohlig.com", name: "simplelogin:1", text: "hey whats up", timestamp: 1418016362961});
 
@@ -269,7 +189,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
         //        $scope.allchats = FireBaseServices.getchats();
         console.log($scope.allchats);
-        $('#txtSendTo').focus();
+//        $('#txtSendTo').focus();
 
     }
 
@@ -295,8 +215,9 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             chat.message = "";
 
             // Update the scroll area
-            $ionicScrollDelegate.scrollBottom(true);
-            $('#txtSendTo').focus();
+//            $ionicScrollDelegate.scrollBottom(true);
+            $(".has-header").scrollTop(10000000000);
+//            $('#txtSendTo').focus();
         } else {
 
             console.log("not not not check");
