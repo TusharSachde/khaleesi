@@ -17,7 +17,7 @@
         <i class="icon1 i-order"></i>
     </ion-nav-buttons>
 
-    <ion-content class="has-header padding">
+    <ion-content class="has-header padding" style="overflow-y: auto;">
         <!--        <chat></chat>-->
 
         <ol class="messages" ng-repeat="message in allchats|orderBy:'timestamp':false">
@@ -128,7 +128,7 @@
                 <tr>
                     <td style="width:100%;">
                         <!--                        <input type="text" ng-model="chat.message" id="txtSendTo" placeholder="Your message" ng-class="allvalidation[0].validation" style="width:100%;" autofocus required>-->
-                        <input type="text" ng-model="chat.message" id="txtSendTo" placeholder="Your message" style="width:100%;" ng-change="checksend()" ng-focus="checksend()" autofocus>
+                        <input type="text" ng-model="chat.message" id="txtSendTo" placeholder="Your message" style="width:100%;" ng-change="checksend()" ng-focus="checksend()">
                     </td>
                     <td>
                         <input type="submit" ng-if="showsend" value="SEND">
