@@ -1,7 +1,80 @@
 <ion-view>
-   
-    <ion-content class="has-header padding">
-        <h1>Hello Hotel !</h1>
-    </ion-content>
+
+    <div id="search-bar">
+        <div class="item item-input-inset">
+            <label class="item-input-wrapper" id="search-input">
+                <i class="icon ion-ios7-search placeholder-icon"></i>
+                <input type="text" placeholder="Search" ng-model="query" ng-change="search()">
+            </label>
+        </div>
+    </div>
     
+    <div id="filter-tab">
+        <div class="row">
+            <div class="col"><a class="active">All Goods</a></div>
+            <div class="col"><a>Purchased</a></div>
+            <div class="col"><a>Requested</a></div>
+        </div>
+    </div>
+
+    <ion-content class="has-search">
+
+        <ion-list>
+
+            <ion-item class="item-thumbnail-left item-good" href="#">
+
+                <div class="box-thumbnail">
+                    <ion-slide-box>
+                        <ion-slide>
+                            <div class="slide-hold">
+                                <img src="img/iphone.jpg" class="full-height">
+                            </div>
+                        </ion-slide>
+                        <ion-slide>
+                            <div class="slide-hold">
+                                <img src="img/iphone.jpg" class="full-height">
+                            </div>
+                        </ion-slide>
+                    </ion-slide-box>
+                </div>
+
+                <h2>Apple iPhone 5S, Silver, 16 GB </h2>
+                <p class="price">Rs. 37,500</p>
+                <p class="greyish">Buying From <a href="href://www.amazon.com" target="_blank">Amazon.com</a>
+                </p>
+                <a href="" class="positive no-deco">View Details <i class="icon ion-ios7-plus-empty"></i></a>
+                <button class="button button-block button-positive">
+                    Buy Now
+                </button>
+            </ion-item><ion-item class="item-thumbnail-left item-good" href="#">
+
+                <div class="box-thumbnail">
+                    <ion-slide-box>
+                        <ion-slide>
+                            <div class="slide-hold">
+                                <img src="img/iphone.jpg" class="full-height">
+                            </div>
+                        </ion-slide>
+                        <ion-slide>
+                            <div class="slide-hold">
+                                <img src="img/iphone.jpg" class="full-height">
+                            </div>
+                        </ion-slide>
+                    </ion-slide-box>
+                </div>
+
+                <h2>Apple iPhone 5S, Silver, 16 GB </h2>
+                <p class="price">Rs. 37,500</p>
+                <p class="greyish">Buying From <a href="href://www.amazon.com" target="_blank">Amazon.com</a>
+                </p>
+                <a href="" class="positive no-deco">View Details <i class="icon ion-ios7-plus-empty"></i></a>
+                <button class="button button-block button-positive">
+                    Buy Now
+                </button>
+            </ion-item>
+
+        </ion-list>
+
+    </ion-content>
+
 </ion-view>

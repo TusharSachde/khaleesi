@@ -16,11 +16,15 @@
 .messages li.us {
     float: right;
 }
-.ng-invalid.ng-dirty { border: 1px solid red; }
+.ng-invalid.ng-dirty {
+    border: 1px solid red;
+}
 .messages li.us img {
     float: right;
 }
 .messages p {
+    -webkit-border-radius: .75rem;
+    -moz-border-radius: .75rem;
     border-radius: .75rem;
     background: #6DD900;
     color: #fff;
@@ -41,6 +45,8 @@
 .messages img {
     display: block;
     max-width: 65%;
+    -webkit-border-radius: .75rem;
+    -moz-border-radius: .75rem;
     border-radius: .75rem;
 }
 .bar.bar-white.bar-footer {
@@ -51,6 +57,8 @@
     border-color: #bfbfbf;
     background-color: white;
     background-image: -webkit-linear-gradient(90deg, #fff, #fff 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #fff, #fff 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #fff, #fff 50%, transparent 50%);
     background-image: linear-gradient(0deg, #fff, #fff 50%, transparent 50%);
     color: #262626;
 }
@@ -59,6 +67,8 @@
     position: relative;
 }
 .chat-bar input {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     width: 100%;
     background: #fff;
@@ -102,6 +112,8 @@
     border-color: #191919;
     background-color: #191919;
     background-image: -webkit-linear-gradient(90deg, #191919, #191919 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #191919, #191919 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #191919, #191919 50%, transparent 50%);
     background-image: linear-gradient(0deg, #191919, #191919 50%, transparent 50%);
     color: #fff;
 }
@@ -130,60 +142,90 @@
     background-position: 0px 0px;
     width: 32px;
     height: 23px;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
     background-size: 100%;
 }
 .i-return {
     background-position: -1px -24px;
     width: 32px;
     height: 25px;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
     background-size: 100%;
 }
 .i-shipping {
     background-position: 0px -48px;
     width: 32px;
     height: 22px;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
     background-size: 100%;
 }
 .i-billing {
     background-position: 0px -70px;
     width: 32px;
     height: 19px;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
     background-size: 100%;
 }
 .i-setting {
     background-position: 0px -89px;
     width: 32px;
     height: 24px;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
     background-size: 100%;
 }
 .i-travel {
     background-position: 0px 0px;
     width: 32px;
     height: 22px;
+    -webkit-background-size: 400px 400px;
+    -moz-background-size: 400px;
+    -o-background-size: 400px;
     background-size: 400px;
 }
 .i-hotel {
     background-position: -87px 0px;
     width: 32px;
     height: 22px;
+    -webkit-background-size: 400px 400px;
+    -moz-background-size: 400px;
+    -o-background-size: 400px;
     background-size: 400px;
 }
 .i-good {
     background-position: -172px 0px;
     width: 40px;
     height: 22px;
+    -webkit-background-size: 400px 400px;
+    -moz-background-size: 400px;
+    -o-background-size: 400px;
     background-size: 400px;
 }
 .i-show {
     background-position: -271px 0px;
     width: 34px;
     height: 22px;
+    -webkit-background-size: 400px 400px;
+    -moz-background-size: 400px;
+    -o-background-size: 400px;
     background-size: 400px;
 }
 .i-bill {
     background-position: -371px 0px;
     width: 33px;
     height: 22px;
+    -webkit-background-size: 400px 400px;
+    -moz-background-size: 400px;
+    -o-background-size: 400px;
     background-size: 400px;
 }
 .menus-content .item {
@@ -318,4 +360,91 @@ span.assertive.inform {
     display: block;
     margin-top: -5px;
     text-transform: none;
+}
+#search-bar {
+    background: none;
+    position: absolute;
+    width: 100%;
+    top: 44px;
+    height: 40px;
+    z-index: 3;
+}
+#search-bar .item {
+    background: #e8e8e8;
+    border: none;
+}
+#content {
+    top: 44px;
+    padding-top: 45px;
+    padding-bottom: 20px;
+}
+#search-input {
+    background: white;
+}
+.has-search {
+    top: 94px;
+}
+.item-good {
+    border: 0;
+}
+.item-good h2 {
+    font-weight: bold;
+}
+.item-good h2,
+.item-good p,
+.item-good a {
+    margin-bottom: 10px;
+}
+.item-good .button {
+    width: 80%;
+    padding: 6px 0;
+    margin: 0;
+}
+.item-good .item-content {
+    padding: 20px 10px 20px 160px;
+    margin: 0;
+}
+.item-good:nth-child(even) .item-content {
+    background: #f8f8f8;
+}
+a {
+    color: inherit;
+    font-size: inherit;
+}
+a.no-deco {
+    text-decoration: none;
+    display: block;
+}
+p.price {
+    color: #333;
+}
+p.greyish {
+    color: #999;
+}
+.box-thumbnail {
+    height: 175px;
+    position: absolute;
+    left: 10px;
+    width: 140px;
+}
+img.full-height {
+    height: 100%;
+    width: auto;
+    margin: 0 auto;
+    display: block;
+}
+.slide-hold {
+    height: 170px;
+    padding-bottom: 12px;
+    width: 100%;
+    overflow: hidden;
+}
+.box-thumbnail .slider-pager {
+    bottom: 2px;
+}
+.box-thumbnail .slider-pager i {
+    font-size: 9px;
+}
+.box-thumbnail .slider-pager .slider-pager-page {
+    width: 9px;
 }
