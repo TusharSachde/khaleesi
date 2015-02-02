@@ -19,8 +19,8 @@
 
     <div class="padding scroll-content ionic-scroll  has-header has-footer" style="overflow-y: auto;">
         <!--        <chat></chat>-->
-
-        <ol class="messages" ng-repeat="message in allchats|orderBy:'timestamp':false">
+    <div class="chintan clearfix">
+        <ol class="messages" ng-repeat="message in allchats|orderBy:'timestamp':false" my-repeat-directive>
             <li class="{{message.name|chatclass}}" ng-if="message.type!=3 && message.type!=4 && message.type!=5">
                 <p>
                     <span ng-bind-html="message.text | linky:'_blank'"></span>
@@ -120,6 +120,7 @@
             </li>
 
         </ol>
+        </div>
     </div>
     <ion-footer-bar class="bar-stable bar-white chat-bar">
         <form ng-submit="send(chat, 1)">

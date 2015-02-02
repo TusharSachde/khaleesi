@@ -164,7 +164,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         replace: "true",
         templateUrl: "templates/chat1.html"
     }
+})
+
+.directive('myRepeatDirective', function() {
+  return function(scope, element, attrs) {
+    //angular.element(element).css('color','blue');
+    if (scope.$last){
+        $('.has-header').animate({ scrollTop: $(".has-header div.chintan").height() }, 'slow', function () {
+                            });
+      
+    }
+  };
 });
+
 var formvalidation = function(allvalidation) {
     var isvalid2 = true;
     for (var i = 0; i < allvalidation.length; i++) {
