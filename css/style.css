@@ -369,6 +369,17 @@ span.assertive.inform {
     height: 40px;
     z-index: 3;
 }
+#filter-tab {
+    background: none;
+    position: absolute;
+    width: 100%;
+    top: 94px;
+    height: 32px;
+    z-index: 3;
+    text-align: center;
+    color: #ccc;
+    border-bottom: 1px solid #ccc;
+}
 #search-bar .item {
     background: #e8e8e8;
     border: none;
@@ -383,6 +394,9 @@ span.assertive.inform {
 }
 .has-search {
     top: 94px;
+}
+.has-filter {
+    top: 127px;
 }
 .item-good {
     border: 0;
@@ -406,6 +420,9 @@ span.assertive.inform {
 }
 .item-good:nth-child(even) .item-content {
     background: #f8f8f8;
+}
+.item-good:nth-child(even) .item-content.activated {
+    background: #d9d9d9;
 }
 a {
     color: inherit;
@@ -447,4 +464,13 @@ img.full-height {
 }
 .box-thumbnail .slider-pager .slider-pager-page {
     width: 9px;
+}
+#filter-tab .row {
+    padding: 0;
+}
+#filter-tab .active {
+    color: black;
+}
+#filter-tab .active>span {
+    border-bottom: 2px solid black;
 }
