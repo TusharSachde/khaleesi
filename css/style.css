@@ -474,3 +474,6 @@ img.full-height {
 #filter-tab .active>span {
     border-bottom: 2px solid black;
 }
+.has-header1 {
+    top: 44px;
+}
