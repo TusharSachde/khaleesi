@@ -91,7 +91,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
             url: '/good',
             views: {
                 'tab-travel': {
-                    templateUrl: "templates/tab-travel.html",
+                    templateUrl: "templates/tab-good.html",
                     controller: 'GoodCtrl'
                 }
             }
