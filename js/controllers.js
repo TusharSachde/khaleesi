@@ -268,6 +268,20 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     .controller('PlaceOrderCtrl', function($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $stateParams, $state) {
 
         ud = $.jStorage.get("user").id;
+    
+        $scope.form = [];
+    
+//        autofill user data
+        
+        var userdata = function (data, status) {
+            
+            console.log(data);
+            
+            $scope.form = data;
+            
+        };
+    
+        FireBaseServices.getlastorder(ud).success(userdata);
 
         //        getproduct by product id
         var productssuccess = function(data, status) {
