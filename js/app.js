@@ -73,7 +73,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
             url: '/placeorder/:id',
             views: {
                 'tab-travel': {
-                    templateUrl: "templates/tab-placeorder.html",
+                    templateUrl: "templates/placeorder.html",
                     controller: 'PlaceOrderCtrl'
                 }
             }
@@ -90,16 +90,37 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         .state('tab.good', {
             url: '/good',
             views: {
-                'tab-travel': {
+                'tab-good': {
                     templateUrl: "templates/tab-good.html",
                     controller: 'GoodCtrl'
                 }
             }
         })
+        .state('tab.goodbuy', {
+            url: '/good/buy',
+            views: {
+                'tab-good': {
+                    templateUrl: "templates/buy-good.html",
+                    controller: 'GoodbuyCtrl'
+                }
+            }
+        })
+    
+        .state('tab.placeordergood', {
+            url: '/good/buy/placeorder',
+            views: {
+                'tab-good': {
+                    templateUrl: "templates/placeorder.html",
+                    controller: 'PlaceOrderCtrl'
+                }
+            }
+        })
+    
+    
         .state('tab.show', {
             url: '/show',
             views: {
-                'tab-hotel': {
+                'tab-show': {
                     templateUrl: "templates/tab-travel.html",
                     controller: 'ShowCtrl'
                 }
@@ -108,7 +129,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         .state('tab.bill', {
             url: '/bill',
             views: {
-                'tab-hotel': {
+                'tab-bill': {
                     templateUrl: "templates/tab-travel.html",
                     controller: 'BillCtrl'
                 }
