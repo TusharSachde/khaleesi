@@ -45,6 +45,33 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     }, 2000);
 })
 
+.controller('GoodCtrl', function($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
+//SLIDE BOX
+    $scope.nextSlide = function () {
+        $ionicSlideBoxDelegate.next();
+    };
+    $scope.prevSlide = function () {
+        $ionicSlideBoxDelegate.previous();
+    };
+    $timeout(function () {
+        $ionicSlideBoxDelegate.update();
+        
+    }, 2000);
+})
+.controller('GoodbuyCtrl', function($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
+//SLIDE BOX
+    $scope.nextSlide = function () {
+        $ionicSlideBoxDelegate.next();
+    };
+    $scope.prevSlide = function () {
+        $ionicSlideBoxDelegate.previous();
+    };
+    $timeout(function () {
+        $ionicSlideBoxDelegate.update();
+        
+    }, 2000);
+})
+
 
 .controller('ChatCtrl', function($scope, $stateParams, $ionicScrollDelegate, FireBaseServices, $state, $location) {
 
