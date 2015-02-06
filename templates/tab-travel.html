@@ -1,7 +1,10 @@
 <ion-view>
    
     <ion-nav-buttons side="left">
-        <button class="button button-icon icon ion-ios7-arrow-thin-left" nav-clear ui-sref="app.chat"></button>
+<!--        <button class="button button-icon icon ion-ios7-arrow-thin-left" nav-clear ui-sref="app.chat" ui-sref-opts="{reload: true}" href="#/app/chat"></button>-->
+        <div class="buttons">
+        <a class="button button-icon icon ion-ios7-arrow-thin-left" ng-click="gotochat()"></a>
+    </div>
     </ion-nav-buttons>
     
     <ion-content class="has-header padding">

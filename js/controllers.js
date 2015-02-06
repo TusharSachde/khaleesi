@@ -268,6 +268,13 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
         //        DECLARATION
         $scope.orders = [];
+    
+//        GO TO CHAT PAGE FUNCTION
+        $scope.gotochat = function () {
+//            $state.go('app.chat');
+            $location.url('app/chat');
+        }
+        
 
         //        GET USER FROM jStorage
         ud = $.jStorage.get("user").id;
@@ -279,17 +286,6 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
         };
         FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
 
-        //        PAYMENT GETWAY
-        //        $scope.StipePaymentGen = function (amount, form) {
-        //            console.log("strippaymentGen form");
-        //
-        //            handler.open({
-        //                name: 'Lyla Loves',
-        //                description: 'Total Amount: £ ' + amount,
-        //                amount: amount * 100,
-        //
-        //            });
-        //        };
 
     })
     .controller('PlaceOrderCtrl', function($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $stateParams, $state) {
