@@ -301,6 +301,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             //            $state.go('app.chat');
             $location.url('app/chat');
         }
+        
         $scope.form = [];
 
         //        autofill user data
@@ -310,6 +311,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             console.log(data);
 
             $scope.form = data;
+            $scope.form.name = "";
 
         };
 
@@ -331,11 +333,77 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             }
         };
 
+    
+        
+    
+        $scope.allvalidation = [];    
+    
         $scope.placeorder = function (form) {
             console.log(form);
-            form.user = ud;
-            form.productid = $scope.product.id;
-            FireBaseServices.placeorder(form).success(placeordersuccess);
+            
+            $scope.allvalidation = [{
+                field: $scope.form.name,
+                validation: ""
+                }, {
+                field: $scope.form.address1,
+                validation: ""
+                }, {
+                field: $scope.form.address2,
+                validation: ""
+                }, {
+                field: $scope.form.city,
+                validation: ""
+                }, {
+                field: $scope.form.state,
+                validation: ""
+                }, {
+                field: $scope.form.pincode,
+                validation: ""
+                }, {
+                field: $scope.form.email,
+                validation: ""
+                }, {
+                field: $scope.form.contactno,
+                validation: ""
+                }, {
+                field: $scope.form.country,
+                validation: ""
+                }, {
+                field: $scope.form.shipaddress1,
+                validation: ""
+                }, {
+                field: $scope.form.shipaddress2,
+                validation: ""
+                }, {
+                field: $scope.form.shipcity,
+                validation: ""
+                }, {
+                field: $scope.form.shipstate,
+                validation: ""
+                }, {
+                field: $scope.form.shippingcode,
+                validation: ""
+                }, {
+                field: $scope.form.shipcountry,
+                validation: ""
+                }, {
+                field: $scope.form.trackingcode,
+                validation: ""
+                }, {
+                field: $scope.form.shippingcharge,
+                validation: ""
+                }, {
+                field: $scope.form.shippingmethod,
+                validation: ""
+                }];
+            var check = formvalidation($scope.allvalidation);
+            console.log(check);
+            if (check) {
+                form.user = ud;
+                form.productid = $scope.product.id;
+                FireBaseServices.placeorder(form).success(placeordersuccess);
+            }
+            
         }
 
 
