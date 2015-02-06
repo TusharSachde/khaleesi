@@ -2,7 +2,7 @@ var ud = "";
 var online = false;
 
 angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 'ngSanitize'])
-    .controller('AppCtrl', function($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
+    .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
 
         $scope.demo = "demo";
         $scope.loginlogout = "Login";
@@ -23,7 +23,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
         //        $scope.registerdata = {};
         //
         //        // on logout 
-        $scope.logout = function() {
+        $scope.logout = function () {
             if (FireBaseServices.logout() == 1) {
                 $scope.loginlogout = "Login";
             }
@@ -31,8 +31,8 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
     })
 
-.controller('HotelCtrl', function($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
-//SLIDE BOX
+.controller('HotelCtrl', function ($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
+    //SLIDE BOX
     $scope.nextSlide = function () {
         $ionicSlideBoxDelegate.next();
     };
@@ -41,12 +41,12 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     };
     $timeout(function () {
         $ionicSlideBoxDelegate.update();
-        
+
     }, 2000);
 })
 
-.controller('GoodCtrl', function($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
-//SLIDE BOX
+.controller('GoodCtrl', function ($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
+    //SLIDE BOX
     $scope.nextSlide = function () {
         $ionicSlideBoxDelegate.next();
     };
@@ -55,28 +55,28 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     };
     $timeout(function () {
         $ionicSlideBoxDelegate.update();
-        
+
     }, 2000);
 })
-.controller('GoodbuyCtrl', function($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
-//SLIDE BOX
-    $scope.nextSlide = function () {
-        $ionicSlideBoxDelegate.next();
-    };
-    $scope.prevSlide = function () {
-        $ionicSlideBoxDelegate.previous();
-    };
-    $timeout(function () {
-        $ionicSlideBoxDelegate.update();
-        
-    }, 2000);
-})
+    .controller('GoodbuyCtrl', function ($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
+        //SLIDE BOX
+        $scope.nextSlide = function () {
+            $ionicSlideBoxDelegate.next();
+        };
+        $scope.prevSlide = function () {
+            $ionicSlideBoxDelegate.previous();
+        };
+        $timeout(function () {
+            $ionicSlideBoxDelegate.update();
+
+        }, 2000);
+    })
 
 
-.controller('ChatCtrl', function($scope, $stateParams, $ionicScrollDelegate, FireBaseServices, $state, $location) {
+.controller('ChatCtrl', function ($scope, $stateParams, $ionicScrollDelegate, FireBaseServices, $state, $location) {
 
     $scope.formreturn = [];
-//    $('#txtSendTo').focus();
+    //    $('#txtSendTo').focus();
     if (FireBaseServices.checklogin()) {
         $state.go('app.chat');
     } else {
@@ -88,12 +88,12 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     // get logged in user stored in jstorage
     $scope.user = FireBaseServices.getuser();
 
-    $scope.convertform = function(val) {
+    $scope.convertform = function (val) {
         var fff = JSON.parse(val);
         fff.json = JSON.parse(fff.json);
         return fff;
     };
-    $scope.convertproduct = function(val) {
+    $scope.convertproduct = function (val) {
         return JSON.parse(val);
     };
     $scope.allchats = [];
@@ -101,7 +101,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     $scope.msg = '';
 
     $scope.data = [];
-    var formsavesuccess = function(data, status) {
+    var formsavesuccess = function (data, status) {
         $scope.check = false;
         $scope.data.message = $scope.formreturn;
 
@@ -112,21 +112,21 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
     // product place order
     //    $scope.form.productmsg = "";
-    var productsuccess = function(data, status) {
+    var productsuccess = function (data, status) {
         if (data == 1) {
             $scope.data.message = "Order Send";
             $scope.send($scope.data);
             //            $scope.form.productmsg = "Product Saved...We'll come back to you soon...";
         }
     };
-    $scope.placeorder = function(product) {
+    $scope.placeorder = function (product) {
         console.log("place order");
         $location.url('tab/placeorder/' + product.id);
         //        FireBaseServices.adduserproduct(product.id, $scope.user.id, JSON.stringify(product)).success(productsuccess);
     }
 
     // form div validation
-    $scope.submitt = function(val, message) {
+    $scope.submitt = function (val, message) {
         console.log("my form");
         $scope.formreturn = val;
         console.log(val);
@@ -157,16 +157,16 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     // get chat from databse on page load
 
 
-    var onnewchat = function() {
+    var onnewchat = function () {
         console.log("new Chat received");
-//        $ionicScrollDelegate.scrollBottom(true);
+        //        $ionicScrollDelegate.scrollBottom(true);
         $(".has-header").scrollTop(10000000000);
-//        $('#txtSendTo').focus();
+        //        $('#txtSendTo').focus();
     };
     $scope.online = "";
     $scope.line = "offline";
     $scope.useremail = FireBaseServices.getauthemail();
-    var onsergychange = function(data) {
+    var onsergychange = function (data) {
         $scope.lastseen = data;
         if (data.text == "on") {
             if (data.email == $scope.useremail) {
@@ -183,7 +183,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             $scope.$apply();
         }
     }
-    var chatsuccess = function(data, status) {
+    var chatsuccess = function (data, status) {
         console.log(data);
         FireBaseServices.firbasecallonchange(onnewchat, onsergychange);
         //        $scope.allchats = [];
@@ -198,13 +198,13 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
         FireBaseServices.changecallback(changeevent);
         $scope.allchats = FireBaseServices.getchats();
-//        $('#txtSendTo').focus();
+        //        $('#txtSendTo').focus();
         console.log("getchatbyuser.......................////////////");
         console.log($scope.allchats);
 
 
         //        ud = data.queryresult[0].userid;
-//        $ionicScrollDelegate.scrollBottom(true);
+        //        $ionicScrollDelegate.scrollBottom(true);
         $(".has-header").scrollTop(10000000000);
     };
     if ($scope.userdata != null) {
@@ -213,8 +213,8 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     //    if($scope.check == 1)
     //    {
     $scope.allchats = FireBaseServices.getchats();
-//    $('#txtSendTo').focus();
-//    $ionicScrollDelegate.scrollBottom(true);
+    //    $('#txtSendTo').focus();
+    //    $ionicScrollDelegate.scrollBottom(true);
     $(".has-header").scrollTop(10000000000);
     //    }
     //    $scope.allchats.push({email: "jagruti@wohlig.com", name: "simplelogin:1", text: "hey whats up", timestamp: 1418016362961});
@@ -225,14 +225,14 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
         //        $scope.allchats = FireBaseServices.getchats();
         console.log($scope.allchats);
-//        $('#txtSendTo').focus();
+        //        $('#txtSendTo').focus();
 
     }
 
     $scope.allvalidation1 = [];
     $scope.showsend = false;
 
-    $scope.checksend = function() {
+    $scope.checksend = function () {
         console.log("chekc check");
         if ($scope.chat.message) {
             $scope.showsend = true;
@@ -241,7 +241,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
         }
     }
 
-    $scope.send = function(chat, type) {
+    $scope.send = function (chat, type) {
 
         console.log("type of messsage");
         console.log(type);
@@ -251,9 +251,9 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             chat.message = "";
 
             // Update the scroll area
-//            $ionicScrollDelegate.scrollBottom(true);
+            //            $ionicScrollDelegate.scrollBottom(true);
             $(".has-header").scrollTop(10000000000);
-//            $('#txtSendTo').focus();
+            //            $('#txtSendTo').focus();
         } else {
 
             console.log("not not not check");
@@ -264,23 +264,29 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
 
 })
-    .controller('TravelCtrl', function($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
+
+.controller('BlankCtrl', function ($scope, $location) {
+    $scope.gotochat = function () {
+        $location.url("app/chat");
+    };
+})
+    .controller('TravelCtrl', function ($scope, $ionicModal, FireBaseServices, $location) {
 
         //        DECLARATION
         $scope.orders = [];
-    
-//        GO TO CHAT PAGE FUNCTION
+
+        //        GO TO CHAT PAGE FUNCTION
         $scope.gotochat = function () {
-//            $state.go('app.chat');
+            //            $state.go('app.chat');
             $location.url('app/chat');
         }
-        
+
 
         //        GET USER FROM jStorage
         ud = $.jStorage.get("user").id;
 
         //        GET ALL ORDERS BY USER ID
-        var ordersuccess = function(data, status) {
+        var ordersuccess = function (data, status) {
             console.log(data.queryresult);
             $scope.orders = data.queryresult;
         };
@@ -288,33 +294,36 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
 
     })
-    .controller('PlaceOrderCtrl', function($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $stateParams, $state) {
+    .controller('PlaceOrderCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $stateParams, $state) {
 
         ud = $.jStorage.get("user").id;
-    
+        $scope.gotochat = function () {
+            //            $state.go('app.chat');
+            $location.url('app/chat');
+        }
         $scope.form = [];
-    
-//        autofill user data
-        
+
+        //        autofill user data
+
         var userdata = function (data, status) {
-            
+
             console.log(data);
-            
+
             $scope.form = data;
-            
+
         };
-    
+
         FireBaseServices.getlastorder(ud).success(userdata);
 
         //        getproduct by product id
-        var productssuccess = function(data, status) {
+        var productssuccess = function (data, status) {
             console.log(data);
             $scope.product = data.product;
         };
         FireBaseServices.getproductbycategoryid($stateParams.id).success(productssuccess);
 
         //        place order
-        var placeordersuccess = function(data, status) {
+        var placeordersuccess = function (data, status) {
             console.log(data);
             if (data == "1") {
                 $state.go('app.chat');
@@ -322,22 +331,23 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             }
         };
 
-        $scope.placeorder = function(form) {
+        $scope.placeorder = function (form) {
             console.log(form);
             form.user = ud;
             form.productid = $scope.product.id;
             FireBaseServices.placeorder(form).success(placeordersuccess);
         }
 
+
     })
-    .controller('LogoutCrtl', function($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $state) {
+    .controller('LogoutCrtl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $state) {
         if (FireBaseServices.checklogin()) {
             $location.url('app.chat');
         } else {
             $location.url('login');
         }
         $scope.loginData = [];
-        var logoutsuccess = function(data, status) {
+        var logoutsuccess = function (data, status) {
             $scope.allchats = FireBaseServices.getchats();
             console.log(allchats);
             console.log("chat after logout");
@@ -346,7 +356,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
         };
         FireBaseServices.logout(logoutsuccess);
     })
-    .controller('LoginCtrl', function($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $state) {
+    .controller('LoginCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $state) {
 
         $scope.loginData = [];
 
@@ -356,7 +366,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             $location.url('login');
         }
 
-        var loginsuccess = function(data, status) {
+        var loginsuccess = function (data, status) {
             //        console.log(data);
             ud = data;
             FireBaseServices.setuserid(data);
@@ -366,7 +376,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
         };
 
-        var onloginsuccess = function(error, authData) {
+        var onloginsuccess = function (error, authData) {
             console.log("on firebase login success");
             if (error) {
                 console.log("Error");
@@ -382,17 +392,17 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             }
 
         }
-        var normalloginsuccess = function(data, status) {
+        var normalloginsuccess = function (data, status) {
             console.log(data);
             $scope.modal.hide();
         };
-        var oncancel = function(error) {
+        var oncancel = function (error) {
             console.log("Error.......................................................");
             console.log(error);
         };
 
         //    normal login service.js/normallogin
-        $scope.normallogin = function(loginData) {
+        $scope.normallogin = function (loginData) {
             FireBaseServices.normallogin(loginData.username, loginData.password, onloginsuccess, oncancel);
             FireBaseServices.login(loginData.username, loginData.password).success(loginsuccess);
 
