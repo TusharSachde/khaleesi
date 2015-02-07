@@ -342,7 +342,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
         //        place order
         var placeordersuccess = function (data, status) {
             console.log(data);
-            $scope.chatmessage = "Your Order ID is "+data;
+            $scope.chatmessage = "Your Order has been placed.  Your Order ID is "+data;
             FireBaseServices.setmessage($scope.chatmessage,1);
 //            if (data == "1") {
                 $state.go('app.chat');
