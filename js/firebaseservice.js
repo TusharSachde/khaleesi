@@ -30,6 +30,9 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
     var newfun = function () {};
     var message = [];
     var authdetails = ref.getAuth();
+    var chatmessage = [];
+    chatmessage.message = '';
+    chatmessage.id = 0;
 
     var val = 0;
 
@@ -62,6 +65,13 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             console.log("chat in firebase");
             console.log(chats.length);
             return chats;
+        },
+        setmessage: function (data,id) {
+            chatmessage.message = data;
+            chatmessage.id = id;
+        },
+        getmessage: function () {
+            return chatmessage;
         },
         changecallback: function (newfunc) {
             onchangecallback = newfunc;
@@ -113,7 +123,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
         },
         getchatbyuser: function (email, newchat) {
             chats = [];
-            console.log("GET CHAT BY USER CALLED _____________________________________________________________________");
+            console.log("GET CHAT BY USER CALLED");
             $http({
                 url: adminurl + 'getchatbyuser',
                 method: "POST",
