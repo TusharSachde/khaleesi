@@ -76,6 +76,12 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 .controller('ChatCtrl', function ($scope, $stateParams, $ionicScrollDelegate, FireBaseServices, $state, $location) {
 
     $scope.formreturn = [];
+    
+    $scope.data = [];
+    console.log("Get messgae");
+    $scope.chatmessage=FireBaseServices.getmessage();
+    
+    
     //    $('#txtSendTo').focus();
     if (FireBaseServices.checklogin()) {
         $state.go('app.chat');
@@ -100,7 +106,6 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     $scope.allchats.json = [];
     $scope.msg = '';
 
-    $scope.data = [];
     var formsavesuccess = function (data, status) {
         $scope.check = false;
         $scope.data.message = $scope.formreturn;
@@ -201,7 +206,13 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
         //        $('#txtSendTo').focus();
         console.log("getchatbyuser.......................////////////");
         console.log($scope.allchats);
-
+        
+        if($scope.chatmessage.id!=0)
+    {
+        console.log($scope.chatmessage);
+        $scope.data.message = $scope.chatmessage.message;
+        $scope.send($scope.data, 1);
+    }
 
         //        ud = data.queryresult[0].userid;
         //        $ionicScrollDelegate.scrollBottom(true);
@@ -296,7 +307,11 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     })
     .controller('PlaceOrderCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $stateParams, $state) {
 
+        
         ud = $.jStorage.get("user").id;
+        
+        $scope.chatmessage = '';
+    
         $scope.gotochat = function () {
             //            $state.go('app.chat');
             $location.url('app/chat');
@@ -327,10 +342,12 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
         //        place order
         var placeordersuccess = function (data, status) {
             console.log(data);
-            if (data == "1") {
+            $scope.chatmessage = "Your Order ID is "+data;
+            FireBaseServices.setmessage($scope.chatmessage,1);
+//            if (data == "1") {
                 $state.go('app.chat');
                 $location.url('app/chat');
-            }
+//            }
         };
 
     
