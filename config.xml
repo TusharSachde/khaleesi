@@ -49,7 +49,7 @@
     <access origin="*" />
 
     <gap:plugin name="com.ionic.keyboard" />
-    <gap:plugin name="org.apache.cordova.statusbar"/>
+    <gap:plugin name="org.apache.cordova.statusbar" version="0.1.4" />
     <feature name="StatusBar">
         <param name="ios-package" value="CDVStatusBar" onload="true" />
     </feature>
