@@ -26,8 +26,8 @@
     <preference name="orientation" value="portrait" />
     <preference name="android-installLocation" value="internalOnly" />
     <preference name="ErrorUrl" value="" />
-    <preference name="BackgroundColor" value="0x000000" />
-    <preference name="ios-statusbarstyle" value="black-translucent" />
+    <preference name="BackgroundColor" value="#000000" />
+    <preference name="StatusBarStyle" value="default" />
     <preference name="KeepRunning" value="true" />
     <preference name="splash-screen-duration" value="3000" />
     <preference name="SplashScreen" value="screen" />
