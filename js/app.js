@@ -6,11 +6,19 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
 
-.run(function ($ionicPlatform) {
-    $ionicPlatform.ready(function () {
+.run(function($ionicPlatform) {
+
+    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    cordova.plugins.Keyboard.disableScroll(true);
+    cordova.plugins.Keyboard.shrinkView(true);
+    cordova.plugins.Keyboard.overlaysWebView(true);
+
+    $ionicPlatform.ready(function() {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         cordova.plugins.Keyboard.disableScroll(true);
         cordova.plugins.Keyboard.shrinkView(true);
+        cordova.plugins.Keyboard.overlaysWebView(true);
+
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -25,7 +33,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
     });
 })
 
-.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     $ionicConfigProvider.views.maxCache(0);
     //APP
     $stateProvider
@@ -140,15 +148,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
 })
 
 
-.filter('converttime', function (FireBaseServices) {
-    return function (input) {
+.filter('converttime', function(FireBaseServices) {
+    return function(input) {
         input = parseInt(input);
         var date = new Date(input);
         return date.toUTCString();
     };
 })
-    .filter('chatclass', function (FireBaseServices) {
-        return function (input) {
+    .filter('chatclass', function(FireBaseServices) {
+        return function(input) {
             useremail = FireBaseServices.getauthemail();
             if (input == "Sergy") {
                 return "them";
@@ -159,8 +167,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         };
     })
 
-.filter('imagepath', function () {
-    return function (input) {
+.filter('imagepath', function() {
+    return function(input) {
         if (input == "") {
             return "http://mafiawarloots.com/sergybackend/assets/img/default.jpg";
             //                return "http://localhost/sergybackend/assets/img/default.jpg";
@@ -171,15 +179,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
     };
 })
 
-.filter('chatt', function () {
-    return function (input) {
+.filter('chatt', function() {
+    return function(input) {
         var j = JSON.parse(input);
         console.log(j.form);
         return j.form;
     };
 })
 
-.directive("chat", function () {
+.directive("chat", function() {
     return {
         restrict: "E",
         replace: "true",
@@ -187,27 +195,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
     }
 })
 
-.directive('myRepeatDirective', function () {
-    return function (scope, element, attrs) {
+.directive('myRepeatDirective', function() {
+    return function(scope, element, attrs) {
         //angular.element(element).css('color','blue');
         if (scope.$last) {
             $('.has-header').animate({
                 scrollTop: $(".has-header div.chintan").height()
-            }, 'slow', function () {});
+            }, 'slow', function() {});
 
         }
     };
 });
 
-var formvalidation = function (allvalidation) {
-            var isvalid2 = true;
-            for (var i = 0; i < allvalidation.length; i++) {
-                console.log("checking");
-                console.log(allvalidation[i].field);
-                if (allvalidation[i].field == "" || !allvalidation[i].field) {
-                    allvalidation[i].validation = "ng-dirty";
-                    isvalid2 = false;
-                }
-            }
-            return isvalid2;
-        };
+var formvalidation = function(allvalidation) {
+    var isvalid2 = true;
+    for (var i = 0; i < allvalidation.length; i++) {
+        console.log("checking");
+        console.log(allvalidation[i].field);
+        if (allvalidation[i].field == "" || !allvalidation[i].field) {
+            allvalidation[i].validation = "ng-dirty";
+            isvalid2 = false;
+        }
+    }
+    return isvalid2;
+};
