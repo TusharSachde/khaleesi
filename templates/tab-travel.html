@@ -1,24 +1,138 @@
-@@ -1,25 +1,19 @@
 <ion-view>
 
     <ion-nav-bar class="bar-stable">
         <ion-nav-buttons side="left">
-                    <button class="button button-icon icon ion-ios7-arrow-thin-left" nav-clear ui-sref="app.chat"></button>
-            
+            <button class="button button-icon icon ion-ios7-arrow-thin-left" nav-clear ui-sref="app.chat"></button>
+
         </ion-nav-buttons>
 
     </ion-nav-bar>
-    <ion-content>
-    <ion-list>
-    <ion-item class="item-thumbnail-left" ng-repeat="order in orders" href="#/tab/innotification/{{noti.id}}">
-        <img src="cover.jpg">
-        <h2>{{order.name}}</h2>
-        <h3>Address : </h3>
-        <h4>{{order.address1}},{{order.address2}}</h4>
 
-    </ion-item>
+    <div id="search-bar">
+        <div class="item item-input-inset">
+            <label class="item-input-wrapper" id="search-input">
+                <i class="icon ion-ios7-search placeholder-icon"></i>
+                <input type="text" placeholder="Search" ng-model="query" ng-change="search()">
+            </label>
+        </div>
+    </div>
 
-    </ion-list>
+    <div id="filter-tab">
+        <div class="row">
+            <div class="col active"><span>All Goods</span>
+            </div>
+            <div class="col"><span>Purchased</span>
+            </div>
+            <div class="col"><span>Requested</span>
+            </div>
+        </div>
+    </div>
+
+    <ion-content class="has-filter">
+        <!--
+        <ion-list>
+            <ion-item class="item-thumbnail-left" ng-repeat="order in orders" href="#/tab/innotification/{{noti.id}}">
+
+                <img src="cover.jpg">
+                <h2>{{order.name}}</h2>
+                <h3>Address : </h3>
+                <h4>{{order.address1}},{{order.address2}}</h4>
+
+            </ion-item>
+
+        </ion-list>
+-->
+
+        <ion-list>
+
+            <ion-item class="item-travel item-custom">
+                <div class="row">
+                    <div class="col col-33">
+                        <div class="row no-pad">
+                            <div class="col col-25 img-pad no-pad">
+                                <div class="flight">
+                                    <img src="img/j_air.png" alt="" class="full-image">
+                                </div>
+                                <div class="flight">
+                                    <img src="img/j_air.png" alt="" class="full-image">
+                                </div>
+                            </div>
+                            <div class="col no-pad">
+                                <div class="flight">
+                                    <h3>Jet Airways</h3>
+                                    <p>
+                                        Mon, 8th Dec'14
+                                        <br>10:55 - 02.30
+                                        <br>4h 3m | 1 Stop
+                                    </p>
+                                </div>
+                                <div class="flight">
+                                   <h3>Jet Airways</h3>
+                                    <p>
+                                        Mon, 8th Dec'14
+                                        <br>10:55 - 02.30
+                                        <br>4h 3m | 1 Stop
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h2>Mumbai to Lucknow (return)</h2>
+                        <p class="price">Rs. 37,500</p>
+                        <p class="greyish">Buying From <a href="href://www.amazon.com" target="_blank">Amazon.com</a>
+                        </p>
+                        <a href="" class="positive no-deco">View Details <i class="icon ion-ios7-plus-empty"></i></a>
+                        <a class="button button-block button-stable" href="#/tab/innotification/{{noti.id}}"><i class="icon ion-ios7-checkmark balanced small"></i> Purchased</a>
+                    </div>
+                </div>
+            </ion-item>
+            
+            <ion-item class="item-travel item-custom">
+                <div class="row">
+                    <div class="col col-33">
+                        <div class="row no-pad">
+                            <div class="col col-25 img-pad no-pad">
+                                <div class="flight">
+                                    <img src="img/j_air.png" alt="" class="full-image">
+                                </div>
+                                <div class="flight">
+                                    <img src="img/j_air.png" alt="" class="full-image">
+                                </div>
+                            </div>
+                            <div class="col no-pad">
+                                <div class="flight">
+                                    <h3>Jet Airways</h3>
+                                    <p>
+                                        Mon, 8th Dec'14
+                                        <br>10:55 - 02.30
+                                        <br>4h 3m | 1 Stop
+                                    </p>
+                                </div>
+                                <div class="flight">
+                                   <h3>Jet Airways</h3>
+                                    <p>
+                                        Mon, 8th Dec'14
+                                        <br>10:55 - 02.30
+                                        <br>4h 3m | 1 Stop
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h2>Mumbai to Lucknow (return)</h2>
+                        <p class="price">Rs. 37,500</p>
+                        <p class="greyish">Buying From <a href="href://www.amazon.com" target="_blank">Amazon.com</a>
+                        </p>
+                        <a href="" class="positive no-deco">View Details <i class="icon ion-ios7-plus-empty"></i></a>
+                        <a class="button button-block button-positive" href="#/tab/innotification/{{noti.id}}">Buy Now</a>
+                    </div>
+                </div>
+            </ion-item>
+
+
+        </ion-list>
     </ion-content>
 
 </ion-view>
