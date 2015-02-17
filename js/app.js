@@ -7,12 +7,6 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
 
 .run(function($ionicPlatform) {
-
-    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    cordova.plugins.Keyboard.disableScroll(true);
-    cordova.plugins.Keyboard.shrinkView(true);
-    cordova.plugins.Keyboard.overlaysWebView(true);
-
     $ionicPlatform.ready(function() {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         cordova.plugins.Keyboard.disableScroll(true);
