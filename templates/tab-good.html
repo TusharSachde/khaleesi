@@ -1,57 +1,55 @@
+<div id="search-bar">
+    <div class="item item-input-inset">
+        <label class="item-input-wrapper" id="search-input">
+            <i class="icon ion-ios7-search placeholder-icon"></i>
+            <input type="text" placeholder="Search" ng-model="query" ng-change="search()">
+        </label>
+    </div>
+</div>
 
-    
-    <div id="search-bar">
-        <div class="item item-input-inset">
-            <label class="item-input-wrapper" id="search-input">
-                <i class="icon ion-ios7-search placeholder-icon"></i>
-                <input type="text" placeholder="Search" ng-model="query" ng-change="search()">
-            </label>
+<div id="filter-tab">
+    <div class="row">
+        <div class="col active"><span>All Goods</span>
+        </div>
+        <div class="col"><span>Purchased</span>
+        </div>
+        <div class="col"><span>Requested</span>
         </div>
     </div>
+</div>
 
-    <div id="filter-tab">
-        <div class="row">
-            <div class="col active"><span>All Goods</span>
+<ion-content class="has-filter">
+
+    <ion-list>
+
+        <ion-item class="item-thumbnail-left item-good item-custom">
+            <div class="box-thumbnail">
+                <ion-slide-box>
+                    <ion-slide>
+                        <div class="slide-hold">
+                            <img src="img/iphone.jpg" class="full-height">
+                        </div>
+                    </ion-slide>
+                    <ion-slide>
+                        <div class="slide-hold">
+                            <img src="img/iphone.jpg" class="full-height">
+                        </div>
+                    </ion-slide>
+                </ion-slide-box>
             </div>
-            <div class="col"><span>Purchased</span>
-            </div>
-            <div class="col"><span>Requested</span>
-            </div>
-        </div>
-    </div>
 
-    <ion-content class="has-filter">
-
-        <ion-list>
-
-            <ion-item class="item-thumbnail-left item-good">
-                <div class="box-thumbnail">
-                    <ion-slide-box>
-                        <ion-slide>
-                            <div class="slide-hold">
-                                <img src="img/iphone.jpg" class="full-height">
-                            </div>
-                        </ion-slide>
-                        <ion-slide>
-                            <div class="slide-hold">
-                                <img src="img/iphone.jpg" class="full-height">
-                            </div>
-                        </ion-slide>
-                    </ion-slide-box>
-                </div>
-
-                <h2>Apple iPhone 5S, Silver, 16 GB </h2>
-                <p class="price">Rs. 37,500</p>
-                <p class="greyish">Buying From <a href="href://www.amazon.com" target="_blank">Amazon.com</a>
-                </p>
-                <a href="" class="positive no-deco">View Details <i class="icon ion-ios7-plus-empty"></i></a>
-                <a class="button button-block button-positive" href="#/tab/good/buy">
+            <h2>Apple iPhone 5S, Silver, 16 GB </h2>
+            <p class="price">Rs. 37,500</p>
+            <p class="greyish">Buying From <a href="href://www.amazon.com" target="_blank">Amazon.com</a>
+            </p>
+            <a href="" class="positive no-deco">View Details <i class="icon ion-ios7-plus-empty"></i></a>
+            <a class="button button-block button-positive" href="#/tab/good/buy">
                     Buy Now
                 </a>
-            </ion-item>
-            
+        </ion-item>
 
-        </ion-list>
 
-    </ion-content>
+    </ion-list>
+
+</ion-content>
 
