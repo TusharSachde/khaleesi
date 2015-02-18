@@ -11,7 +11,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         //        cordova.plugins.Keyboard.disableScroll(true);
         //        cordova.plugins.Keyboard.shrinkView(true);
-        //        cordova.plugins.Keyboard.overlaysWebView(false);
+        //       
 
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -19,7 +19,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
         if (window.StatusBar) {
-            StatusBar.hide();
+            StatusBar.show();
+        }
+        if (device.platform === 'iOS' && parseFloat(device.version) >= 7.0) {
+            document.body.style.marginTop = "20px";
         }
     });
 })

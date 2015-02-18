@@ -30,7 +30,7 @@
     <preference name="android-minSdkVersion" value="7" />
     <preference name="target-device" value="universal" />
     <preference name="LoadUrlTimeoutValue" value="200000" />
-    <preference name="deployment-target" value="6.1" />
+    <preference name="deployment-target" value="7.0" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
@@ -44,7 +44,9 @@
     <access origin="*" />
 
     <gap:plugin name="com.ionic.keyboard" />
+    <gap:plugin name="org.apache.cordova.device"/>
     <gap:plugin name="com.phonegap.plugin.statusbar"/>
+    
     <feature name="StatusBar">
         <param name="ios-package" value="CDVStatusBar" onload="true" />
     </feature>
