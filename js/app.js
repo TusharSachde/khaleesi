@@ -8,10 +8,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
-        //        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         //        cordova.plugins.Keyboard.disableScroll(true);
         //        cordova.plugins.Keyboard.shrinkView(true);
-        cordova.plugins.Keyboard.overlaysWebView(false);
+        //        cordova.plugins.Keyboard.overlaysWebView(false);
 
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -19,6 +19,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
         if (window.StatusBar) {
+            StatusBar.hide();
         }
     });
 })
