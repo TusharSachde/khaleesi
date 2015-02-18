@@ -531,3 +531,6 @@ img.full-height {
 .button.button-stable {
     color: #666666;
 }
+.platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader)>* {
+     margin-top: 0px 
+}

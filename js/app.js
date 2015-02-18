@@ -21,9 +21,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         if (window.StatusBar) {
             StatusBar.show();
         }
-        if (device.platform === 'iOS' && parseFloat(device.version) >= 7.0) {
-            document.body.style.marginTop = "20px";
-        }
+        //        if (device.platform === 'iOS' && parseFloat(device.version) >= 7.0) {
+        //            document.body.style.marginTop = "0px";
+        //        }
     });
 })
 
