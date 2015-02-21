@@ -26,7 +26,7 @@
     <preference name="KeepRunning" value="true" />
     <preference name="splash-screen-duration" value="3000" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashScreenDelay" value="1000" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="target-device" value="universal" />
     <preference name="LoadUrlTimeoutValue" value="200000" />
