@@ -46,6 +46,40 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 })
 
 .controller('GoodCtrl', function ($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
+    
+    //DECLARATION
+    $scope.products = [];
+    $scope.blanksearch = '';
+    
+    //TAB CHANGE
+    $scope.tab = function(tab){
+        switch(tab)
+        {
+                case 1 : {
+                    $scope.allgoods = "active";
+                    $scope.purchasedgoods = "";
+                    $scope.requestedgoods = "";
+                    break;
+                }
+                case 2 : {
+                    $scope.allgoods = "";
+                    $scope.purchasedgoods = "active";
+                    $scope.requestedgoods = "";
+                    break;
+                }
+                case 3 : {
+                    $scope.allgoods = "";
+                    $scope.purchasedgoods = "";
+                    $scope.requestedgoods = "active";
+                    break;
+                }
+        }
+    }
+    
+    //GET USER JSTORAGE
+    $scope.user=FireBaseServices.getuser();
+    ud = $scope.user.id;
+    
     //SLIDE BOX
     $scope.nextSlide = function () {
         $ionicSlideBoxDelegate.next();
@@ -57,6 +91,24 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
         $ionicSlideBoxDelegate.update();
 
     }, 2000);
+    
+    
+    //NG-ACTIVE CLASS
+    $scope.allgoods = "active";
+    $scope.purchasedgoods = "";
+    $scope.requestedgoods = "";
+    
+    //API'S SUCCESS
+    var allgoodssuccess = function(data, status) {
+        console.log(data);
+        $scope.products = data.queryresult;
+    };
+    
+    // PRODUCT ORDER API
+    FireBaseServices.getordersbyuserid(ud,$scope.blanksearch).success(allgoodssuccess);
+    $scope.search = function (query) {
+        FireBaseServices.getordersbyuserid(ud,query).success(allgoodssuccess);
+    }
 })
     .controller('GoodbuyCtrl', function ($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
         //SLIDE BOX
