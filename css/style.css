@@ -572,3 +572,6 @@ input.form-control,
     background: 0 0;
     color: #3a3a3a;
 }
+.oncursor{
+    cursor: pointer;
+}

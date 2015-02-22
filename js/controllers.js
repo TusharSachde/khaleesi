@@ -50,6 +50,9 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     //DECLARATION
     $scope.products = [];
     $scope.blanksearch = '';
+    $scope.tabstate = 1;
+    $scope.pageno = 1;
+    $scope.totallength = 0;
     
     //TAB CHANGE
     $scope.tab = function(tab){
@@ -59,18 +62,24 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
                     $scope.allgoods = "active";
                     $scope.purchasedgoods = "";
                     $scope.requestedgoods = "";
+                    $scope.tabstate = 1;
+                    FireBaseServices.getordersbyuserid(ud,$scope.blanksearch,$scope.pageno).success(allgoodssuccess);
                     break;
                 }
                 case 2 : {
                     $scope.allgoods = "";
                     $scope.purchasedgoods = "active";
                     $scope.requestedgoods = "";
+                    $scope.tabstate = 2;
+                    FireBaseServices.getordersbyuserid(ud,$scope.blanksearch,$scope.pageno).success(allgoodssuccess);
                     break;
                 }
                 case 3 : {
                     $scope.allgoods = "";
                     $scope.purchasedgoods = "";
                     $scope.requestedgoods = "active";
+                    $scope.tabstate = 3;
+                    FireBaseServices.getordersbyuserid(ud,$scope.blanksearch,$scope.pageno).success(allgoodssuccess);
                     break;
                 }
         }
@@ -102,12 +111,34 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     var allgoodssuccess = function(data, status) {
         console.log(data);
         $scope.products = data.queryresult;
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+    };
+    var allgoodssuccesspush = function(data, status) {
+        console.log(data);
+        
+        for (var i = 0; i < data.queryresult.length; i++) {
+            $scope.products.push(data.queryresult[i]);
+        }
+        
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        
     };
     
     // PRODUCT ORDER API
-    FireBaseServices.getordersbyuserid(ud,$scope.blanksearch).success(allgoodssuccess);
+    FireBaseServices.getordersbyuserid(ud,$scope.blanksearch,$scope.pageno).success(allgoodssuccess);
     $scope.search = function (query) {
         FireBaseServices.getordersbyuserid(ud,query).success(allgoodssuccess);
+    }
+    
+    //LOAD MORE
+    $scope.loadMore = function () {
+        if($scope.products.length != $scope.totallength)
+        {
+            $scope.totallength = $scope.products.length;
+            $scope.pageno = $scope.pageno + 1;
+            FireBaseServices.getordersbyuserid(ud,$scope.blanksearch,$scope.pageno).success(allgoodssuccesspush);
+        }
+        
     }
 })
     .controller('GoodbuyCtrl', function ($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {

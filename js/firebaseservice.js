@@ -1,5 +1,5 @@
-var adminurl = "http://localhost/sergybackend/index.php/json/";
-//var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
+//var adminurl = "http://localhost/sergybackend/index.php/json/";
+var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', ['firebase'])
 
 .factory('FireBaseServices', function ($http, $location, $firebase) {
@@ -241,8 +241,8 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             authdetails = ref.getAuth();
             return authdetails;
         },
-        getordersbyuserid: function (id,search) {
-            return $http.get(adminurl + "getordersbyuserid?id=" + id + "&search=" + search, {});
+        getordersbyuserid: function (id,search,pageno) {
+            return $http.get(adminurl + "getordersbyuserid?id=" + id + "&search=" + search + "&pageno=" + pageno, {});
         },
         getproductbycategoryid: function (id) {
             return $http.get(adminurl + "getproductbyid?id=" + id, {});
