@@ -36,7 +36,7 @@
 }
 .messages li.them p {
     background: #eee;
-    color: #000;
+    color: #3a3a3a;
     max-width: 75%;
     width: auto;
     display: inline-block;
@@ -331,29 +331,30 @@ span.datetime {
     padding: 0px;
     height: 24px;
     position: relative;
+    background: transparent;
 }
 input.form-control.inform {
-    padding: 15px;
+    padding: 15px 0;
 }
 span.form-title {
-    padding: 0px 0px 6px;
+    padding: 0px 0px 0px;
     display: block;
-    margin: 13px 0px;
-    text-transform: CAPITALIZE;
-    font-size: 110%;
-    font-weight: 300;
-    color: #5F5F5F;
-    border-bottom: 1px solid #B5B5B5;
+    margin: 10px 0px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #3a3a3a;
+    border-bottom: 1px solid #3a3a3a;
 }
 span.form-info {
-    padding: 0px 0px 6px;
+    padding: 1px;
     display: block;
-    margin: 13px 0px;
-    text-transform: CAPITALIZE;
-    font-size: 110%;
-    font-weight: 200;
-    color: #5F5F5F;
-    border-bottom: 1px solid #B5B5B5;
+    margin: 5px 0px;
+    text-transform: capitalize;
+    font-size: 14px;
+    font-weight: 600;
+    color: #3A3A3A;
+    border-bottom: 1px solid #3A3A3A;
+    text-align: right;
 }
 span.assertive.inform {
     margin-bottom: 10px;
@@ -546,4 +547,28 @@ img.full-height {
 }
 .has-filter {
     top: 127px !important;
+}
+input.form-control,
+.item-select {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #aaa;
+    border-radius: 0;
+}
+.us span.form-title,
+.us span.form-info {
+    color: white;
+    border-bottom: 1px solid #FFFFFF;
+    font-weight: 600;
+    text-align: left;
+}
+.us button.button-positive.button-outline {
+    border-color: #FFFFFF;
+    background: 0 0;
+    color: #FFFFFF;
+}
+.them button.button-positive.button-outline {
+    border-color: #3a3a3a;
+    background: 0 0;
+    color: #3a3a3a;
 }

@@ -1,0 +1,87 @@
+<ion-view>
+    <ion-nav-title class="sergy-title">
+        <h5><i class="ion-record small" ng-class="line"></i>
+<!--        <i class="ion-record small offline" ng-if="!online"></i>-->
+         Sergy</h5>
+        <p>
+            <span ng-if="lastseen.text=='off'">OFFLINE - {{lastseen.timestamp|date:"h:mma"}}</span>
+            <span ng-if="lastseen.text=='on'">ONLINE</span>
+        </p>
+    </ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-ios7-drag"></button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+        <i class="icon1 i-order"></i>
+    </ion-nav-buttons>
+
+    <div class="padding scroll-content ionic-scroll  has-header has-footer" style="overflow-y: auto;">
+        <!--        <chat></chat>-->
+        <div class="chintan clearfix">
+            <ol class="messages">
+
+
+                <li class="them">
+                    <p>
+                        <span class="form-title">Form 1</span>
+                        <span class="assertive inform button-assertive">Message</span>
+                        <span>
+                    <input type="text" placeholder='Name' ng-model="form.val" class="form-control inform">
+                    <input type="password" placeholder="Password" ng-model="form.val"  class="form-control inform">
+                    <label class="item item-input item-select">
+                        <select  ng-model="form.val" class="form-control inform" >
+                                <option>Option1</option>
+                        </select>       
+                    </label>
+                    </span>
+                        <button class="button button-block button-positive button-small button-outline" ng-click="submitt(formm,message)">Submit</button>
+                        <span class="small-right">time</span>
+                    </p>
+                </li>
+
+                <!--            li for product-->
+                <li class="us">
+                    <p>
+                        <span class="form-title">Form Name</span>
+                        <span><img src="img/ionic.png" width="100"></span>
+                        <span class="form-info">Price</span>
+                        <span>Rs. 100</span>
+                        <span class="form-info">Details</span>
+                        <span>Details</span>
+                        <button class="button button-block button-positive button-small button-outline" ng-click="placeorder(form)">Place Order</button>
+                        <span class="small-right">{{message.timestamp|converttime}}</span>
+                    </p>
+                </li>
+                    <li class="them">
+                    <p>
+                        <span class="form-title">Form Name</span>
+                        <span><img src="img/ionic.png" width="100"></span>
+                        <span class="form-info">Price</span>
+                        <span>Rs. 100</span>
+                        <span class="form-info">Details</span>
+                        <span>Details</span>
+                        <button class="button button-block button-positive button-small button-outline" ng-click="placeorder(form)">Place Order</button>
+                        <span class="small-right">{{message.timestamp|converttime}}</span>
+                    </p>
+                </li>
+
+                <!--            li for Form Return-->
+                <li class="us">
+                    <p>
+                        <span class="form-title">Your Data Of LOL</span>
+                        <span>
+                        <span class="form-info">My Name is Lakhan</span>
+                        <span>Sajhno Ka Sajan</span>
+                        </span>
+                        <span class="small-right">12:00 PM</span>
+                    </p>
+                </li>
+
+            </ol>
+        </div>
+    </div>
+
+    </ion-content>
+</ion-view>
