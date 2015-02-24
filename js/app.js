@@ -22,13 +22,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-//    $ionicConfigProvider.views.maxCache(0);
+    //$ionicConfigProvider.views.maxCache(0);
     //APP
     $stateProvider
         .state('app', {
             url: "/app",
             abstract: true,
-            templateUrl: "templates/menu.html"
+            templateUrl: "templates/menu.html",
+            controller: 'MenuCtrl'
         })
         .state('app.chat', {
             url: "/chat",
@@ -57,13 +58,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
                 }
             }
         })
-    
-        .state('login', { //logins
-            url: "/login",
-            templateUrl: "templates/login.html",
-            controller: 'LoginCtrl'
 
-        })
+    .state('login', { //logins
+        url: "/login",
+        templateUrl: "templates/login.html",
+        controller: 'LoginCtrl'
+
+    })
         .state('logout', { //Logout
             url: "/logout",
             templateUrl: "templates/login.html",
@@ -177,10 +178,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
     return function(input) {
         if (input == "") {
             return "http://mafiawarloots.com/sergybackend/assets/img/default.jpg";
-//                            return "http://localhost/sergybackend/assets/img/default.jpg";
+            //                            return "http://localhost/sergybackend/assets/img/default.jpg";
         } else {
             return "http://mafiawarloots.com/sergybackend/uploads/" + input;
-//                        return "http://localhost/sergybackend/uploads/" + input;
+            //                        return "http://localhost/sergybackend/uploads/" + input;
         }
     };
 })
