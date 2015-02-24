@@ -1,55 +1,66 @@
-<div id="search-bar">
-    <div class="item item-input-inset">
-        <label class="item-input-wrapper" id="search-input">
-            <i class="icon ion-ios7-search placeholder-icon"></i>
-            <input type="text" placeholder="Search" ng-model="query" ng-change="search(query)">
-        </label>
+<ion-view>
+    <ion-nav-title>
+        <i class="icon1 i-order"></i>
+    </ion-nav-title>
+    <ion-nav-bar class="bar-stable">
+        <ion-nav-buttons side="left">
+            <button class="button button-icon icon ion-ios7-arrow-thin-left" nav-clear ui-sref="app.chat"></button>
+        </ion-nav-buttons>
+
+    </ion-nav-bar>
+    <div id="search-bar">
+        <div class="item item-input-inset">
+            <label class="item-input-wrapper" id="search-input">
+                <i class="icon ion-ios7-search placeholder-icon"></i>
+                <input type="text" placeholder="Search" ng-model="query" ng-change="search(query)">
+            </label>
+        </div>
     </div>
-</div>
 
-<div id="filter-tab">
-    <div class="row">
-        <div class="col oncursor" ng-class="allgoods" ng-click="tab(1)"><span>All Goods</span>
-        </div>
-        <div class="col oncursor" ng-class="purchasedgoods" ng-click="tab(2)"><span>Purchased</span>
-        </div>
-        <div class="col oncursor" ng-class="requestedgoods" ng-click="tab(3)"><span>Requested</span>
-        </div>
-    </div>
-</div>
-
-<ion-content class="has-filter">
-
-    <ion-list>
-
-        <ion-item class="item-thumbnail-left item-good item-custom" ng-repeat="product in products">
-            <div class="box-thumbnail">
-                <ion-slide-box>
-                    <ion-slide>
-                        <div class="slide-hold">
-                            <img src="{{product.productimage | imagepath}}" class="full-height">
-                        </div>
-                    </ion-slide>
-                    <ion-slide>
-                        <div class="slide-hold">
-                            <img src="{{product.productimage | imagepath}}" class="full-height">
-                        </div>
-                    </ion-slide>
-                </ion-slide-box>
+    <div id="filter-tab">
+        <div class="row">
+            <div class="col oncursor" ng-class="allgoods" ng-click="tab(1)"><span>All Goods</span>
             </div>
+            <div class="col oncursor" ng-class="purchasedgoods" ng-click="tab(2)"><span>Purchased</span>
+            </div>
+            <div class="col oncursor" ng-class="requestedgoods" ng-click="tab(3)"><span>Requested</span>
+            </div>
+        </div>
+    </div>
 
-            <h2>{{product.productname}} </h2>
-            <p class="price">Rs. {{product.price}}</p>
-            <p class="greyish">Buying From <a href="{{product.url}}" target="_blank">{{product.url}}</a>
-            </p>
-            <a href="" class="positive no-deco">View Details <i class="icon ion-ios7-plus-empty"></i></a>
-            <a class="button button-block button-positive" href="#/tab/good/buy/{{product.id}}" ng-if="tabstate==1">
+    <ion-content class="has-filter">
+
+        <ion-list>
+
+            <ion-item class="item-thumbnail-left item-good item-custom" ng-repeat="product in products">
+                <div class="box-thumbnail">
+                    <ion-slide-box>
+                        <ion-slide>
+                            <div class="slide-hold">
+                                <img src="{{product.productimage | imagepath}}" class="full-height">
+                            </div>
+                        </ion-slide>
+                        <ion-slide>
+                            <div class="slide-hold">
+                                <img src="{{product.productimage | imagepath}}" class="full-height">
+                            </div>
+                        </ion-slide>
+                    </ion-slide-box>
+                </div>
+
+                <h2>{{product.productname}} </h2>
+                <p class="price">Rs. {{product.price}}</p>
+                <p class="greyish">Buying From <a href="{{product.url}}" target="_blank">{{product.url}}</a>
+                </p>
+                <a href="" class="positive no-deco">View Details <i class="icon ion-ios7-plus-empty"></i></a>
+                <a class="button button-block button-positive" href="#/tab/good/buy/{{product.id}}" ng-if="tabstate==1">
                     Buy Now
                 </a>
-        </ion-item>
-    </ion-list>
-    <ion-infinite-scroll icon="ion-loading-c" on-infinite="loadMore()">
-    </ion-infinite-scroll>
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll icon="ion-loading-c" on-infinite="loadMore()">
+        </ion-infinite-scroll>
 
-</ion-content>
+    </ion-content>
 
+</ion-view>
