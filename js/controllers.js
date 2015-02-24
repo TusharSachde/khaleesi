@@ -1,35 +1,42 @@
 var ud = "";
 var online = false;
 
-angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 'ngSanitize'])
-    .controller('AppCtrl', function($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
+angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 'ngSanitize', 'ngCordova'])
+.controller('MenuCtrl', function($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
+    //Share
+    $scope.share = function() {
+        window.plugins.socialsharing.share('Hey there ! I am using sergy.');
+    };
+})
 
-        $scope.demo = "demo";
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
+
+    $scope.demo = "demo";
+    $scope.loginlogout = "Login";
+    $scope.userdata = [];
+    $scope.logind = {};
+
+
+    console.log(FireBaseServices.getuser());
+    $scope.userdata = FireBaseServices.authenticate();
+
+    if ($scope.userdata == null) {
         $scope.loginlogout = "Login";
-        $scope.userdata = [];
-        $scope.logind = {};
-
-
-        console.log(FireBaseServices.getuser());
-        $scope.userdata = FireBaseServices.authenticate();
-
-        if ($scope.userdata == null) {
+    } else {
+        $scope.loginlogout = "Logout";
+    }
+    //
+    //        $scope.loginData = {};
+    //        $scope.registerdata = {};
+    //
+    //        // on logout 
+    $scope.logout = function() {
+        if (FireBaseServices.logout() == 1) {
             $scope.loginlogout = "Login";
-        } else {
-            $scope.loginlogout = "Logout";
         }
-        //
-        //        $scope.loginData = {};
-        //        $scope.registerdata = {};
-        //
-        //        // on logout 
-        $scope.logout = function() {
-            if (FireBaseServices.logout() == 1) {
-                $scope.loginlogout = "Login";
-            }
-        }
+    }
 
-    })
+})
 
 .controller('HotelCtrl', function($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
     //SLIDE BOX
@@ -139,7 +146,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     // PRODUCT ORDER API
     FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, $scope.pageno, 1).success(allgoodssuccess);
     $scope.search = function(query) {
-            FireBaseServices.getordersbyuserid(ud, query, '',$scope.tabstate).success(allgoodssuccess);
+        FireBaseServices.getordersbyuserid(ud, query, '', $scope.tabstate).success(allgoodssuccess);
     }
 
     //LOAD MORE
@@ -155,17 +162,17 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     }
 })
     .controller('GoodbuyCtrl', function($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
-    
+
         //DECLARATION
         $scope.product = [];
-    
+
         //GET SINGLE PRODUCT DETAILS
-        var productsuccess = function (data, status) {
+        var productsuccess = function(data, status) {
             $scope.product = data.product;
         }
-    
+
         FireBaseServices.getproductbyid($stateParams.id).success(productsuccess);
-    
+
         //SLIDE BOX
         $scope.nextSlide = function() {
             $ionicSlideBoxDelegate.next();
