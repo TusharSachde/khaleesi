@@ -588,3 +588,9 @@ input.form-control,
     box-shadow: none;
     color: #fff;
 }
+.item-select select {
+    top: 1px;
+}
+.text-justify {
+    text-align: justify;
+}
