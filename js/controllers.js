@@ -53,6 +53,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     $scope.tabstate = 1;
     $scope.pageno = 1;
     $scope.totallength = 0;
+    $scope.query = '';
 
     //TAB CHANGE
     $scope.tab = function(tab) {
@@ -63,7 +64,9 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
                     $scope.purchasedgoods = "";
                     $scope.requestedgoods = "";
                     $scope.tabstate = 1;
-                    FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, $scope.pageno).success(allgoodssuccess);
+                    $scope.query = '';
+                    $scope.pageno = 1;
+                    FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, 1, $scope.tabstate).success(allgoodssuccess);
                     break;
                 }
             case 2:
@@ -72,7 +75,9 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
                     $scope.purchasedgoods = "active";
                     $scope.requestedgoods = "";
                     $scope.tabstate = 2;
-                    FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, $scope.pageno).success(allgoodssuccess);
+                    $scope.query = '';
+                    $scope.pageno = 1;
+                    FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, 1, $scope.tabstate).success(allgoodssuccess);
                     break;
                 }
             case 3:
@@ -81,7 +86,9 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
                     $scope.purchasedgoods = "";
                     $scope.requestedgoods = "active";
                     $scope.tabstate = 3;
-                    FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, $scope.pageno).success(allgoodssuccess);
+                    $scope.query = '';
+                    $scope.pageno = 1;
+                    FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, 1, $scope.tabstate).success(allgoodssuccess);
                     break;
                 }
         }
@@ -112,8 +119,10 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     //API'S SUCCESS
     var allgoodssuccess = function(data, status) {
         console.log(data);
+        $scope.products = [];
         $scope.products = data.queryresult;
         $scope.$broadcast('scroll.infiniteScrollComplete');
+        $scope.$apply();
     };
     var allgoodssuccesspush = function(data, status) {
         console.log(data);
@@ -123,21 +132,24 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
         }
 
         $scope.$broadcast('scroll.infiniteScrollComplete');
+        $scope.$apply();
 
     };
 
     // PRODUCT ORDER API
-    FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, $scope.pageno).success(allgoodssuccess);
+    FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, $scope.pageno, 1).success(allgoodssuccess);
     $scope.search = function(query) {
-        FireBaseServices.getordersbyuserid(ud, query).success(allgoodssuccess);
+            FireBaseServices.getordersbyuserid(ud, query, '',$scope.tabstate).success(allgoodssuccess);
     }
 
     //LOAD MORE
     $scope.loadMore = function() {
         if ($scope.products.length != $scope.totallength) {
+            console.log("query search");
+            console.log($scope.query);
             $scope.totallength = $scope.products.length;
             $scope.pageno = $scope.pageno + 1;
-            FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, $scope.pageno).success(allgoodssuccesspush);
+            FireBaseServices.getordersbyuserid(ud, $scope.query, $scope.pageno, $scope.tabstate).success(allgoodssuccesspush);
         }
 
     }
