@@ -415,17 +415,61 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
 
     })
-    .controller('Billing', function($scope, $ionicModal, FireBaseServices, $location) {
+    .controller('BillingCtrl', function($scope, $ionicModal, FireBaseServices, $location) {
 
         //        DECLARATION
         $scope.orders = [];
 
-        //        GO TO CHAT PAGE FUNCTION
-        $scope.gotochat = function() {
-            //            $state.go('app.chat');
-            $location.url('app/chat');
-        }
+        //        GET USER FROM jStorage
+        ud = $.jStorage.get("user").id;
 
+        //        GET ALL ORDERS BY USER ID
+        var ordersuccess = function(data, status) {
+            console.log(data.queryresult);
+            $scope.orders = data.queryresult;
+        };
+        FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
+
+
+    })
+    .controller('FaqCtrl', function($scope, $ionicModal, FireBaseServices, $location) {
+
+        //        DECLARATION
+        $scope.orders = [];
+
+        //        GET USER FROM jStorage
+        ud = $.jStorage.get("user").id;
+
+        //        GET ALL ORDERS BY USER ID
+        var ordersuccess = function(data, status) {
+            console.log(data.queryresult);
+            $scope.orders = data.queryresult;
+        };
+        FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
+
+
+    })
+    .controller('ShippingCtrl', function($scope, $ionicModal, FireBaseServices, $location) {
+
+        //        DECLARATION
+        $scope.orders = [];
+
+        //        GET USER FROM jStorage
+        ud = $.jStorage.get("user").id;
+
+        //        GET ALL ORDERS BY USER ID
+        var ordersuccess = function(data, status) {
+            console.log(data.queryresult);
+            $scope.orders = data.queryresult;
+        };
+        FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
+
+
+    })
+    .controller('SettingCtrl', function($scope, $ionicModal, FireBaseServices, $location) {
+
+        //        DECLARATION
+        $scope.orders = [];
 
         //        GET USER FROM jStorage
         ud = $.jStorage.get("user").id;

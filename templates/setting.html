@@ -1,0 +1,24 @@
+<ion-view title="Settings">
+
+    <ion-nav-bar class="bar-stable">
+        <ion-nav-buttons side="left">
+            <button class="button button-icon icon ion-ios7-arrow-thin-left" nav-clear ui-sref="app.chat"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <ion-content class="has-header">
+        <form ng-submit="">
+            <div class="list">
+                <label class="item item-input">
+                    <input type="Email" placeholder="Email">
+                </label>
+                <label class="item item-input">
+                    <input type="password" placeholder="Password">
+                </label>
+            </div>
+            <div class="padding">
+                <button class="button button-positive button-block" type="submit">Update</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>
