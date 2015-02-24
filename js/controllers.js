@@ -155,6 +155,17 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     }
 })
     .controller('GoodbuyCtrl', function($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
+    
+        //DECLARATION
+        $scope.product = [];
+    
+        //GET SINGLE PRODUCT DETAILS
+        var productsuccess = function (data, status) {
+            $scope.product = data.product;
+        }
+    
+        FireBaseServices.getproductbyid($stateParams.id).success(productsuccess);
+    
         //SLIDE BOX
         $scope.nextSlide = function() {
             $ionicSlideBoxDelegate.next();
@@ -374,6 +385,30 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     };
 })
     .controller('TravelCtrl', function($scope, $ionicModal, FireBaseServices, $location) {
+
+        //        DECLARATION
+        $scope.orders = [];
+
+        //        GO TO CHAT PAGE FUNCTION
+        $scope.gotochat = function() {
+            //            $state.go('app.chat');
+            $location.url('app/chat');
+        }
+
+
+        //        GET USER FROM jStorage
+        ud = $.jStorage.get("user").id;
+
+        //        GET ALL ORDERS BY USER ID
+        var ordersuccess = function(data, status) {
+            console.log(data.queryresult);
+            $scope.orders = data.queryresult;
+        };
+        FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
+
+
+    })
+    .controller('Billing', function($scope, $ionicModal, FireBaseServices, $location) {
 
         //        DECLARATION
         $scope.orders = [];

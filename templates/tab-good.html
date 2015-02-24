@@ -43,7 +43,7 @@
             <p class="greyish">Buying From <a href="{{product.url}}" target="_blank">{{product.url}}</a>
             </p>
             <a href="" class="positive no-deco">View Details <i class="icon ion-ios7-plus-empty"></i></a>
-            <a class="button button-block button-positive" href="#/tab/good/buy">
+            <a class="button button-block button-positive" href="#/tab/good/buy/{{product.id}}" ng-if="tabstate==1">
                     Buy Now
                 </a>
         </ion-item>

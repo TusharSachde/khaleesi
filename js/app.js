@@ -39,6 +39,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
                 }
             }
         })
+        .state('app.billing', {
+            url: "/billing",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/billing.html",
+                    controller: 'Billing'
+                }
+            }
+        })
         .state('app.placeorder', {
             url: '/chat/placeorder/:id',
             views: {
@@ -102,7 +111,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
             }
         })
         .state('tab.goodbuy', {
-            url: '/good/buy',
+            url: '/good/buy/:id',
             views: {
                 'tab-good': {
                     templateUrl: "templates/buy-good.html",
@@ -112,7 +121,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         })
 
     .state('tab.placeordergood', {
-        url: '/good/buy/placeorder',
+        url: '/good/buy/placeorder/:id',
         views: {
             'tab-good': {
                 templateUrl: "templates/placeorder.html",
