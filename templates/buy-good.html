@@ -6,22 +6,22 @@
                     <ion-slide-box>
                         <ion-slide>
                             <div class="slide-hold">
-                                <img src="img/iphone.jpg" class="full-height">
+                                <img src="{{product.image | imagepath}}" class="full-height">
                             </div>
                         </ion-slide>
                         <ion-slide>
                             <div class="slide-hold">
-                                <img src="img/iphone.jpg" class="full-height">
+                                <img src="{{product.image | imagepath}}" class="full-height">
                             </div>
                         </ion-slide>
                     </ion-slide-box>
                 </div>
                 <div class="padding-top"></div>
-                <h3>Apple iPhone 5S, Silver, 16 GB </h3>
-                <p class="price">Rs. 37,500</p>
-                <p class="greyish">Buying From <a href="href://www.amazon.com" target="_blank">Amazon.com</a>
+                <h3>{{product.name}} </h3>
+                <p class="price">Rs. {{product.price}}</p>
+                <p class="greyish">Buying From <a href="{{product.url}}" target="_blank">{{product.url}}</a>
                 </p>
-                <a class="button button-block button-positive" href="#/tab/good/buy/placeorder">
+                <a class="button button-block button-positive" href="#/tab/good/buy/placeorder/{{product.id}}">
                     Buy Now
                 </a>
            

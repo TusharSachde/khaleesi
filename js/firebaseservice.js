@@ -12,17 +12,12 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
     //
     //    db.transaction(function (tx) {
     //        tx.executeSql('CREATE TABLE IF NOT EXISTS chatmessages (id INTEGER PRIMARY KEY, chat,user,timestamp,type,url,imageurl,status,json)');
-    //        
-    //         
-    //
-    //        
-    //        //        tx.executeSql('INSERT INTO BETS (id, book,favorite,backlay,stake,odds) VALUES (1,1,2,2,0.3,100)');
-    //
-    //        //            tx.executeSql('SELECT last_insert_rowid()',callback);
-    //        //            getlast();
-    //        //            tx.executeSql('SELECT last_insert_rowid()', [], function (tx, results) {
-    //        //                console.log(results.rows.item(0));
-    //        //                });
+    //        tx.executeSql('INSERT INTO BETS (id, book,favorite,backlay,stake,odds) VALUES (1,1,2,2,0.3,100)');
+    //            tx.executeSql('SELECT last_insert_rowid()',callback);
+    //            getlast();
+    //            tx.executeSql('SELECT last_insert_rowid()', [], function (tx, results) {
+    //                console.log(results.rows.item(0));
+    //                });
     //    });
     var ref = new Firebase("https://blinding-heat-5568.firebaseio.com/");
     var chats = [];
@@ -66,7 +61,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             console.log(chats.length);
             return chats;
         },
-        setmessage: function (data,id) {
+        setmessage: function (data, id) {
             chatmessage.message = data;
             chatmessage.id = id;
         },
@@ -241,8 +236,11 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             authdetails = ref.getAuth();
             return authdetails;
         },
-        getordersbyuserid: function (id,search,pageno) {
-            return $http.get(adminurl + "getordersbyuserid?id=" + id + "&search=" + search + "&pageno=" + pageno, {});
+        getordersbyuserid: function (id, search, pageno, status) {
+            return $http.get(adminurl + "getordersbyuserid?id=" + id + "&search=" + search + "&pageno=" + pageno + "&status=" + status, {});
+        },
+        getproductbyid: function (id) {
+            return $http.get(adminurl + "getproductbyid?id=" + id, {});
         },
         getproductbycategoryid: function (id) {
             return $http.get(adminurl + "getproductbyid?id=" + id, {});
@@ -257,8 +255,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             var obj = {};
             var timestamp = new Date();
 
-            if( type == 1 )
-            {
+            if (type == 1) {
                 obj[authdetails.uid] = {
                     name: name,
                     text: text,
@@ -279,12 +276,11 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                     timestamp: timestamp.getTime()
                 };
                 json1 = JSON.stringify(json1);
-                
+
             }
-            
-            if( type == 5)
-            {
-                
+
+            if (type == 5) {
+
                 obj[authdetails.uid] = {
                     name: name,
                     text: JSON.stringify(text),
@@ -307,7 +303,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                     type: type
                 };
                 json1 = JSON.stringify(json1);
-                
+
             }
 
             $http.get(adminurl + "addchat?json=" + json1 + "&user=" + id + "&type=1&url=&imageurl=&status=1", {});

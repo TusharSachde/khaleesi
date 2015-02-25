@@ -1,35 +1,42 @@
 var ud = "";
 var online = false;
 
-angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 'ngSanitize'])
-    .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
-
-        $scope.demo = "demo";
-        $scope.loginlogout = "Login";
-        $scope.userdata = [];
-        $scope.logind = {};
-
-
-        console.log(FireBaseServices.getuser());
-        $scope.userdata = FireBaseServices.authenticate();
-
-        if ($scope.userdata == null) {
-            $scope.loginlogout = "Login";
-        } else {
-            $scope.loginlogout = "Logout";
-        }
-        //
-        //        $scope.loginData = {};
-        //        $scope.registerdata = {};
-        //
-        //        // on logout 
-        $scope.logout = function () {
-            if (FireBaseServices.logout() == 1) {
-                $scope.loginlogout = "Login";
-            }
-        }
-
+angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 'ngSanitize', 'ngCordova'])
+    .controller('MenuCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
+        //Share
+        $scope.share = function () {
+            window.plugins.socialsharing.share('Hey there ! I am using sergy.');
+        };
     })
+
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location) {
+
+    $scope.demo = "demo";
+    $scope.loginlogout = "Login";
+    $scope.userdata = [];
+    $scope.logind = {};
+
+
+    console.log(FireBaseServices.getuser());
+    $scope.userdata = FireBaseServices.authenticate();
+
+    if ($scope.userdata == null) {
+        $scope.loginlogout = "Login";
+    } else {
+        $scope.loginlogout = "Logout";
+    }
+    //
+    //        $scope.loginData = {};
+    //        $scope.registerdata = {};
+    //
+    //        // on logout 
+    $scope.logout = function () {
+        if (FireBaseServices.logout() == 1) {
+            $scope.loginlogout = "Login";
+        }
+    }
+
+})
 
 .controller('HotelCtrl', function ($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
     //SLIDE BOX
@@ -53,6 +60,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     $scope.tabstate = 1;
     $scope.pageno = 1;
     $scope.totallength = 0;
+    $scope.query = '';
 
     //TAB CHANGE
     $scope.tab = function (tab) {
@@ -63,7 +71,9 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
                 $scope.purchasedgoods = "";
                 $scope.requestedgoods = "";
                 $scope.tabstate = 1;
-                FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, $scope.pageno).success(allgoodssuccess);
+                $scope.query = '';
+                $scope.pageno = 1;
+                FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, 1, $scope.tabstate).success(allgoodssuccess);
                 break;
             }
         case 2:
@@ -72,7 +82,9 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
                 $scope.purchasedgoods = "active";
                 $scope.requestedgoods = "";
                 $scope.tabstate = 2;
-                FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, $scope.pageno).success(allgoodssuccess);
+                $scope.query = '';
+                $scope.pageno = 1;
+                FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, 1, $scope.tabstate).success(allgoodssuccess);
                 break;
             }
         case 3:
@@ -81,7 +93,9 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
                 $scope.purchasedgoods = "";
                 $scope.requestedgoods = "active";
                 $scope.tabstate = 3;
-                FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, $scope.pageno).success(allgoodssuccess);
+                $scope.query = '';
+                $scope.pageno = 1;
+                FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, 1, $scope.tabstate).success(allgoodssuccess);
                 break;
             }
         }
@@ -112,8 +126,10 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     //API'S SUCCESS
     var allgoodssuccess = function (data, status) {
         console.log(data);
+        $scope.products = [];
         $scope.products = data.queryresult;
         $scope.$broadcast('scroll.infiniteScrollComplete');
+        $scope.$apply();
     };
     var allgoodssuccesspush = function (data, status) {
         console.log(data);
@@ -123,26 +139,40 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
         }
 
         $scope.$broadcast('scroll.infiniteScrollComplete');
+        $scope.$apply();
 
     };
 
     // PRODUCT ORDER API
-    FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, $scope.pageno).success(allgoodssuccess);
+    FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, $scope.pageno, 1).success(allgoodssuccess);
     $scope.search = function (query) {
-        FireBaseServices.getordersbyuserid(ud, query).success(allgoodssuccess);
+        FireBaseServices.getordersbyuserid(ud, query, '', $scope.tabstate).success(allgoodssuccess);
     }
 
     //LOAD MORE
     $scope.loadMore = function () {
         if ($scope.products.length != $scope.totallength) {
+            console.log("query search");
+            console.log($scope.query);
             $scope.totallength = $scope.products.length;
             $scope.pageno = $scope.pageno + 1;
-            FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, $scope.pageno).success(allgoodssuccesspush);
+            FireBaseServices.getordersbyuserid(ud, $scope.query, $scope.pageno, $scope.tabstate).success(allgoodssuccesspush);
         }
 
     }
 })
     .controller('GoodbuyCtrl', function ($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
+
+        //DECLARATION
+        $scope.product = [];
+
+        //GET SINGLE PRODUCT DETAILS
+        var productsuccess = function (data, status) {
+            $scope.product = data.product;
+        }
+
+        FireBaseServices.getproductbyid($stateParams.id).success(productsuccess);
+
         //SLIDE BOX
         $scope.nextSlide = function () {
             $ionicSlideBoxDelegate.next();
@@ -210,7 +240,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     };
     $scope.placeorder = function (product) {
         console.log("place order");
-        $location.url('tab/placeorder/' + product.id);
+        $location.url('app/chat/placeorder/' + product.id);
         //        FireBaseServices.adduserproduct(product.id, $scope.user.id, JSON.stringify(product)).success(productsuccess);
     }
 
@@ -249,9 +279,8 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     var onnewchat = function () {
         console.log("new Chat received");
         $ionicScrollDelegate.scrollBottom(true);
-        $scope.$apply();
-//                $(".has-header").scrollTop(10000000000);
-        //        $('#txtSendTo').focus();
+        //                $(".has-header").scrollTop(10000000000);
+//                $('#txtSendTo').focus();
     };
     $scope.online = "";
     $scope.line = "offline";
@@ -296,7 +325,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             $scope.send($scope.data, 1);
         }
         $ionicScrollDelegate.scrollBottom(true);
-                $(".has-header").scrollTop(10000000000);
+        //        $(".has-header").scrollTop(10000000000);
     };
     if ($scope.userdata != null) {
         FireBaseServices.getchatbyuser($scope.userdata.password.email, chatsuccess);
@@ -306,7 +335,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     $scope.allchats = FireBaseServices.getchats();
     //    $('#txtSendTo').focus();
     $ionicScrollDelegate.scrollBottom(true);
-        $(".has-header").scrollTop(10000000000);
+    //    $(".has-header").scrollTop(10000000000);
     //    }
     //    $scope.allchats.push({email: "jagruti@wohlig.com", name: "simplelogin:1", text: "hey whats up", timestamp: 1418016362961});
 
@@ -385,7 +414,75 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
 
     })
-    .controller('PlaceOrderCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $stateParams, $state) {
+    .controller('BillingCtrl', function ($scope, $ionicModal, FireBaseServices, $location) {
+
+        //        DECLARATION
+        $scope.orders = [];
+
+        //        GET USER FROM jStorage
+        ud = $.jStorage.get("user").id;
+
+        //        GET ALL ORDERS BY USER ID
+        var ordersuccess = function (data, status) {
+            console.log(data.queryresult);
+            $scope.orders = data.queryresult;
+        };
+        FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
+
+
+    })
+    .controller('FaqCtrl', function ($scope, $ionicModal, FireBaseServices, $location) {
+
+        //        DECLARATION
+        $scope.orders = [];
+
+        //        GET USER FROM jStorage
+        ud = $.jStorage.get("user").id;
+
+        //        GET ALL ORDERS BY USER ID
+        var ordersuccess = function (data, status) {
+            console.log(data.queryresult);
+            $scope.orders = data.queryresult;
+        };
+        FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
+
+
+    })
+    .controller('ShippingCtrl', function ($scope, $ionicModal, FireBaseServices, $location) {
+
+        //        DECLARATION
+        $scope.orders = [];
+
+        //        GET USER FROM jStorage
+        ud = $.jStorage.get("user").id;
+
+        //        GET ALL ORDERS BY USER ID
+        var ordersuccess = function (data, status) {
+            console.log(data.queryresult);
+            $scope.orders = data.queryresult;
+        };
+        FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
+
+
+    })
+    .controller('SettingCtrl', function ($scope, $ionicModal, FireBaseServices, $location) {
+
+        //        DECLARATION
+        $scope.orders = [];
+
+        //        GET USER FROM jStorage
+        ud = $.jStorage.get("user").id;
+
+        //        GET ALL ORDERS BY USER ID
+        var ordersuccess = function (data, status) {
+            console.log(data.queryresult);
+            $scope.orders = data.queryresult;
+        };
+        FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
+
+
+    })
+    .controller('PlaceOrderCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $stateParams, $state, $ionicNavBarDelegate) {
 
 
         ud = $.jStorage.get("user").id;
@@ -394,7 +491,9 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
         $scope.gotochat = function () {
             //            $state.go('app.chat');
-            $location.url('app/chat');
+            //            $location.url('app/chat');
+            //            $ionicNavBarDelegate.back();
+
         }
 
         $scope.form = [];
@@ -441,58 +540,58 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             $scope.allvalidation = [{
                 field: $scope.form.name,
                 validation: ""
-                }, {
+            }, {
                 field: $scope.form.address1,
                 validation: ""
-                }, {
+            }, {
                 field: $scope.form.address2,
                 validation: ""
-                }, {
+            }, {
                 field: $scope.form.city,
                 validation: ""
-                }, {
+            }, {
                 field: $scope.form.state,
                 validation: ""
-                }, {
+            }, {
                 field: $scope.form.pincode,
                 validation: ""
-                }, {
+            }, {
                 field: $scope.form.email,
                 validation: ""
-                }, {
+            }, {
                 field: $scope.form.contactno,
                 validation: ""
-                }, {
+            }, {
                 field: $scope.form.country,
                 validation: ""
-                }, {
+            }, {
                 field: $scope.form.shipaddress1,
                 validation: ""
-                }, {
+            }, {
                 field: $scope.form.shipaddress2,
                 validation: ""
-                }, {
+            }, {
                 field: $scope.form.shipcity,
                 validation: ""
-                }, {
+            }, {
                 field: $scope.form.shipstate,
                 validation: ""
-                }, {
+            }, {
                 field: $scope.form.shippingcode,
                 validation: ""
-                }, {
+            }, {
                 field: $scope.form.shipcountry,
                 validation: ""
-                }, {
+            }, {
                 field: $scope.form.trackingcode,
                 validation: ""
-                }, {
+            }, {
                 field: $scope.form.shippingcharge,
                 validation: ""
-                }, {
+            }, {
                 field: $scope.form.shippingmethod,
                 validation: ""
-                }];
+            }];
             var check = formvalidation($scope.allvalidation);
             console.log(check);
             if (check) {
@@ -514,7 +613,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
         $scope.loginData = [];
         var logoutsuccess = function (data, status) {
             $scope.allchats = FireBaseServices.getchats();
-            console.log(allchats);
+            //            console.log(allchats);
             console.log("chat after logout");
             console.log($scope.allchats);
             $location.url("login");
