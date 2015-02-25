@@ -45,50 +45,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
             views: {
                 'menuContent': {
                     templateUrl: "templates/billing.html",
-                    controller: 'BillingCtrl'
-                }
-            }
-        })
-        .state('app.shipping', {
-            url: "/shipping",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/shipping.html",
-                    controller: 'ShippingCtrl'
-                }
-            }
-        })
-        .state('app.setting', {
-            url: "/setting",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/setting.html",
-                    controller: 'SettingCtrl'
-                }
-            }
-        })
-        .state('app.privacy', {
-            url: "/privacy",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/privacy.html"
-                }
-            }
-        })
-        .state('app.faq', {
-            url: "/faq",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/faq.html",
-                    controller: 'FaqCtrl'
-                }
-            }
-        })
-        .state('app.tnc', {
-            url: "/tnc",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/tnc.html"
+                    controller: 'Billing'
                 }
             }
         })
