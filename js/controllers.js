@@ -73,6 +73,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
                 $scope.tabstate = 1;
                 $scope.query = '';
                 $scope.pageno = 1;
+                $scope.totallength = 0;
                 FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, 1, $scope.tabstate).success(allgoodssuccess);
                 break;
             }
@@ -84,6 +85,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
                 $scope.tabstate = 2;
                 $scope.query = '';
                 $scope.pageno = 1;
+                $scope.totallength = 0;
                 FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, 1, $scope.tabstate).success(allgoodssuccess);
                 break;
             }
@@ -95,6 +97,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
                 $scope.tabstate = 3;
                 $scope.query = '';
                 $scope.pageno = 1;
+                $scope.totallength = 0;
                 FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, 1, $scope.tabstate).success(allgoodssuccess);
                 break;
             }
@@ -128,8 +131,8 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
         console.log(data);
         $scope.products = [];
         $scope.products = data.queryresult;
-        $scope.$broadcast('scroll.infiniteScrollComplete');
-        $scope.$apply();
+//        $scope.$broadcast('scroll.infiniteScrollComplete');
+//        $scope.$apply();
     };
     var allgoodssuccesspush = function (data, status) {
         console.log(data);
@@ -139,7 +142,6 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
         }
 
         $scope.$broadcast('scroll.infiniteScrollComplete');
-        $scope.$apply();
 
     };
 
@@ -635,7 +637,8 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             ud = data;
             FireBaseServices.setuserid(data);
             ud = $.jStorage.get("user").id;
-            $location.url('app/chat');
+            $location.path('app/chat');
+            $scope.$apply();
             //$state.go('app.chat');
 
         };
