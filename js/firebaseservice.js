@@ -12,7 +12,12 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
     //
     //    db.transaction(function (tx) {
     //        tx.executeSql('CREATE TABLE IF NOT EXISTS chatmessages (id INTEGER PRIMARY KEY, chat,user,timestamp,type,url,imageurl,status,json)');
+    //        
+    //         
+    //
+    //        
     //        tx.executeSql('INSERT INTO BETS (id, book,favorite,backlay,stake,odds) VALUES (1,1,2,2,0.3,100)');
+
     //            tx.executeSql('SELECT last_insert_rowid()',callback);
     //            getlast();
     //            tx.executeSql('SELECT last_insert_rowid()', [], function (tx, results) {

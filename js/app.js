@@ -9,6 +9,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        //        cordova.plugins.Keyboard.disableScroll(true);
+        //        cordova.plugins.Keyboard.shrinkView(true);
+        //       
 
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -18,11 +21,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         if (window.StatusBar) {
             StatusBar.show();
         }
+        //        if (device.platform === 'iOS' && parseFloat(device.version) >= 7.0) {
+        //            document.body.style.marginTop = "0px";
+        //        }
     });
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-//    $ionicConfigProvider.views.maxCache(0);
+    $ionicConfigProvider.views.maxCache(0);
     //APP
     $stateProvider
         .state('app', {
@@ -39,16 +45,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
                 }
             }
         })
-        .state('app.placeorder', {
-            url: '/chat/placeorder/:id',
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/placeorder.html",
-                    controller: 'PlaceOrderCtrl'
-                }
-            }
-        })
-    
         .state('login', { //logins
             url: "/login",
             templateUrl: "templates/login.html",
