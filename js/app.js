@@ -59,6 +59,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         })
         .state('tab', { //tabs
             url: '/tab',
+            abstract: true,
             templateUrl: "templates/tabs.html"
         })
         .state('tab.travel', {

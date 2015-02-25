@@ -1,8 +1,8 @@
-//var adminurl = "http://localhost/sergybackend/index.php/json/";
-var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
+var adminurl = "http://localhost/sergybackend/index.php/json/";
+//var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', ['firebase'])
 
-.factory('FireBaseServices', function($http, $location, $firebase) {
+.factory('FireBaseServices', function ($http, $location, $firebase) {
 
 
     //     var db = openDatabase('Sergy', '1.0', 'Books Database', 2 * 1024 * 1024);
@@ -16,18 +16,18 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
     //         
     //
     //        
-    //        tx.executeSql('INSERT INTO BETS (id, book,favorite,backlay,stake,odds) VALUES (1,1,2,2,0.3,100)');
-
-    //            tx.executeSql('SELECT last_insert_rowid()',callback);
-    //            getlast();
-    //            tx.executeSql('SELECT last_insert_rowid()', [], function (tx, results) {
-    //                console.log(results.rows.item(0));
-    //                });
+    //        //        tx.executeSql('INSERT INTO BETS (id, book,favorite,backlay,stake,odds) VALUES (1,1,2,2,0.3,100)');
+    //
+    //        //            tx.executeSql('SELECT last_insert_rowid()',callback);
+    //        //            getlast();
+    //        //            tx.executeSql('SELECT last_insert_rowid()', [], function (tx, results) {
+    //        //                console.log(results.rows.item(0));
+    //        //                });
     //    });
     var ref = new Firebase("https://blinding-heat-5568.firebaseio.com/");
     var chats = [];
-    var onchangecallback = function() {};
-    var newfun = function() {};
+    var onchangecallback = function () {};
+    var newfun = function () {};
     var message = [];
     var authdetails = ref.getAuth();
     var chatmessage = [];
@@ -38,9 +38,9 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
 
 
     var returnval = {
-        firbasecallonchange: function(callback, callback1) {
+        firbasecallonchange: function (callback, callback1) {
             ref.child(authdetails.uid).off('value');
-            ref.child(authdetails.uid).on('value', function(snapshot) {
+            ref.child(authdetails.uid).on('value', function (snapshot) {
                 console.log("firbasecallonchange firbasecallonchange firbasecallonchange firbasecallonchange firbasecallonchange");
                 message = snapshot.val();
                 console.log(message);
@@ -54,44 +54,44 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                 callback();
                 onchangecallback(message);
             });
-            ref.child("sergy").on('value', function(snapshot) {
+            ref.child("sergy").on('value', function (snapshot) {
                 console.log("on sergy change");
 
                 callback1(snapshot.val());
 
             });
         },
-        getchats: function() {
+        getchats: function () {
             console.log("chat in firebase");
             console.log(chats.length);
             return chats;
         },
-        setmessage: function(data, id) {
+        setmessage: function (data,id) {
             chatmessage.message = data;
             chatmessage.id = id;
         },
-        getmessage: function() {
+        getmessage: function () {
             return chatmessage;
         },
-        changecallback: function(newfunc) {
+        changecallback: function (newfunc) {
             onchangecallback = newfunc;
             return true;
         },
-        getuseremail: function() {
+        getuseremail: function () {
             return useremail;
         },
 
-        getauthemail: function() {
+        getauthemail: function () {
             return authdetails.password.email;
         },
-        logout: function(callback) {
+        logout: function (callback) {
             ref.child(authdetails.uid).off('value');
             ref.unauth();
             $.jStorage.flush();
             chats = [];
             callback();
         },
-        checklogin: function() {
+        checklogin: function () {
             if ($.jStorage.get('user')) {
                 console.log("Loggedin");
                 return true;
@@ -100,7 +100,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                 return false;
             }
         },
-        setuserid: function(user) {
+        setuserid: function (user) {
 
             authdetails = ref.getAuth();
             var userdata = {
@@ -110,7 +110,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             };
             $.jStorage.set("user", userdata);
         },
-        normallogin: function(username, password, callback, oncancel) {
+        normallogin: function (username, password, callback, oncancel) {
             //    var auth = $firebaseAuth(ref);
             ref.authWithPassword({
                 email: username,
@@ -121,7 +121,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
 
 
         },
-        getchatbyuser: function(email, newchat) {
+        getchatbyuser: function (email, newchat) {
             chats = [];
             console.log("GET CHAT BY USER CALLED");
             $http({
@@ -130,7 +130,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                 data: {
                     'email': email
                 }
-            }).success(function(data, status) {
+            }).success(function (data, status) {
                 chats = [];
                 for (var i = 0; i < data.queryresult.length; i++) {
                     chats.push(JSON.parse(data.queryresult[i].json));
@@ -143,7 +143,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             });
 
         },
-        login: function(username, password) {
+        login: function (username, password) {
             //            return $http.get(adminurl + "login?email="+username+"&password="+password,{});
             return $http({
                 url: adminurl + 'login',
@@ -155,7 +155,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             });
 
         },
-        adduserform: function(formid, user, json) {
+        adduserform: function (formid, user, json) {
             //            return $http.get(adminurl + "login?email="+username+"&password="+password,{});
             return $http({
                 url: adminurl + 'adduserform',
@@ -168,7 +168,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             });
 
         },
-        placeorder: function(form) {
+        placeorder: function (form) {
             console.log(form);
             return $http({
                 url: adminurl + 'createfrontendorder',
@@ -198,7 +198,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             });
 
         },
-        adduserproduct: function(productid, user, json) {;
+        adduserproduct: function (productid, user, json) {;
             return $http({
                 url: adminurl + 'adduserproduct',
                 method: "POST",
@@ -210,7 +210,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             });
 
         },
-        adduser: function(name, username, password) {
+        adduser: function (name, username, password) {
             //            return $http.get(adminurl + "register?name="+name+"&email="+username+"&password="+password+"&socialid="+0+"&logintype=3&json=",{});
             return $http({
                 url: adminurl + 'register',
@@ -226,7 +226,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             });
 
         },
-        normalregister: function(username, password, callback) {
+        normalregister: function (username, password, callback) {
 
             // User to database `user`
             //            $http.get(adminurl + 'addchat?user=' + bigbagplan.user + '&category=' + bigbagplan.category, {});
@@ -237,27 +237,28 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             }, callback);
 
         },
-        authenticate: function() {
+        authenticate: function () {
             authdetails = ref.getAuth();
             return authdetails;
         },
-        getordersbyuserid: function(id, search, pageno) {
+        getordersbyuserid: function (id,search,pageno) {
             return $http.get(adminurl + "getordersbyuserid?id=" + id + "&search=" + search + "&pageno=" + pageno, {});
         },
-        getproductbycategoryid: function(id) {
+        getproductbycategoryid: function (id) {
             return $http.get(adminurl + "getproductbyid?id=" + id, {});
         },
-        getlastorder: function(id) {
+        getlastorder: function (id) {
             return $http.get(adminurl + "getlastorder?id=" + id, {});
         },
-        authenticate1: function() {
+        authenticate1: function () {
             return $http.get(adminurl + "authenticate", {});
         },
-        update: function(name, email, text, id, type, newfun) {
+        update: function (name, email, text, id, type, newfun) {
             var obj = {};
             var timestamp = new Date();
 
-            if (type == 1) {
+            if( type == 1 )
+            {
                 obj[authdetails.uid] = {
                     name: name,
                     text: text,
@@ -278,11 +279,12 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                     timestamp: timestamp.getTime()
                 };
                 json1 = JSON.stringify(json1);
-
+                
             }
-
-            if (type == 5) {
-
+            
+            if( type == 5)
+            {
+                
                 obj[authdetails.uid] = {
                     name: name,
                     text: JSON.stringify(text),
@@ -305,16 +307,16 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                     type: type
                 };
                 json1 = JSON.stringify(json1);
-
+                
             }
 
             $http.get(adminurl + "addchat?json=" + json1 + "&user=" + id + "&type=1&url=&imageurl=&status=1", {});
 
         },
-        setuser: function(userdata) {
+        setuser: function (userdata) {
 
         },
-        getuser: function() {
+        getuser: function () {
             return $.jStorage.get("user");
         }
     }
