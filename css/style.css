@@ -75,7 +75,6 @@
     width: 100%;
     background: #fff;
     padding: 0 5px;
-    margin-top: 5px;
 }
 .offline {
     color: #FF7373;
@@ -107,6 +106,7 @@
 .chat-bar input[type="submit"] {
     border: 0px;
     font-weight: 500;
+    padding: 12px 10px;
 }
 .title.icon {
     font-size: 33px;
