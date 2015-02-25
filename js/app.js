@@ -245,17 +245,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
     }
 })
 
-//.directive('myRepeatDirective', function() {
-//    return function(scope, element, attrs) {
-//        //angular.element(element).css('color','blue');
-//        if (scope.$last) {
-//            $('.has-header').animate({
-//                scrollTop: $(".has-header div.chintan").height()
-//            }, 'slow', function() {});
-//
-//        }
-//    };
-//});
+.directive('myRepeatDirective', function() {
+    return function(scope, element, attrs) {
+        //angular.element(element).css('color','blue');
+        if (scope.$last) {
+            $('.has-header').animate({
+                scrollTop: $(".has-header div.chintan").height()
+            }, 'slow', function() {});
+
+        }
+    };
+});
 
 var formvalidation = function(allvalidation) {
     var isvalid2 = true;
