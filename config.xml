@@ -44,24 +44,15 @@
     <access origin="*" />
 
     <gap:plugin name="com.ionic.keyboard" />
-    <gap:plugin name="org.apache.cordova.device" />
-    <gap:plugin name="com.phonegap.plugin.statusbar" />
-    <gap:plugin name="nl.x-services.plugins.socialsharing" />
-
-
+    <gap:plugin name="org.apache.cordova.device"/>
+    <gap:plugin name="com.phonegap.plugin.statusbar"/>
+    
     <feature name="StatusBar">
         <param name="ios-package" value="CDVStatusBar" onload="true" />
     </feature>
     <feature name="Keyboard">
         <param name="ios-package" value="IonicKeyboard" onload="true" />
     </feature>
-    <!-- for iOS -->
-    <feature name="SocialSharing">
-        <param name="ios-package" value="SocialSharing" />
-    </feature>
-    <!-- for Android (you will find one in res/xml) -->
-    <feature name="SocialSharing">
-        <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
-    </feature>
+
 
 </widget>
