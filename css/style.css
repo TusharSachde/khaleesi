@@ -52,8 +52,6 @@
 .bar.bar-white.bar-footer {
     background-color: white;
     border-color: #bfbfbf;
-    padding-top: 0;
-    padding-bottom: 0;
 }
 .bar.bar-stable {
     border-color: #bfbfbf;
@@ -106,7 +104,6 @@
 .chat-bar input[type="submit"] {
     border: 0px;
     font-weight: 500;
-    padding: 12px 10px;
 }
 .title.icon {
     font-size: 33px;
@@ -556,8 +553,6 @@ input.form-control,
     background: transparent;
     border: 0;
     border-bottom: 1px solid #aaa;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
     border-radius: 0;
 }
 .us span.form-title,
@@ -577,14 +572,6 @@ input.form-control,
     background: 0 0;
     color: #3a3a3a;
 }
-.oncursor {
+.oncursor{
     cursor: pointer;
-}
-.button.button-positive.button-outline.activated,
-.button.button-positive.button-outline.active {
-    background-color: #3a3a3a;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    color: #fff;
 }
