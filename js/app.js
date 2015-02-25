@@ -22,7 +22,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-    //$ionicConfigProvider.views.maxCache(0);
+//    $ionicConfigProvider.views.maxCache(0);
     //APP
     $stateProvider
         .state('app', {
@@ -32,9 +32,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
             controller: 'MenuCtrl'
         })
         .state('app.chat', {
+            
             url: "/chat",
             views: {
                 'menuContent': {
+                    cache: false,
                     templateUrl: "templates/chat.html",
                     controller: 'ChatCtrl'
                 }
@@ -103,12 +105,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         })
 
     .state('login', { //logins
+        cache: false,
         url: "/login",
         templateUrl: "templates/login.html",
         controller: 'LoginCtrl'
 
     })
         .state('logout', { //Logout
+            cache: false,
             url: "/logout",
             templateUrl: "templates/login.html",
             controller: 'LogoutCrtl'
