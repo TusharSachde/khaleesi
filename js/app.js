@@ -9,9 +9,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        //        cordova.plugins.Keyboard.disableScroll(true);
-        //        cordova.plugins.Keyboard.shrinkView(true);
-        //       
 
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -21,20 +18,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         if (window.StatusBar) {
             StatusBar.show();
         }
-        //        if (device.platform === 'iOS' && parseFloat(device.version) >= 7.0) {
-        //            document.body.style.marginTop = "0px";
-        //        }
     });
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-    $ionicConfigProvider.views.maxCache(0);
+    //$ionicConfigProvider.views.maxCache(0);
     //APP
     $stateProvider
         .state('app', {
             url: "/app",
             abstract: true,
-            templateUrl: "templates/menu.html"
+            templateUrl: "templates/menu.html",
+            controller: 'MenuCtrl'
         })
         .state('app.chat', {
             url: "/chat",
@@ -45,12 +40,74 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
                 }
             }
         })
-        .state('login', { //logins
-            url: "/login",
-            templateUrl: "templates/login.html",
-            controller: 'LoginCtrl'
-
+        .state('app.billing', {
+            url: "/billing",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/billing.html",
+                    controller: 'BillingCtrl'
+                }
+            }
         })
+        .state('app.shipping', {
+            url: "/shipping",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/shipping.html",
+                    controller: 'ShippingCtrl'
+                }
+            }
+        })
+        .state('app.setting', {
+            url: "/setting",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/setting.html",
+                    controller: 'SettingCtrl'
+                }
+            }
+        })
+        .state('app.privacy', {
+            url: "/privacy",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/privacy.html"
+                }
+            }
+        })
+        .state('app.faq', {
+            url: "/faq",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/faq.html",
+                    controller: 'FaqCtrl'
+                }
+            }
+        })
+        .state('app.tnc', {
+            url: "/tnc",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/tnc.html"
+                }
+            }
+        })
+        .state('app.placeorder', {
+            url: '/chat/placeorder/:id',
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/placeorder.html",
+                    controller: 'PlaceOrderCtrl'
+                }
+            }
+        })
+
+    .state('login', { //logins
+        url: "/login",
+        templateUrl: "templates/login.html",
+        controller: 'LoginCtrl'
+
+    })
         .state('logout', { //Logout
             url: "/logout",
             templateUrl: "templates/login.html",
@@ -59,7 +116,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         })
         .state('tab', { //tabs
             url: '/tab',
-            abstract: true,
             templateUrl: "templates/tabs.html"
         })
         .state('tab.travel', {
@@ -99,7 +155,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
             }
         })
         .state('tab.goodbuy', {
-            url: '/good/buy',
+            url: '/good/buy/:id',
             views: {
                 'tab-good': {
                     templateUrl: "templates/buy-good.html",
@@ -109,7 +165,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         })
 
     .state('tab.placeordergood', {
-        url: '/good/buy/placeorder',
+        url: '/good/buy/placeorder/:id',
         views: {
             'tab-good': {
                 templateUrl: "templates/placeorder.html",
@@ -165,10 +221,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
     return function(input) {
         if (input == "") {
             return "http://mafiawarloots.com/sergybackend/assets/img/default.jpg";
-            //                return "http://localhost/sergybackend/assets/img/default.jpg";
+            //                            return "http://localhost/sergybackend/assets/img/default.jpg";
         } else {
             return "http://mafiawarloots.com/sergybackend/uploads/" + input;
-            //            return "http://localhost/sergybackend/uploads/" + input;
+            //                        return "http://localhost/sergybackend/uploads/" + input;
         }
     };
 })
@@ -189,17 +245,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
     }
 })
 
-.directive('myRepeatDirective', function() {
-    return function(scope, element, attrs) {
-        //angular.element(element).css('color','blue');
-        if (scope.$last) {
-            $('.has-header').animate({
-                scrollTop: $(".has-header div.chintan").height()
-            }, 'slow', function() {});
-
-        }
-    };
-});
+//.directive('myRepeatDirective', function() {
+//    return function(scope, element, attrs) {
+//        //angular.element(element).css('color','blue');
+//        if (scope.$last) {
+//            $('.has-header').animate({
+//                scrollTop: $(".has-header div.chintan").height()
+//            }, 'slow', function() {});
+//
+//        }
+//    };
+//});
 
 var formvalidation = function(allvalidation) {
     var isvalid2 = true;
