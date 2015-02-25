@@ -17,26 +17,26 @@
         <i class="icon1 i-order" ui-sref="tab.travel"></i>
     </ion-nav-buttons>
 
-    <div class="padding scroll-content ionic-scroll has-footer" style="overflow-y: auto;">
-            <ol class="messages" ng-repeat="message in allchats|orderBy:'timestamp':false">
-                <li class="{{message.name|chatclass}}" ng-if="message.type!=3 && message.type!=4 && message.type!=5">
-                    <p>
-                        <span ng-bind-html="message.text | linky:'_blank'"></span>
-                        <br><span class="datetime">{{message.timestamp|date:"h:mma"}}</span>
-                    </p>
-                </li>
+    <ion-content class="has-footer has-header padding" has-bouncing="true">
+        <ol class="messages" ng-repeat="message in allchats|orderBy:'timestamp':false">
+            <li class="{{message.name|chatclass}}" ng-if="message.type!=3 && message.type!=4 && message.type!=5">
+                <p>
+                    <span ng-bind-html="message.text | linky:'_blank'"></span>
+                    <br><span class="datetime">{{message.timestamp|date:"h:mma"}}</span>
+                </p>
+            </li>
 
-                <!--            li for form-->
-                <li class="{{message.name|chatclass}}" ng-if="message.type==3">
+            <!--            li for form-->
+            <li class="{{message.name|chatclass}}" ng-if="message.type==3">
 
-                    <p ng-init="formm = convertform(message.text);">
+                <p ng-init="formm = convertform(message.text);">
 
-                        <!--                    {{formjson|json}}-->
-                        <span class="form-title">{{formm.name}}</span>
+                    <!--                    {{formjson|json}}-->
+                    <span class="form-title">{{formm.name}}</span>
 
-                        <span class="assertive inform button-assertive">{{msg}}</span>
+                    <span class="assertive inform button-assertive">{{msg}}</span>
 
-                        <span ng-repeat="form in formm.json">
+                    <span ng-repeat="form in formm.json">
                         
                     <input type="text" placeholder='{{form.placeholder}}' ng-model="form.val" class="form-control inform" ng-if="form.type=='text'">
                        
@@ -56,64 +56,60 @@
                     
                     </span>
 
-                        <button class="button button-block button-positive button-small button-outline" ng-click="submitt(formm,message)">Submit</button>
+                    <button class="button button-block button-positive button-small button-outline" ng-click="submitt(formm,message)">Submit</button>
 
-                        <span class="small-right">{{message.timestamp|converttime}}</span>
+                    <span class="small-right">{{message.timestamp|converttime}}</span>
 
-                    </p>
+                </p>
 
-                </li>
+            </li>
 
-                <!--            li for product-->
-                <li class="{{message.name|chatclass}}" ng-if="message.type==4">
+            <!--            li for product-->
+            <li class="{{message.name|chatclass}}" ng-if="message.type==4">
 
-                    <p ng-init="form=convertproduct(message.text);">
+                <p ng-init="form=convertproduct(message.text);">
 
-                        <span class="form-title">{{form.name}}</span>
+                    <span class="form-title">{{form.name}}</span>
 
-                        <span>
+                    <span>
                        <img src="{{form.image|imagepath}}" width="100">
                     </span>
 
-                        <span class="form-info">Price</span>
+                    <span class="form-info">Price</span>
 
-                        <span>{{form.price}}</span>
+                    <span>{{form.price}}</span>
 
-                        <span class="form-info">Details</span>
+                    <span class="form-info">Details</span>
 
-                        <span>{{form.details}}</span>
-                        <button class="button button-block button-positive button-small button-outline" ng-click="placeorder(form)">Place Order</button>
-                        <span class="small-right">{{message.timestamp|converttime}}</span>
-                    </p>
-                </li>
+                    <span>{{form.details}}</span>
+                    <button class="button button-block button-positive button-small button-outline" ng-click="placeorder(form)">Place Order</button>
+                    <span class="small-right">{{message.timestamp|converttime}}</span>
+                </p>
+            </li>
 
-                <!--            li for Form Return-->
-                <li class="{{message.name|chatclass}}" ng-if="message.type==5">
+            <!--            li for Form Return-->
+            <li class="{{message.name|chatclass}}" ng-if="message.type==5">
 
-                    <p ng-init="form=convertproduct(message.text);">
+                <p ng-init="form=convertproduct(message.text);">
 
-                        <span class="form-title">Your Data Of {{form.name}}</span>
+                    <span class="form-title">Your Data Of {{form.name}}</span>
 
-                        <span ng-repeat="formdata in form.json">
+                    <span ng-repeat="formdata in form.json">
                        
                         <span class="form-info">{{formdata.name}}</span>
 
-                        <span ng-if="formdata.val">{{formdata.val}}</span>
+                    <span ng-if="formdata.val">{{formdata.val}}</span>
 
-                        <span ng-if="!formdata.val">NA</span>
+                    <span ng-if="!formdata.val">NA</span>
 
-                        </span>
+                    </span>
 
-                        <br>
-
-                        <span class="small-right">{{message.timestamp|converttime}}</span>
-
-                    </p>
-
-                </li>
-
-            </ol>
-    </div>
+                    <br>
+                    <span class="small-right">{{message.timestamp|converttime}}</span>
+                </p>
+            </li>
+        </ol>
+    </ion-content>
     <ion-footer-bar class="bar-stable bar-white chat-bar">
         <form ng-submit="send(chat, 1)">
 
@@ -132,5 +128,5 @@
         </form>
     </ion-footer-bar>
 
-    </ion-content>
+
 </ion-view>
