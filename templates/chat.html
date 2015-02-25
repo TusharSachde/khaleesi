@@ -18,8 +18,6 @@
     </ion-nav-buttons>
 
     <div class="padding scroll-content ionic-scroll has-footer" style="overflow-y: auto;">
-        <!--        <chat></chat>-->
-        <div class="chintan clearfix">
             <ol class="messages" ng-repeat="message in allchats|orderBy:'timestamp':false">
                 <li class="{{message.name|chatclass}}" ng-if="message.type!=3 && message.type!=4 && message.type!=5">
                     <p>
@@ -115,7 +113,6 @@
                 </li>
 
             </ol>
-        </div>
     </div>
     <ion-footer-bar class="bar-stable bar-white chat-bar">
         <form ng-submit="send(chat, 1)">
