@@ -10,25 +10,32 @@
         <form ng-submit="">
             <div class="list">
                 <label class="item item-input">
-            <textarea placeholder="Billing Address 1*" ng-model="form.shipaddress1" ng-class="allvalidation[9].validation" required></textarea>
+            <textarea placeholder="Billing Address 1*" ng-model="billing.address1" ng-class="allvalidation[0].validation" required></textarea>
         </label>
         <label class="item item-input">
-            <textarea placeholder="Billing Address 2*" ng-model="form.shipaddress2" ng-class="allvalidation[10].validation" required></textarea>
+            <textarea placeholder="Billing Address 2*" ng-model="billing.address2" ng-class="allvalidation[1].validation" required></textarea>
         </label>
         <label class="item item-input">
-            <input type="text" placeholder="Billing City*" ng-model="form.shipcity" ng-class="allvalidation[11].validation" required>
+            <input type="text" placeholder="Billing City*" ng-model="billing.city" ng-class="allvalidation[2].validation" required>
         </label>
         <label class="item item-input">
-            <input type="tel" placeholder="Billing state*" ng-model="form.shipstate" ng-class="allvalidation[12].validation" required>
+            <input type="text" placeholder="Billing state*" ng-model="billing.state" ng-class="allvalidation[3].validation" required>
         </label>
         <label class="item item-input">
-            <input type="text" placeholder="Billing Code*" ng-model="form.shippingcode" ng-class="allvalidation[13].validation" required>
+            <input type="text" placeholder="Billing Code*" ng-model="billing.pincode" ng-class="allvalidation[4].validation" required>
+        </label>
+        
+        <label class="item item-input">
+            <input type="email" placeholder="Billing state*" ng-model="billing.email" ng-class="allvalidation[5].validation" required>
+        </label>
+        <label class="item item-input">
+            <input type="tel" placeholder="Billing state*" ng-model="billing.contactno" ng-class="allvalidation[6].validation" required>
         </label>
         <label class="item item-input item-select">
             <div class="input-label">
                 Country*
             </div>
-            <select ng-model="form.shipcountry" placeholder="Billing Country" ng-class="allvalidation[14].validation" required>
+            <select ng-model="billing.country" placeholder="Billing Country" ng-class="allvalidation[7].validation" required>
                 <option value="">Please Select</option>
                 <option value="Afganistan">Afghanistan</option>
                 <option value="Albania">Albania</option>
@@ -280,15 +287,8 @@
             </select>
         </label>
         <label class="item item-input">
-            <input type="text" placeholder="Tracking Code" ng-model="form.trackingcode" ng-class="allvalidation[15].validation" required>
+            <input type="text" placeholder="Tracking Code" ng-model="billing.trackingcode" ng-class="allvalidation[8].validation" required>
         </label>
-        <label class="item item-input">
-            <input type="text" placeholder="Billing Charge" ng-model="form.shippingcharge" ng-class="allvalidation[16].validation" required>
-        </label>
-        <label class="item item-input">
-            <input type="text" placeholder="Billing Method" ng-model="form.shippingmethod" ng-class="allvalidation[17].validation" required>
-        </label>
-
             </div>
             <div class="padding">
                 <button class="button button-positive button-block" type="submit">Update</button>

@@ -420,17 +420,17 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     .controller('BillingCtrl', function ($scope, $ionicModal, FireBaseServices, $location) {
 
         //        DECLARATION
-        $scope.orders = [];
+        $scope.billing = [];
 
         //        GET USER FROM jStorage
         ud = $.jStorage.get("user").id;
 
-        //        GET ALL ORDERS BY USER ID
-        var ordersuccess = function (data, status) {
-            console.log(data.queryresult);
-            $scope.orders = data.queryresult;
-        };
-        FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
+        //        GET USER DATA
+        var userdata = function (data, status) {
+            console.log(data);
+            $scope.billing = data.queryresult[0];
+        }
+        FireBaseServices.getuserbyuserid(ud).success(userdata);
 
 
     })
@@ -454,17 +454,17 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     .controller('ShippingCtrl', function ($scope, $ionicModal, FireBaseServices, $location) {
 
         //        DECLARATION
-        $scope.orders = [];
+        $scope.shipping = [];
 
         //        GET USER FROM jStorage
         ud = $.jStorage.get("user").id;
 
-        //        GET ALL ORDERS BY USER ID
-        var ordersuccess = function (data, status) {
-            console.log(data.queryresult);
-            $scope.orders = data.queryresult;
-        };
-        FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
+        //        GET USER DATA
+        var userdata = function (data, status) {
+            console.log(data);
+            $scope.shipping = data.queryresult[0];
+        }
+        FireBaseServices.getuserbyuserid(ud).success(userdata);
 
 
     })
