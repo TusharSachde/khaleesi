@@ -22,7 +22,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-    $ionicConfigProvider.views.maxCache(0);
+//    $ionicConfigProvider.views.maxCache(0);
     //APP
     $stateProvider
         .state('app', {
@@ -36,7 +36,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
             url: "/chat",
             views: {
                 'menuContent': {
-                    cache: false,
+//                    cache: false,
                     templateUrl: "templates/chat.html",
                     controller: 'ChatCtrl'
                 }

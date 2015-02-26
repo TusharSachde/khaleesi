@@ -82,7 +82,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
                 $scope.allgoods = "";
                 $scope.purchasedgoods = "active";
                 $scope.requestedgoods = "";
-                $scope.tabstate = 2;
+                $scope.tabstate = 3;
                 $scope.query = '';
                 $scope.pageno = 1;
                 $scope.totallength = 0;
@@ -94,7 +94,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
                 $scope.allgoods = "";
                 $scope.purchasedgoods = "";
                 $scope.requestedgoods = "active";
-                $scope.tabstate = 3;
+                $scope.tabstate = 2;
                 $scope.query = '';
                 $scope.pageno = 1;
                 $scope.totallength = 0;
@@ -131,7 +131,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
         console.log(data);
         $scope.products = [];
         $scope.products = data.queryresult;
-//        $scope.$broadcast('scroll.infiniteScrollComplete');
+        $scope.$broadcast('scroll.infiniteScrollComplete');
 //        $scope.$apply();
     };
     var allgoodssuccesspush = function (data, status) {
@@ -196,6 +196,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     $scope.data = [];
     console.log("Get messgae");
     $scope.chatmessage = FireBaseServices.getmessage();
+    console.log($scope.chatmessage);
 
 
     //    $('#txtSendTo').focus();
@@ -636,8 +637,8 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             //        console.log(data);
             ud = data;
             FireBaseServices.setuserid(data);
-//            ud = $.jStorage.get("user").id;
-            $location.url('app/chat');
+            ud = $.jStorage.get("user").id;
+            $location.path('app/chat');
             $scope.$apply();
             //$state.go('app.chat');
 
@@ -652,7 +653,6 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             }
             if (authData) {
                 console.log("Done");
-$scope.error = "on firebase.";
                 //                                FireBaseServices.firbasecallonchange();
                 FireBaseServices.login($scope.loginData.username, $scope.loginData.password).success(loginsuccess);
 
