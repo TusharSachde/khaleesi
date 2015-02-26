@@ -245,6 +245,9 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
         getproductbycategoryid: function (id) {
             return $http.get(adminurl + "getproductbyid?id=" + id, {});
         },
+        getuserbyuserid: function (id) {
+            return $http.get(adminurl + "getuserbyuserid?id=" + id, {});
+        },
         getlastorder: function (id) {
             return $http.get(adminurl + "getlastorder?id=" + id, {});
         },
