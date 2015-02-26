@@ -652,7 +652,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             }
             if (authData) {
                 console.log("Done");
-
+$scope.error = "on firebase.";
                 //                                FireBaseServices.firbasecallonchange();
                 FireBaseServices.login($scope.loginData.username, $scope.loginData.password).success(loginsuccess);
 
