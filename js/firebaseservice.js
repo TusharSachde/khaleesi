@@ -193,7 +193,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             });
 
         },
-        adduserproduct: function (productid, user, json) {;
+        adduserproduct: function (productid, user, json) {
             return $http({
                 url: adminurl + 'adduserproduct',
                 method: "POST",
@@ -201,6 +201,44 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                     'productid': productid,
                     'user': user,
                     'json': json
+                }
+            });
+
+        },
+        updateshippingdetails: function (user, shipping) {
+            return $http({
+                url: adminurl + 'updateshippingdetails',
+                method: "POST",
+                data: {
+                    'user': user,
+                    'shippingaddress1': shipping.shipaddress1,
+                    'shippingaddress2': shipping.shipaddress2,
+                    'shipcity': shipping.shipcity,
+                    'shipstate': shipping.shipstate,
+                    'shippingcode': shipping.shippingcode,
+                    'shipcountry': shipping.shipcountry,
+                    'trackingcode': shipping.trackingcode,
+                    'shippingcharge': shipping.shippingcharge,
+                    'shippingmethod': shipping.shippingmethod
+                }
+            });
+
+        },
+        updatebillingdetails: function (user, billing) {
+            return $http({
+                url: adminurl + 'updatebillingdetails',
+                method: "POST",
+                data: {
+                    'user': user,
+                    'address1': billing.address1,
+                    'address2': billing.address2,
+                    'city': billing.city,
+                    'state': billing.state,
+                    'pincode': billing.pincode,
+                    'email': billing.email,
+                    'contactno': billing.contactno,
+                    'country': billing.country,
+                    'trackingcode': billing.trackingcode
                 }
             });
 
