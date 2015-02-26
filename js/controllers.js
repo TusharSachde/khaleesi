@@ -636,8 +636,8 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             //        console.log(data);
             ud = data;
             FireBaseServices.setuserid(data);
-            ud = $.jStorage.get("user").id;
-            $location.path('app/chat');
+//            ud = $.jStorage.get("user").id;
+            $location.url('app/chat');
             $scope.$apply();
             //$state.go('app.chat');
 
