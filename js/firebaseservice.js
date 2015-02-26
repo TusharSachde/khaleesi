@@ -1,5 +1,5 @@
-//var adminurl = "http://localhost/sergybackend/index.php/json/";
-var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
+var adminurl = "http://localhost/sergybackend/index.php/json/";
+//var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', ['firebase'])
 
 .factory('FireBaseServices', function ($http, $location, $firebase) {
@@ -169,7 +169,6 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                 url: adminurl + 'createfrontendorder',
                 method: "POST",
                 data: {
-                    'name': form.name,
                     'user': form.user,
                     'address1': form.address1,
                     'address2': form.address2,

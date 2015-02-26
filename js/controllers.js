@@ -567,9 +567,6 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             console.log(form);
 
             $scope.allvalidation = [{
-                field: $scope.form.name,
-                validation: ""
-            }, {
                 field: $scope.form.address1,
                 validation: ""
             }, {

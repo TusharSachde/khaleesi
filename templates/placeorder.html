@@ -14,34 +14,31 @@
     <ion-content class="has-header">
         <div class="item item-divider">Customer Detail</div>
         <label class="item item-input">
-            <input type="text" placeholder="Order Name*" ng-model="form.name" ng-class="allvalidation[0].validation" required>
+            <textarea placeholder="Address 1*" ng-model="form.address1" ng-class="allvalidation[0].validation" required></textarea>
         </label>
         <label class="item item-input">
-            <textarea placeholder="Address 1*" ng-model="form.address1" ng-class="allvalidation[1].validation" required></textarea>
+            <textarea placeholder="Address 2" ng-model="form.address2" ng-class="allvalidation[1].validation" required></textarea>
         </label>
         <label class="item item-input">
-            <textarea placeholder="Address 2" ng-model="form.address2" ng-class="allvalidation[2].validation" required></textarea>
+            <input type="text" placeholder="City*" ng-model="form.city" ng-class="allvalidation[2].validation" required>
         </label>
         <label class="item item-input">
-            <input type="text" placeholder="City*" ng-model="form.city" ng-class="allvalidation[3].validation" required>
+            <input type="text" placeholder="State*" ng-model="form.state" ng-class="allvalidation[3].validation" required>
         </label>
         <label class="item item-input">
-            <input type="text" placeholder="State*" ng-model="form.state" ng-class="allvalidation[4].validation" required>
+            <input type="text" placeholder="Pincoe*" ng-model="form.pincode" ng-class="allvalidation[4].validation" required>
         </label>
         <label class="item item-input">
-            <input type="text" placeholder="Pincoe*" ng-model="form.pincode" ng-class="allvalidation[5].validation" required>
+            <input type="text" placeholder="Email*" ng-model="form.email" ng-class="allvalidation[5].validation" required>
         </label>
         <label class="item item-input">
-            <input type="text" placeholder="Email*" ng-model="form.email" ng-class="allvalidation[6].validation" required>
-        </label>
-        <label class="item item-input">
-            <input type="text" placeholder="Contact Number*" ng-model="form.contactno" ng-class="allvalidation[7].validation" required>
+            <input type="text" placeholder="Contact Number*" ng-model="form.contactno" ng-class="allvalidation[6].validation" required>
         </label>
         <label class="item item-input item-select">
             <div class="input-label">
                 Select Country*
             </div>
-            <select ng-model="form.country" placeholder="Country" ng-class="allvalidation[8].validation" required>
+            <select ng-model="form.country" placeholder="Country" ng-class="allvalidation[7].validation" required>
                 <option value="">Please Select</option>
                 <option value="Afganistan">Afghanistan</option>
                 <option value="Albania">Albania</option>
@@ -296,25 +293,25 @@
 
         <div class="item item-divider">Shipping Information</div>
         <label class="item item-input">
-            <textarea placeholder="Shipping Address 1*" ng-model="form.shipaddress1" ng-class="allvalidation[9].validation" required></textarea>
+            <textarea placeholder="Shipping Address 1*" ng-model="form.shipaddress1" ng-class="allvalidation[8].validation" required></textarea>
         </label>
         <label class="item item-input">
-            <textarea placeholder="Shipping Address 2*" ng-model="form.shipaddress2" ng-class="allvalidation[10].validation" required></textarea>
+            <textarea placeholder="Shipping Address 2*" ng-model="form.shipaddress2" ng-class="allvalidation[9].validation" required></textarea>
         </label>
         <label class="item item-input">
-            <input type="text" placeholder="Shipping City*" ng-model="form.shipcity" ng-class="allvalidation[11].validation" required>
+            <input type="text" placeholder="Shipping City*" ng-model="form.shipcity" ng-class="allvalidation[10].validation" required>
         </label>
         <label class="item item-input">
-            <input type="tel" placeholder="Shipping state*" ng-model="form.shipstate" ng-class="allvalidation[12].validation" required>
+            <input type="tel" placeholder="Shipping state*" ng-model="form.shipstate" ng-class="allvalidation[11].validation" required>
         </label>
         <label class="item item-input">
-            <input type="text" placeholder="Shipping Code*" ng-model="form.shippingcode" ng-class="allvalidation[13].validation" required>
+            <input type="text" placeholder="Shipping Code*" ng-model="form.shippingcode" ng-class="allvalidation[12].validation" required>
         </label>
         <label class="item item-input item-select">
             <div class="input-label">
                 Select Country*
             </div>
-            <select ng-model="form.shipcountry" placeholder="Shipping Country" ng-class="allvalidation[14].validation" required>
+            <select ng-model="form.shipcountry" placeholder="Shipping Country" ng-class="allvalidation[13].validation" required>
                 <option value="">Please Select</option>
                 <option value="Afganistan">Afghanistan</option>
                 <option value="Albania">Albania</option>
@@ -566,13 +563,13 @@
             </select>
         </label>
         <label class="item item-input">
-            <input type="text" placeholder="Tracking Code" ng-model="form.trackingcode" ng-class="allvalidation[15].validation" required>
+            <input type="text" placeholder="Tracking Code" ng-model="form.trackingcode" ng-class="allvalidation[14].validation" required>
         </label>
         <label class="item item-input">
-            <input type="text" placeholder="Shipping Charge" ng-model="form.shippingcharge" ng-class="allvalidation[16].validation" required>
+            <input type="text" placeholder="Shipping Charge" ng-model="form.shippingcharge" ng-class="allvalidation[15].validation" required>
         </label>
         <label class="item item-input">
-            <input type="text" placeholder="Shipping Method" ng-model="form.shippingmethod" ng-class="allvalidation[17].validation" required>
+            <input type="text" placeholder="Shipping Method" ng-model="form.shippingmethod" ng-class="allvalidation[16].validation" required>
         </label>
 
         <div class="item item-divider">Product Details</div>
