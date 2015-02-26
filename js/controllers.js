@@ -417,10 +417,11 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
 
     })
-    .controller('BillingCtrl', function ($scope, $ionicModal, FireBaseServices, $location) {
+    .controller('BillingCtrl', function ($scope, $ionicModal, FireBaseServices, $ionicPopup, $location, $timeout) {
 
         //        DECLARATION
         $scope.billing = [];
+        $scope.error = true;
 
         //        GET USER FROM jStorage
         ud = $.jStorage.get("user").id;
@@ -431,6 +432,19 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             $scope.billing = data.queryresult[0];
         }
         FireBaseServices.getuserbyuserid(ud).success(userdata);
+    
+        //UPDATE BILLING INFORMATION
+        var billingupdatesuccess = function (data, status) {
+            console.log(data);
+            var alertPopup = $ionicPopup.alert({
+                 title: 'Billing Information',
+                 template: 'Updated'
+               });
+             };
+        
+        $scope.billingupdate = function (billing) {
+            FireBaseServices.updatebillingdetails(ud,billing).success(billingupdatesuccess);
+        }
 
 
     })
@@ -451,7 +465,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
 
     })
-    .controller('ShippingCtrl', function ($scope, $ionicModal, FireBaseServices, $location) {
+    .controller('ShippingCtrl', function ($scope, $ionicModal, FireBaseServices, $location, $ionicPopup, $timeout) {
 
         //        DECLARATION
         $scope.shipping = [];
@@ -465,6 +479,18 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             $scope.shipping = data.queryresult[0];
         }
         FireBaseServices.getuserbyuserid(ud).success(userdata);
+    
+        //UPDATE SHIPPING INFORMATION
+        var shippingupdatesuccess = function (data, status) {
+            console.log(data);
+            var alertPopup = $ionicPopup.alert({
+                title: 'Shipping Information',
+                template: 'Updated'
+            });
+        }
+        $scope.shippingupdate = function (shipping){
+            FireBaseServices.updateshippingdetails(ud, shipping).success(shippingupdatesuccess);
+        }
 
 
     })
@@ -507,12 +533,12 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
             console.log(data);
 
-            $scope.form = data;
+            $scope.form = data.queryresult[0];
             $scope.form.name = "";
 
         };
-
-        FireBaseServices.getlastorder(ud).success(userdata);
+        FireBaseServices.getuserbyuserid(ud).success(userdata);
+//        FireBaseServices.getlastorder(ud).success(userdata);
 
         //        getproduct by product id
         var productssuccess = function (data, status) {
