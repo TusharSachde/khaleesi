@@ -172,8 +172,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         url: '/good/buy/placeorder/:id',
         views: {
             'tab-good': {
-                templateUrl: "templates/placeorder.html",
-                controller: 'PlaceOrderCtrl'
+                templateUrl: "templates/orders.html",
+                controller: 'GoodsOrderCtrl'
             }
         }
     })

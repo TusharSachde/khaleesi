@@ -192,6 +192,34 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             });
 
         },
+        updateorderbyorderid: function (form) {
+            console.log(form);
+            return $http({
+                url: adminurl + 'updateorderbyorderid',
+                method: "POST",
+                data: {
+                    'order': form.order,
+                    'address1': form.address1,
+                    'address2': form.address2,
+                    'city': form.city,
+                    'state': form.state,
+                    'pincode': form.pincode,
+                    'email': form.email,
+                    'contactno': form.contactno,
+                    'country': form.country,
+                    'shippingaddress1': form.shipaddress1,
+                    'shippingaddress2': form.shipaddress2,
+                    'shipcity': form.shipcity,
+                    'shipstate': form.shipstate,
+                    'shippingcode': form.shippingcode,
+                    'shipcountry': form.shipcountry,
+                    'trackingcode': form.trackingcode,
+                    'shippingcharge': form.shippingcharge,
+                    'shippingmethod': form.shippingmethod
+                }
+            });
+
+        },
         adduserproduct: function (productid, user, json) {
             return $http({
                 url: adminurl + 'adduserproduct',
@@ -275,6 +303,9 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
         },
         getordersbyuserid: function (id, search, pageno, status) {
             return $http.get(adminurl + "getordersbyuserid?id=" + id + "&search=" + search + "&pageno=" + pageno + "&status=" + status, {});
+        },
+        getorderbyorderid: function (id) {
+            return $http.get(adminurl + "getorderbyorderid?orderid=" + id, {});
         },
         getproductbyid: function (id) {
             return $http.get(adminurl + "getproductbyid?id=" + id, {});

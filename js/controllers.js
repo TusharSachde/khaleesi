@@ -170,10 +170,11 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
         //GET SINGLE PRODUCT DETAILS
         var productsuccess = function (data, status) {
-            $scope.product = data.product;
+            console.log(data);
+            $scope.product = data;
         }
 
-        FireBaseServices.getproductbyid($stateParams.id).success(productsuccess);
+        FireBaseServices.getorderbyorderid($stateParams.id).success(productsuccess);
 
         //SLIDE BOX
         $scope.nextSlide = function () {
@@ -518,13 +519,6 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
         $scope.chatmessage = '';
 
-        $scope.gotochat = function () {
-            //            $state.go('app.chat');
-            //            $location.url('app/chat');
-            //            $ionicNavBarDelegate.back();
-
-        }
-
         $scope.form = [];
 
         //        autofill user data
@@ -624,6 +618,117 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
                 form.user = ud;
                 form.productid = $scope.product.id;
                 FireBaseServices.placeorder(form).success(placeordersuccess);
+            }
+
+        }
+
+
+    })
+    .controller('GoodsOrderCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $stateParams, $state, $ionicNavBarDelegate) {
+
+
+        ud = $.jStorage.get("user").id;
+
+        $scope.chatmessage = '';
+
+        $scope.form = [];
+
+        //        autofill user data
+
+        var userdata = function (data, status) {
+
+            console.log(data);
+
+            $scope.form = data.queryresult[0];
+            $scope.form.name = "";
+
+        };
+        FireBaseServices.getuserbyuserid(ud).success(userdata);
+//        FireBaseServices.getlastorder(ud).success(userdata);
+
+        //        getproduct by product id
+        var productssuccess = function (data, status) {
+            console.log(data);
+            $scope.product = data;
+        };
+        FireBaseServices.getorderbyorderid($stateParams.id).success(productssuccess);
+
+        //        place order
+        var placeordersuccess = function (data, status) {
+            console.log(data);
+            $scope.chatmessage = "Your Order has been placed.  Your Order ID is " + data;
+            FireBaseServices.setmessage($scope.chatmessage, 1);
+            //            if (data == "1") {
+            $state.go('tab.good');
+            $location.url('tab/good');
+            //            }
+        };
+
+
+
+
+        $scope.allvalidation = [];
+
+        $scope.placeorder = function (form) {
+            console.log(form);
+
+            $scope.allvalidation = [{
+                field: $scope.form.address1,
+                validation: ""
+            }, {
+                field: $scope.form.address2,
+                validation: ""
+            }, {
+                field: $scope.form.city,
+                validation: ""
+            }, {
+                field: $scope.form.state,
+                validation: ""
+            }, {
+                field: $scope.form.pincode,
+                validation: ""
+            }, {
+                field: $scope.form.email,
+                validation: ""
+            }, {
+                field: $scope.form.contactno,
+                validation: ""
+            }, {
+                field: $scope.form.country,
+                validation: ""
+            }, {
+                field: $scope.form.shipaddress1,
+                validation: ""
+            }, {
+                field: $scope.form.shipaddress2,
+                validation: ""
+            }, {
+                field: $scope.form.shipcity,
+                validation: ""
+            }, {
+                field: $scope.form.shipstate,
+                validation: ""
+            }, {
+                field: $scope.form.shippingcode,
+                validation: ""
+            }, {
+                field: $scope.form.shipcountry,
+                validation: ""
+            }, {
+                field: $scope.form.trackingcode,
+                validation: ""
+            }, {
+                field: $scope.form.shippingcharge,
+                validation: ""
+            }, {
+                field: $scope.form.shippingmethod,
+                validation: ""
+            }];
+            var check = formvalidation($scope.allvalidation);
+            console.log(check);
+            if (check) {
+                form.order = $stateParams.id;
+                FireBaseServices.updateorderbyorderid(form).success(placeordersuccess);
             }
 
         }
