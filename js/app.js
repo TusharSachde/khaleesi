@@ -32,11 +32,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
             controller: 'MenuCtrl'
         })
         .state('app.chat', {
-            
+//            cache: false,
             url: "/chat",
             views: {
                 'menuContent': {
-//                    cache: false,
                     templateUrl: "templates/chat.html",
                     controller: 'ChatCtrl'
                 }

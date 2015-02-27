@@ -190,10 +190,16 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     })
 
 
-.controller('ChatCtrl', function ($scope, $stateParams, $ionicScrollDelegate, FireBaseServices, $state, $location) {
+.controller('ChatCtrl', function ($scope, $stateParams, $ionicScrollDelegate, FireBaseServices, $state, $location, $ionicHistory) {
 
     $scope.formreturn = [];
-
+    
+    $scope.$on('$ionicView.beforeEnter', function(){
+        console.log("chat Enter...................");
+        $ionicHistory.clearCache();
+        $ionicHistory.clearHistory();
+      }); 
+    
     $scope.data = [];
     console.log("Get messgae");
     $scope.chatmessage = FireBaseServices.getmessage();
@@ -751,11 +757,18 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
         };
         FireBaseServices.logout(logoutsuccess);
     })
-    .controller('LoginCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $state) {
+    .controller('LoginCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $state, $ionicHistory) {
 
         $scope.loginData = [];
 
+        $scope.$on('$ionicView.afterLeave', function(){
+            console.log("loginleave");
+            $ionicHistory.clearCache();
+            $ionicHistory.clearHistory();
+          });
+    
         if (FireBaseServices.checklogin()) {
+            $state.go('app.chat');
             $location.url('app/chat');
         } else {
             $location.url('login');
@@ -765,6 +778,7 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
             //        console.log(data);
             ud = data;
             FireBaseServices.setuserid(data);
+            $ionicHistory.clearCache();
             ud = $.jStorage.get("user").id;
             $location.path('app/chat');
             $scope.$apply();
