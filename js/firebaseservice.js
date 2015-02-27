@@ -55,6 +55,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                 callback1(snapshot.val());
 
             });
+            
         },
         getchats: function () {
             console.log("chat in firebase");
