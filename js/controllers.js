@@ -192,11 +192,16 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
 .controller('ChatCtrl', function ($scope, $stateParams, $ionicScrollDelegate, FireBaseServices, $state, $location, $ionicHistory) {
 
+
+
+
+
+
     location.hash = "#/app/chat"
     $scope.formreturn = [];
 
-    
-    
+
+
     $scope.data = [];
     console.log("Get messgae");
     $scope.chatmessage = FireBaseServices.getmessage();
@@ -398,6 +403,58 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     };
 })
     .controller('TravelCtrl', function ($scope, $ionicModal, FireBaseServices, $location, $state) {
+
+        //        DECLARATION
+        $scope.orders = [];
+
+        //        GO TO CHAT PAGE FUNCTION
+        $scope.gotochat = function () {
+            $state.go('app.chat', {
+                cache: false
+            });
+            //            $location.url('app/chat');
+        }
+
+
+        //        GET USER FROM jStorage
+        ud = $.jStorage.get("user").id;
+
+        //        GET ALL ORDERS BY USER ID
+        var ordersuccess = function (data, status) {
+            console.log(data.queryresult);
+            $scope.orders = data.queryresult;
+        };
+        FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
+
+
+    })
+    .controller('ShowCtrl', function ($scope, $ionicModal, FireBaseServices, $location, $state) {
+
+        //        DECLARATION
+        $scope.orders = [];
+
+        //        GO TO CHAT PAGE FUNCTION
+        $scope.gotochat = function () {
+            $state.go('app.chat', {
+                cache: false
+            });
+            //            $location.url('app/chat');
+        }
+
+
+        //        GET USER FROM jStorage
+        ud = $.jStorage.get("user").id;
+
+        //        GET ALL ORDERS BY USER ID
+        var ordersuccess = function (data, status) {
+            console.log(data.queryresult);
+            $scope.orders = data.queryresult;
+        };
+        FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
+
+
+    })
+    .controller('BillCtrl', function ($scope, $ionicModal, FireBaseServices, $location, $state) {
 
         //        DECLARATION
         $scope.orders = [];
@@ -765,6 +822,33 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     })
     .controller('LoginCtrl', function ($scope, $ionicModal, $timeout, $firebase, FireBaseServices, $location, $state, $ionicHistory) {
 
+    
+//    $scope.user = null;
+//
+//    $scope.login = function scopeLogin() {
+//        FireBaseServices.loginWithFacebook()
+//            .then(function (authData) {
+//                console.log('We are logged in!', authData);
+//            })
+//            .catch(function (error) {
+//                console.error(error);
+//            });
+//    };
+//
+//    // Logs a user out
+////    $scope.logoutt = FireBaseServices.logout;
+//
+//    // detect changes in authentication state
+//    // when a user logs in, set them to $scope
+//    FireBaseServices.onAuth(function (authData) {
+//        $scope.user = authData;
+//    });
+
+
+
+
+    
+    
         $scope.loginData = [];
 
         if (FireBaseServices.checklogin()) {
