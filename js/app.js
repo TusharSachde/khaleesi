@@ -182,7 +182,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
         url: '/show',
         views: {
             'tab-show': {
-                templateUrl: "templates/tab-travel.html",
+                templateUrl: "templates/tab-show.html",
                 controller: 'ShowCtrl'
             }
         }
@@ -191,7 +191,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'firebaseservices'])
             url: '/bill',
             views: {
                 'tab-bill': {
-                    templateUrl: "templates/tab-travel.html",
+                    templateUrl: "templates/tab-bill.html",
                     controller: 'BillCtrl'
                 }
             }

@@ -423,6 +423,58 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
 
     })
+    .controller('ShowCtrl', function ($scope, $ionicModal, FireBaseServices, $location, $state) {
+
+        //        DECLARATION
+        $scope.orders = [];
+
+        //        GO TO CHAT PAGE FUNCTION
+        $scope.gotochat = function () {
+            $state.go('app.chat', {
+                cache: false
+            });
+            //            $location.url('app/chat');
+        }
+
+
+        //        GET USER FROM jStorage
+        ud = $.jStorage.get("user").id;
+
+        //        GET ALL ORDERS BY USER ID
+        var ordersuccess = function (data, status) {
+            console.log(data.queryresult);
+            $scope.orders = data.queryresult;
+        };
+        FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
+
+
+    })
+    .controller('BillCtrl', function ($scope, $ionicModal, FireBaseServices, $location, $state) {
+
+        //        DECLARATION
+        $scope.orders = [];
+
+        //        GO TO CHAT PAGE FUNCTION
+        $scope.gotochat = function () {
+            $state.go('app.chat', {
+                cache: false
+            });
+            //            $location.url('app/chat');
+        }
+
+
+        //        GET USER FROM jStorage
+        ud = $.jStorage.get("user").id;
+
+        //        GET ALL ORDERS BY USER ID
+        var ordersuccess = function (data, status) {
+            console.log(data.queryresult);
+            $scope.orders = data.queryresult;
+        };
+        FireBaseServices.getordersbyuserid(ud).success(ordersuccess);
+
+
+    })
     .controller('BillingCtrl', function ($scope, $ionicModal, FireBaseServices, $ionicPopup, $location, $timeout) {
 
         //        DECLARATION
