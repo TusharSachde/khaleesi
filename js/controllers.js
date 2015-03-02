@@ -48,7 +48,6 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     };
     $timeout(function () {
         $ionicSlideBoxDelegate.update();
-
     }, 2000);
 })
 
@@ -131,15 +130,18 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
         console.log(data);
         $scope.products = [];
         $scope.products = data.queryresult;
+        $scope.totallength = data.totalvalues;
+        console.log("in first load");
         $scope.$broadcast('scroll.infiniteScrollComplete');
         //        $scope.$apply();
     };
     var allgoodssuccesspush = function (data, status) {
         console.log(data);
-
+        console.log("in other loads");
         for (var i = 0; i < data.queryresult.length; i++) {
             $scope.products.push(data.queryresult[i]);
         }
+
 
         $scope.$broadcast('scroll.infiniteScrollComplete');
 
@@ -153,14 +155,13 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
 
     //LOAD MORE
     $scope.loadMore = function () {
+        console.log("load more call");
         if ($scope.products.length != $scope.totallength) {
             console.log("query search");
             console.log($scope.query);
-            $scope.totallength = $scope.products.length;
             $scope.pageno = $scope.pageno + 1;
             FireBaseServices.getordersbyuserid(ud, $scope.query, $scope.pageno, $scope.tabstate).success(allgoodssuccesspush);
         }
-
     }
 })
     .controller('GoodbuyCtrl', function ($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
@@ -195,8 +196,8 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     location.hash = "#/app/chat"
     $scope.formreturn = [];
 
-    
-    
+
+
     $scope.data = [];
     console.log("Get messgae");
     $scope.chatmessage = FireBaseServices.getmessage();
