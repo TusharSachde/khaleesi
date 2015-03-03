@@ -57,6 +57,9 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
             });
             
         },
+        getitmestamp: function () {
+           console.log(Firebase.ServerValue.TIMESTAMP);
+        },
         getchats: function () {
             console.log("chat in firebase");
             console.log(chats.length);
@@ -334,6 +337,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                     textcheck: message.textcheck + 1,
                     email: email,
                     timestamp: timestamp.getTime()
+//                    timestamp: Firebase.ServerValue.TIMESTAMP
                 };
                 ref.update(obj);
 
@@ -346,6 +350,7 @@ var firebaseservices = angular.module('firebaseservices', ['firebase'])
                     name: name,
                     text: text,
                     timestamp: timestamp.getTime()
+//                    timestamp: Firebase.ServerValue.TIMESTAMP
                 };
                 json1 = JSON.stringify(json1);
 

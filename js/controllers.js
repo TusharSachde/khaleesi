@@ -196,7 +196,9 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     location.hash = "#/app/chat"
     $scope.formreturn = [];
 
-
+    console.log("timestamp timestamp timestamp");
+//    console.log(Firebase.ServerValue.TIMESTAMP);
+    console.log(FireBaseServices.getitmestamp());
 
     $scope.data = [];
     console.log("Get messgae");
