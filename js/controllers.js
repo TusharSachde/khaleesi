@@ -101,8 +101,125 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
                 FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, 1, $scope.tabstate).success(allgoodssuccess);
                 break;
             }
+    }, 2000);
+})
+
+.controller('GoodCtrl', function ($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
+
+    //DECLARATION
+    $scope.products = [];
+    $scope.blanksearch = '';
+    $scope.tabstate = 1;
+    $scope.pageno = 1;
+    $scope.totallength = 0;
+    $scope.query = '';
+
+    //TAB CHANGE
+    $scope.tab = function (tab) {
+        switch (tab) {
+        case 1:
+            {
+                $scope.allgoods = "active";
+                $scope.purchasedgoods = "";
+                $scope.requestedgoods = "";
+                $scope.tabstate = 1;
+                $scope.query = '';
+                $scope.pageno = 1;
+                $scope.totallength = 0;
+                FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, 1, $scope.tabstate).success(allgoodssuccess);
+                break;
+            }
+        case 2:
+            {
+                $scope.allgoods = "";
+                $scope.purchasedgoods = "active";
+                $scope.requestedgoods = "";
+                $scope.tabstate = 3;
+                $scope.query = '';
+                $scope.pageno = 1;
+                $scope.totallength = 0;
+                FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, 1, $scope.tabstate).success(allgoodssuccess);
+                break;
+            }
+        case 3:
+            {
+                $scope.allgoods = "";
+                $scope.purchasedgoods = "";
+                $scope.requestedgoods = "active";
+                $scope.tabstate = 2;
+                $scope.query = '';
+                $scope.pageno = 1;
+                $scope.totallength = 0;
+                FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, 1, $scope.tabstate).success(allgoodssuccess);
+                break;
+            }
         }
     }
+
+    //GET USER JSTORAGE
+    $scope.user = FireBaseServices.getuser();
+    ud = $scope.user.id;
+
+    //SLIDE BOX
+    $scope.nextSlide = function () {
+        $ionicSlideBoxDelegate.next();
+    };
+    $scope.prevSlide = function () {
+        $ionicSlideBoxDelegate.previous();
+    };
+    $timeout(function () {
+        $ionicSlideBoxDelegate.update();
+
+    }, 2000);
+
+
+    //NG-ACTIVE CLASS
+    $scope.allgoods = "active";
+    $scope.purchasedgoods = "";
+    $scope.requestedgoods = "";
+
+    //API'S SUCCESS
+    var allgoodssuccess = function (data, status) {
+        console.log(data);
+        $scope.products = [];
+        $scope.products = data.queryresult;
+        $scope.totallength = data.totalvalues;
+        console.log("in first load");
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        //        $scope.$apply();
+    };
+    var allgoodssuccesspush = function (data, status) {
+        console.log(data);
+        console.log("in other loads");
+        for (var i = 0; i < data.queryresult.length; i++) {
+            $scope.products.push(data.queryresult[i]);
+        }
+
+
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+
+    };
+
+    // PRODUCT ORDER API
+    FireBaseServices.getordersbyuserid(ud, $scope.blanksearch, $scope.pageno, 1).success(allgoodssuccess);
+    $scope.search = function (query) {
+        FireBaseServices.getordersbyuserid(ud, query, '', $scope.tabstate).success(allgoodssuccess);
+    }
+
+    //LOAD MORE
+    $scope.loadMore = function () {
+        console.log("load more call");
+        if ($scope.products.length != $scope.totallength) {
+            console.log("query search");
+            console.log($scope.query);
+            $scope.pageno = $scope.pageno + 1;
+            FireBaseServices.getordersbyuserid(ud, $scope.query, $scope.pageno, $scope.tabstate).success(allgoodssuccesspush);
+
+        }
+    }
+})
+    .controller('GoodbuyCtrl', function ($scope, $stateParams, $rootScope, $ionicSlideBoxDelegate, $timeout, $ionicScrollDelegate, FireBaseServices, $firebase) {
+
 
     //GET USER JSTORAGE
     $scope.user = FireBaseServices.getuser();
@@ -185,9 +302,82 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
         };
         $timeout(function () {
             $ionicSlideBoxDelegate.update();
+        //DECLARATION
+        $scope.product = [];
+
+        //GET SINGLE PRODUCT DETAILS
+        var productsuccess = function (data, status) {
+            console.log(data);
+            $scope.product = data;
+        }
+
+        FireBaseServices.getorderbyorderid($stateParams.id).success(productsuccess);
+
+        //SLIDE BOX
+        $scope.nextSlide = function () {
+            $ionicSlideBoxDelegate.next();
+        };
+        $scope.prevSlide = function () {
+            $ionicSlideBoxDelegate.previous();
+        };
+        $timeout(function () {
+            $ionicSlideBoxDelegate.update();
 
         }, 2000);
     })
+
+
+.controller('ChatCtrl', function ($scope, $stateParams, $ionicScrollDelegate, FireBaseServices, $state, $location, $ionicHistory) {
+
+    location.hash = "#/app/chat"
+    $scope.formreturn = [];
+
+    console.log("timestamp timestamp timestamp");
+//    console.log(Firebase.ServerValue.TIMESTAMP);
+    console.log(FireBaseServices.getitmestamp());
+
+    $scope.data = [];
+    console.log("Get messgae");
+    $scope.chatmessage = FireBaseServices.getmessage();
+    console.log($scope.chatmessage);
+
+
+    //    $('#txtSendTo').focus();
+    if (FireBaseServices.checklogin()) {
+        $state.go('app.chat');
+    } else {
+        $state.go('login');
+    }
+
+    ud = $.jStorage.get("user").id;
+
+    // get logged in user stored in jstorage
+    $scope.user = FireBaseServices.getuser();
+
+    $scope.convertform = function (val) {
+        var fff = JSON.parse(val);
+        fff.json = JSON.parse(fff.json);
+        return fff;
+    };
+    $scope.convertproduct = function (val) {
+        return JSON.parse(val);
+    };
+    $scope.allchats = [];
+    $scope.allchats.json = [];
+    $scope.msg = '';
+
+    var formsavesuccess = function (data, status) {
+        $scope.check = false;
+        $scope.data.message = $scope.formreturn;
+
+        $scope.send($scope.data, 5);
+        console.log($scope.formreturn);
+    };
+
+
+        }, 2000);
+    })
+
 
 
 .controller('ChatCtrl', function ($scope, $stateParams, $ionicScrollDelegate, FireBaseServices, $state, $location, $ionicHistory) {
@@ -270,6 +460,42 @@ angular.module('starter.controllers', ['ionic', 'firebase', 'firebaseservices', 
     }
     //    console.log($scope.user);
 
+
+    // product place order
+    //    $scope.form.productmsg = "";
+    var productsuccess = function (data, status) {
+        if (data == 1) {
+            $scope.data.message = "Order Send";
+            $scope.send($scope.data);
+            //  $scope.form.productmsg = "Product Saved...We'll come back to you soon...";
+        }
+    };
+    $scope.placeorder = function (product) {
+        console.log("place order");
+        $location.url('app/chat/placeorder/' + product.id);
+        //  FireBaseServices.adduserproduct(product.id, $scope.user.id, JSON.stringify(product)).success(productsuccess);
+    }
+
+    // form div validation
+    $scope.submitt = function (val, message) {
+        console.log("my form");
+        $scope.formreturn = val;
+        console.log(val);
+        $scope.formid = val.id;
+        for (var i = 0; i < val.length; i++) {
+            if (!val[i].val) {
+                $scope.msg = val[i].name + ' can not be blank';
+            } else {
+                $scope.msg = '';
+            }
+        }
+        if ($scope.msg == '') {
+            FireBaseServices.adduserform($scope.formid, $scope.user.id, JSON.stringify(val)).success(formsavesuccess);
+        }
+    }
+    //    console.log($scope.user);
+
+>>>>>>> origin/master
     // get user data by getAuth() function
     $scope.userdata = FireBaseServices.authenticate();
     $scope.chat = {};

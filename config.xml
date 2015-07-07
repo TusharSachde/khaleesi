@@ -36,6 +36,8 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="HideKeyboardFormAccessoryBar" value="true" />
+
 
     <icon src="img/icon.png" />
 
